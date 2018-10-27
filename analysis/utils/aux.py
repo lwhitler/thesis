@@ -5,24 +5,6 @@ from pyuvdata import UVData
 from hera_qm.metrics_io import process_ex_ants
 
 
-def calc_21cm_obs_freq(z):
-    """
-    Calculate the observed frequency of the 21.1 cm line from a redshift.
-
-    Parameters
-    ----------
-    z : int or float
-        Redshift at which to calculate the observed frequency
-
-    Returns
-    -------
-    f_obs : float
-         The observed frequency at the given redshift in MHz
-    """
-    f_obs = (299792458.0/0.211) / ((1+z)*1e6)
-    return f_obs
-
-
 def bootstrap_median(uvp, blpairs=None, niters=1000):
     """
     Calculate the error on the median power spectrum by bootstrapping.
@@ -54,6 +36,24 @@ def bootstrap_median(uvp, blpairs=None, niters=1000):
     med_boots = np.asarray(med_boots)
     med_sd = np.std(med_boots, axis=0)
     return med_sd
+
+
+def calc_21cm_obs_freq(z):
+    """
+    Calculate the observed frequency of the 21.1 cm line from a redshift.
+
+    Parameters
+    ----------
+    z : int or float
+        Redshift at which to calculate the observed frequency
+
+    Returns
+    -------
+    f_obs : float
+         The observed frequency at the given redshift in MHz
+    """
+    f_obs = (299792458.0/0.211) / ((1+z)*1e6)
+    return f_obs
 
 
 def calc_flagged_bl_percent(uvd, bls):

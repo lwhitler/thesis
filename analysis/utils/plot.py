@@ -4,9 +4,30 @@ import hera_pspec as hp
 import utils
 
 
-def plot_all_blps(uvp, ax, spw, blps=None, plot_median=True, delay=False,
-                  yscale='symlog', hline=False):
+def plot_multiple_blpairs(uvp, ax, blpairs=None, plot_median=True, delay=False,
+                          yscale='symlog', hline=False):
     """
+    Plot the power spectra from multiple baseline pairs.
+
+    Parameters
+    ----------
+    uvp : UVPSpec object
+        UVPSpec object containing the power spectra to plot
+    ax : Axes object
+        Axes object to plot the power spectra on
+    blpairs : list(s) of tuples, optional
+        The baseline pairs to plot the spectra of (default is all of the
+        baseline pairs in the UVPSpec object)
+    plot_median : bool, optional
+        Whether to plot the median of the baseline pair power spectra (default
+        is True)
+    delay : bool, optional
+        Whether to plot in delay (ns) or cosmological units (h Mpc^-1) (default
+        is cosmological units)
+    yscale : str, optional
+        The y-axis scale ('linear', 'log', or 'symlog', default is symlog)
+    hline : bool, optional
+        Whether to plot a horizontal line at zero (default is False)
     """
     kparas = uvp.get_kparas(0)
     # Default to baseline pairs in UVPSpec object
@@ -16,11 +37,11 @@ def plot_all_blps(uvp, ax, spw, blps=None, plot_median=True, delay=False,
     if hline:
         ax.axhline(0, c='#444444', ls=':')
         hline = False
-    hp.plot.delay_spectrum(uvp, blps, spw=spw, pol='XX', delay=delay,
+    hp.plot.delay_spectrum(uvp, blps, spw=0, pol='xx', delay=delay,
                            force_plot=True, logscale=False, c='#383838',
                            lw=0.25, alpha=0.01, ax=ax)
     if plot_median:
-        plot_median_spectra(uvp, ax, spw, delay=delay, hline=hline)
+        plot_median_spectra(uvp, ax, delay=delay, hline=hline)
 
     # y-axis scaling
     if yscale == 'symlog':
@@ -33,20 +54,50 @@ def plot_all_blps(uvp, ax, spw, blps=None, plot_median=True, delay=False,
 def plot_flag_frac(uvd, bls, ax, **kwargs):
     """
     Plot the waterfall for the percentage of flagged baselines.
+
+    Parameters
+    ----------
+    uvd : UVData object
+        The UVData object containing the flags
+    bls : array-like
+        Baselines for which to look for flags
+    ax : Axes object
+        Axes object to plot the waterfall on
     """
     flag_frac = utils.calc_flagged_bl_percent(uvd, bls)
     ax.imshow(flag_frac, **kwargs)
 
 
-def plot_median_spectra(uvp, spw, ax, blpairs=None, niters=1000, delay=False,
+def plot_median_spectra(uvp, ax, blpairs=None, niters=1000, delay=False,
                         yscale='symlog', hline=False):
     """
+    Plot the median power spectra of multiple baseline pairs.
+
+    Parameters
+    ----------
+    uvp : UVPSpec object
+        UVPSpec object containing the power spectra to take the median of
+    ax : Axes object
+        Axes object to plot the median in
+    blpairs : list(s) of tuples, optional
+        The baseline pairs to plot the spectra of (default is all of the
+        baseline pairs in the UVPSpec object)
+    niters : int, optional
+        Number of resamples to take to calculate the error of the median
+        (default is 1000)
+    delay : bool, optional
+        Whether to plot in delay (ns) or cosmological units (h Mpc^-1) (default
+        is cosmological units)
+    yscale : str, optional
+        The y-axis scale ('linear', 'log', or 'symlog', default is symlog)
+    hline : bool, optional
+        Whether to plot a horizontal line at zero (default is False)
     """
-    # Get the x axis units
+    # Get the x-axis units
     if not delay:
-        x = uvp.get_kparas(spw)  # k_parallel in h^-1 Mpc
+        x = uvp.get_kparas(0)  # k_parallel in h Mpc^-1
     else:
-        x = uvp.get_dlys(spw) * 1e9  # delay in ns
+        x = uvp.get_dlys(0) * 1e9  # delay in ns
 
     # Get the median and bootstrap for errors
     median = utils.calc_median(uvp)
