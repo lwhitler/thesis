@@ -167,26 +167,6 @@ def find_good_bls(bls, xants):
     return good_bls
 
 
-def make_pspec_axis_labels(uvp, delay=False):
-    """
-    Make the axis labels for plotting the power spectra.
-
-    Parameters
-    ----------
-    uvp : UVPSpec object
-        UVPSpec object containing the power spectra
-    delay : bool, optional
-        Whether the spectra are in delay (ns) or cosmological units (h Mpc^-1)
-        (default is cosmological units)
-    """
-    if delay:
-        xlabel = r'$\tau$ $[{\rm ns}]$'
-    else:
-        xlabel = r'k$_\parallel$ h Mpc$^{-1}$'
-    vis_units = uvp.vis_units
-    ylabel = r'P(k$_\parallel$) [(' + vis_units + '$^2$ h$^{-3}$ Mpc$^3$]'
-    return xlabel, ylabel
-
 def sample_blpairs(blpairs, size=None, seed=None):
     """
     Randomly sample a set of baseline pairs with replacement.

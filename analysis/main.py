@@ -57,7 +57,7 @@ else:
     print('\nWriting ' + uvp_file + '...')
     uvp.write_hdf5(uvp_file)
 
-# Time average the spectrum for all baseline pairs
+# Take the time average of the spectra
 uvp_avg = uvp.average_spectra(time_avg=True, inplace=False)
 # Save the baseline pairs
 blpairs = list(np.unique(uvp_avg.blpair_array))
@@ -71,9 +71,11 @@ uvp_avg.data_array[0] = np.ma.masked_array(uvp_avg.data_array[0], zero_wgt_mask)
 
 # The four panel plot with flags before and after broadcasting, spectra of
 # all baseline pairs, and the median power spectrum with errors
-fig, ax = plt.subplots(2, 2, figsize=(12, 10))
+fig, ax = plt.subplots(2, 2, figsize=(10, 10))
 utils.plot.plot_flag_frac(uvd_orig, good_bls, ax[0, 0], vmin=0, vmax=1)
 utils.plot.plot_flag_frac(ds.dsets[0], good_bls, ax[0, 1], vmin=0, vmax=1)
 utils.plot.plot_multiple_blpairs(uvp_avg, ax[1, 0], blpairs=nonzero_blpairs)
 utils.plot.plot_median_spectra(uvp_avg, ax[1, 1], blpairs=nonzero_blpairs)
+ax[0, 0].set_title('Original flags')
+ax[0, 1].set_title('After broadcasting')
 plt.show()
