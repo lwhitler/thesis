@@ -21,7 +21,7 @@ uvd_orig = UVData()
 uvd_orig.read_miriad(data_file)
 uvd = copy.deepcopy(uvd_orig)
 # Convert data from Jy to mK
-freq_arr = np.unique(uvd.freq_array)
+freq_array = np.unique(uvd.freq_array)
 uvd.data_array *= uvb.Jy_to_mK(freq_array, pol='xx')[None, None, :, None]
 uvd.vis_units = 'mK'
 
