@@ -51,7 +51,7 @@ def plot_multiple_blpairs(uvp, ax, blpairs=None, plot_median=True, delay=False,
         ax.set_yscale(yscale)
 
     # Axis labeling
-    xlabel, ylabel = utils.aux.make_pspec_axis_labels(uvp, delay=delay)
+    xlabel, ylabel = aux.make_pspec_axis_labels(uvp, delay=delay)
     ax.set_xlabel(xlabel, fontsize=14)
     ax.set_ylabel(ylabel, fontsize=14)
 
@@ -121,3 +121,8 @@ def plot_median_spectra(uvp, ax, blpairs=None, niters=1000, delay=False,
         ax.set_yscale(yscale, linthreshy=linthreshy)
     else:
         ax.set_yscale(yscale)
+
+    # Axis labeling
+    xlabel, ylabel = aux.make_pspec_axis_labels(uvp, delay=delay)
+    ax.set_xlabel(xlabel, fontsize=14)
+    ax.set_ylabel(ylabel, fontsize=14)
