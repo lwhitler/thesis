@@ -30,7 +30,7 @@ uvd.vis_units = 'mK'
 reds = hp.utils.get_reds(uvd)[0]
 bls = reds[2]  # 14-m EW baselines
 bl_str = 'EW_14m'  # For saving files
-xants = process_ex_ants(metrics_file=ant_metrics_file)  # Bad antennas
+xants = process_ex_ants(metrics_file=ant_metrics)  # Bad antennas
 good_bls = utils.aux.find_good_bls(bls, xants)
 blps = hp.utils.construct_blpairs(good_bls, exclude_auto_bls=True,
                                   exclude_permutations=True)
