@@ -56,7 +56,7 @@ def plot_multiple_blpairs(uvp, ax, blpairs=None, plot_median=True, delay=False,
         ax.yaxis.get_major_ticks()[zero_index].label.set_visible(False)
 
     # Axis labeling
-    xlabel, ylabel = make_pspec_axis_labels(uvp, delay=delay)
+    xlabel, ylabel = make_axis_labels(uvp, delay=delay)
     ax.set_xlabel(xlabel, fontsize=12)
     ax.set_ylabel(ylabel, fontsize=12)
 
