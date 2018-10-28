@@ -64,7 +64,7 @@ def plot_flag_frac(uvd, bls, ax, **kwargs):
     ax : Axes object
         Axes object to plot the waterfall on
     """
-    flag_frac = utils.calc_flagged_bl_percent(uvd, bls)
+    flag_frac = utils.aux.calc_flagged_bl_percent(uvd, bls)
     ax.imshow(flag_frac, **kwargs)
 
 
@@ -100,8 +100,8 @@ def plot_median_spectra(uvp, ax, blpairs=None, niters=1000, delay=False,
         x = uvp.get_dlys(0) * 1e9  # delay in ns
 
     # Get the median and bootstrap for errors
-    median = utils.calc_median(uvp)
-    med_sd = utils.bootstrap_median(uvp, blpairs=blpairs, niters=niters)
+    median = utils.aux.calc_median(uvp)
+    med_sd = utils.aux.bootstrap_median(uvp, blpairs=blpairs, niters=niters)
 
     # Plot median and errors
     if hline:
