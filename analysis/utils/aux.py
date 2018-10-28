@@ -183,7 +183,8 @@ def make_pspec_axis_labels(uvp, delay=False):
         xlabel = r'$\tau$ $[{\rm ns}]$'
     else:
         xlabel = r'k$_\parallel$ h Mpc$^{-1}$'
-    ylabel = r'P(k$_\parallel$) [(uvp.vis_units)$^2$ h$^{-3}$ Mpc$^3$]'
+    vis_units = uvp.vis_units
+    ylabel = r'P(k$_\parallel$) [(' + vis_units + '$^2$ h$^{-3}$ Mpc$^3$]'
     return xlabel, ylabel
 
 def sample_blpairs(blpairs, size=None, seed=None):

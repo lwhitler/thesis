@@ -52,8 +52,8 @@ def plot_multiple_blpairs(uvp, ax, blpairs=None, plot_median=True, delay=False,
 
     # Axis labeling
     xlabel, ylabel = aux.make_pspec_axis_labels(uvp, delay=delay)
-    ax.set_xlabel(xlabel, fontsize=14)
-    ax.set_ylabel(ylabel, fontsize=14)
+    ax.set_xlabel(xlabel, fontsize=10)
+    ax.set_ylabel(ylabel, fontsize=10)
 
 
 def plot_flag_frac(uvd, bls, ax, **kwargs):
@@ -124,5 +124,5 @@ def plot_median_spectra(uvp, ax, blpairs=None, niters=1000, delay=False,
 
     # Axis labeling
     xlabel, ylabel = aux.make_pspec_axis_labels(uvp, delay=delay)
-    ax.set_xlabel(xlabel, fontsize=14)
-    ax.set_ylabel(ylabel, fontsize=14)
+    ax.set_xlabel(xlabel, fontsize=10)
+    ax.set_ylabel(ylabel, fontsize=10)
