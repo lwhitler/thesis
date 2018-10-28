@@ -82,7 +82,7 @@ def calc_flagged_bl_percent(uvd, bls):
                           (uvd.ant_2_array == ant2))[0]
         bl_flags = uvd.flag_array[bl_ind][:, 0, :, 0].astype(float)
         bl_flag_arr.append(bl_flags)
-    bl_flag_arr = np.asarray(bl_flag_frac)
+    bl_flag_arr = np.asarray(bl_flag_arr)
 
     # Calculate the percentage of baselines flagged
     flag_sum = np.sum(bl_flag_arr, axis=0)
