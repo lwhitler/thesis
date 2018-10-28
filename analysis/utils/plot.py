@@ -1,11 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import hera_pspec as hp
-import utils
+import aux
 
 
 def plot_multiple_blpairs(uvp, ax, blpairs=None, plot_median=True, delay=False,
-                          yscale='symlog', hline=False):
+                          yscale='symlog', hline=True):
     """
     Plot the power spectra from multiple baseline pairs.
 
@@ -27,7 +27,7 @@ def plot_multiple_blpairs(uvp, ax, blpairs=None, plot_median=True, delay=False,
     yscale : str, optional
         The y-axis scale ('linear', 'log', or 'symlog', default is symlog)
     hline : bool, optional
-        Whether to plot a horizontal line at zero (default is False)
+        Whether to plot a horizontal line at zero (default is True)
     """
     kparas = uvp.get_kparas(0)
     # Default to baseline pairs in UVPSpec object
@@ -69,7 +69,7 @@ def plot_flag_frac(uvd, bls, ax, **kwargs):
 
 
 def plot_median_spectra(uvp, ax, blpairs=None, niters=1000, delay=False,
-                        yscale='symlog', hline=False):
+                        yscale='symlog', hline=True):
     """
     Plot the median power spectra of multiple baseline pairs.
 
@@ -91,7 +91,7 @@ def plot_median_spectra(uvp, ax, blpairs=None, niters=1000, delay=False,
     yscale : str, optional
         The y-axis scale ('linear', 'log', or 'symlog', default is symlog)
     hline : bool, optional
-        Whether to plot a horizontal line at zero (default is False)
+        Whether to plot a horizontal line at zero (default is True)
     """
     # Get the x-axis units
     if not delay:
