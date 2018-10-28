@@ -4,6 +4,7 @@ import copy
 import os.path
 import hera_pspec as hp
 from pyuvdata import UVData
+from hera_qm.metrics_io import process_ex_ants
 import utils
 
 # Paths
