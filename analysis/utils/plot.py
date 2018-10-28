@@ -50,6 +50,11 @@ def plot_multiple_blpairs(uvp, ax, blpairs=None, plot_median=True, delay=False,
     else:
         ax.set_yscale(yscale)
 
+    # Axis labeling
+    xlabel, ylabel = utils.aux.make_pspec_axis_labels(uvp, delay=delay)
+    ax.set_xlabel(xlabel, fontsize=14)
+    ax.set_ylabel(ylabel, fontsize=14)
+
 
 def plot_flag_frac(uvd, bls, ax, **kwargs):
     """
@@ -65,7 +70,7 @@ def plot_flag_frac(uvd, bls, ax, **kwargs):
         Axes object to plot the waterfall on
     """
     flag_frac = aux.calc_flagged_bl_percent(uvd, bls)
-    ax.imshow(flag_frac, **kwargs)
+    ax.imshow(flag_frac, aspect='auto', **kwargs)
 
 
 def plot_median_spectra(uvp, ax, blpairs=None, niters=1000, delay=False,
@@ -112,7 +117,7 @@ def plot_median_spectra(uvp, ax, blpairs=None, niters=1000, delay=False,
 
     # y-axis scaling
     if yscale == 'symlog':
-        linthreshy = np.max(np.real(uvp.data_array[0]))*1e-3
+        linthreshy = np.max(np.real(uvp.data_array[0]))*1e-5
         ax.set_yscale(yscale, linthreshy=linthreshy)
     else:
         ax.set_yscale(yscale)
