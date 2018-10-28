@@ -151,7 +151,7 @@ def make_axis_labels(uvp, delay=False):
 
 def find_zero_tick_label(ax):
     """
-    Remove the tick label at y = 0.
+    Find the tick label at y = 0.
 
     Parameters
     ----------

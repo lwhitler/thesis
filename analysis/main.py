@@ -78,10 +78,10 @@ utils.plot.plot_multiple_blpairs(uvp_avg, ax[1, 0], blpairs=nonzero_blpairs)
 utils.plot.plot_median_spectra(uvp_avg, ax[1, 1], blpairs=nonzero_blpairs)
 # More formatting
 fig.canvas.draw()
-zero_ind = utils.plot.find_zero_tick_label(ax[1, 0])
+zero_index = utils.plot.find_zero_tick_label(ax[1, 0])
 if zero_index is not None:
     ax[1, 0].yaxis.get_major_ticks()[zero_index].label.set_visible(False)
-zero_ind = utils.plot.find_zero_tick_label(ax[1, 1])
+zero_index = utils.plot.find_zero_tick_label(ax[1, 1])
 if zero_index is not None:
     ax[1, 1].yaxis.get_major_ticks()[zero_index].label.set_visible(False)
 ax[0, 0].set_title('Original flags')
