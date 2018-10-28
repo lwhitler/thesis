@@ -79,5 +79,5 @@ utils.plot.plot_median_spectra(uvp_avg, ax[1, 1], blpairs=nonzero_blpairs)
 # Axis labeling and titles
 ax[0, 0].set_title('Original flags')
 ax[0, 1].set_title('After broadcasting')
-ax[1, 1].xaxis.label.set_visible(False)
+ax[1, 1].yaxis.label.set_visible(False)
 plt.show()

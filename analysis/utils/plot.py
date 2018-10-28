@@ -51,7 +51,7 @@ def plot_multiple_blpairs(uvp, ax, blpairs=None, plot_median=True, delay=False,
         ax.set_yscale(yscale)
 
     # Remove zero tick label on y-axis
-    zero_index = remove_zero_tick_label(ax)
+    zero_index = find_zero_tick_label(ax)
     if zero_index is not None:
         ax.yaxis.get_major_ticks()[zero_index].label.set_visible(False)
 
@@ -128,7 +128,7 @@ def plot_median_spectra(uvp, ax, blpairs=None, niters=1000, delay=False,
         ax.set_yscale(yscale)
 
     # Remove zero tick label on y-axis
-    zero_index = remove_zero_tick_label(ax)
+    zero_index = find_zero_tick_label(ax)
     if zero_index is not None:
         ax.yaxis.get_major_ticks()[zero_index].label.set_visible(False)
 
@@ -159,7 +159,7 @@ def make_axis_labels(uvp, delay=False):
     return xlabel, ylabel
 
 
-def remove_zero_tick_label(ax):
+def find_zero_tick_label(ax):
     """
     Remove the tick label at y = 0.
 
@@ -168,8 +168,10 @@ def remove_zero_tick_label(ax):
     ax : Axes object
         Axes object containing the ticks
     """
+    ax.set_yticklabels(ax.get_yticks())
     yticks = ax.yaxis.get_major_ticks()
-    for ytick in yticks:
-        text = ytick.label.get_text()
+    for i in range(len(yticks)):
+        text = yticks[i].label.get_text()
+        print(text)
         if text == '$\mathdefault{0}$':
             return i
