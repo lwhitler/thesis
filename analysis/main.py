@@ -62,10 +62,17 @@ uvp_avg = uvp.average_spectra(time_avg=True, inplace=False)
 # Save the baseline pairs
 blpairs = list(np.unique(uvp_avg.blpair_array))
 
+# Find all nonzero data and corresponding baselines
+zero_wgt = np.all(uvp_avg.wgt_array[0][:, :, 0] == 0, axis=1)
+zero_wgt_mask = np.broadcast_to(zero_wgt, uvp_avg.data_array[0][:, :, 0].shape)
+zero_wgt_mask = zero_wgt_mask[:, :, np.newaxis]
+nonzero_blpairs = uvp_avg.blpair_array[~zero_wgt[:, 0]]
+uvp_avg.data_array[0] = np.ma.masked_array(uvp_avg.data_array[0], zero_wgt_mask)
+
 # The four panel plot with flags before and after broadcasting, spectra of
 # all baseline pairs, and the median power spectrum with errors
 fig, ax = plt.subplots(2, 2, figsize=(12, 10))
 utils.plot.plot_flag_frac(uvd_orig, good_bls, ax[0], vmin=0, vmax=1)
 utils.plot.plot_flag_frac(ds.dsets[0], good_bls, ax[1], vmin=0, vmax=1)
-utils.plot.plot_multiple_blpairs(uvp_avg, ax[2], good_bls, hline=True)
-utils.plot.plot_median_spectra(uvp_avg, ax[3], good_bls, hline=True)
+utils.plot.plot_multiple_blpairs(uvp_avg, ax[2], blpairs=nonzero_blpairs)
+utils.plot.plot_median_spectra(uvp_avg, ax[3], blpairs=nonzero_blpairs)
