@@ -31,13 +31,13 @@ def plot_multiple_blpairs(uvp, ax, blpairs=None, plot_median=True, delay=False,
     """
     kparas = uvp.get_kparas(0)
     # Default to baseline pairs in UVPSpec object
-    if blps is None:
-        blps = list(np.unique(uvp.blpair_array))
+    if blpairs is None:
+        blpairs = list(np.unique(uvp.blpair_array))
 
     if hline:
         ax.axhline(0, c='#444444', ls=':')
         hline = False
-    hp.plot.delay_spectrum(uvp, blps, spw=0, pol='xx', delay=delay,
+    hp.plot.delay_spectrum(uvp, blpairs, spw=0, pol='xx', delay=delay,
                            force_plot=True, logscale=False, c='#383838',
                            lw=0.25, alpha=0.01, ax=ax)
     if plot_median:

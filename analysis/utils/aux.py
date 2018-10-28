@@ -190,5 +190,5 @@ def sample_blpairs(blpairs, size=None, seed=None):
         size = len(blpairs)
     if seed is not None:
         np.random.seed(seed)
-    sample = [random.choice(blpairs) for i in range(size)]
+    sample = [np.random.choice(blpairs) for i in range(size)]
     return sample
