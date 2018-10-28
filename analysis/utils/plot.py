@@ -35,7 +35,7 @@ def plot_multiple_blpairs(uvp, ax, blpairs=None, plot_median=True, delay=False,
         blpairs = list(np.unique(uvp.blpair_array))
 
     if hline:
-        ax.axhline(0, c='#444444', ls=':')
+        ax.axhline(0, c='#444444', ls=':', lw=0.75)
         hline = False
     hp.plot.delay_spectrum(uvp, blpairs, spw=0, pol='xx', delay=delay,
                            force_plot=True, logscale=False, c='#383838',
@@ -172,4 +172,4 @@ def remove_zero_tick_label(ax):
     for ytick in yticks:
         text = ytick.label.get_text()
         if text == '$\mathdefault{0}$':
-            return zero_index
+            return i
