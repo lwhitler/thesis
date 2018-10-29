@@ -5,7 +5,7 @@ import aux
 
 
 def plot_multiple_blpairs(uvp, ax, blpairs=None, plot_median=True, delay=False,
-                          yscale='symlog', hline=True):
+                          yscale='symlog', hline=True, **kwargs):
     """
     Plot the power spectra from multiple baseline pairs.
 
@@ -74,7 +74,7 @@ def plot_flag_frac(uvd, bls, ax, **kwargs):
 
 
 def plot_median_spectra(uvp, ax, blpairs=None, niters=1000, delay=False,
-                        yscale='symlog', hline=True):
+                        yscale='symlog', hline=True, **kwargs):
     """
     Plot the median power spectra of multiple baseline pairs.
 
@@ -105,15 +105,14 @@ def plot_median_spectra(uvp, ax, blpairs=None, niters=1000, delay=False,
         x = uvp.get_dlys(0) * 1e9  # delay in ns
 
     # Get the median and bootstrap for errors
-    median = aux.calc_median(uvp)
+    median = aux.calc_median(uvp, blpairs=blpairs)
     med_sd = aux.bootstrap_median(uvp, blpairs=blpairs, niters=niters)
 
     # Plot median and errors
     if hline:
         ax.axhline(0, c='#444444', ls=':', lw=0.75)
-    ax.fill_between(x, median+med_sd, median-med_sd, color='#0700FF',
-                    alpha=0.3)
-    ax.plot(x, median, c='#0700FF', lw=1.25)
+    ax.fill_between(x, median+med_sd, median-med_sd, alpha=0.3, **kwargs)
+    ax.plot(x, median, lw=1.25, **kwargs)
 
     # y-axis scaling
     if yscale == 'symlog':
@@ -161,6 +160,5 @@ def find_zero_tick_label(ax):
     yticks = ax.yaxis.get_major_ticks()
     for i in range(len(yticks)):
         text = yticks[i].label.get_text()
-        print(text)
         if text == '$\mathdefault{0}$':
             return i

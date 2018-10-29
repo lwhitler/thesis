@@ -1,5 +1,6 @@
 import numpy as np
 import copy
+import os
 import hera_pspec as hp
 from pyuvdata import UVData
 from hera_qm.metrics_io import process_ex_ants
@@ -144,6 +145,22 @@ def chan_to_freqs(chans):
     return freqs
 
 
+def convert_Jy_to_mK(uvd, psbeam):
+    """
+    Convert data from Jy to mK.
+
+    Parameters
+    ----------
+    uvd : UVData object
+        UVData object containing the data to be converted
+    psbeam : PSpecBeam object
+        PSpecBeam object to use to convert the data
+    """
+    freq_array = np.unique(uvd.freq_array)
+    uvd.data_array *= beam.Jy_to_mK(freq_array, pol='xx')[None, None, :, None]
+    uvd.vis_units = 'mK'
+
+
 def find_good_bls(bls, xants):
     """
     Find good baselines by removing baselines with bad antennas.
@@ -165,6 +182,47 @@ def find_good_bls(bls, xants):
         bad_bls = [bad_bl for bad_bl in bls if xant in bad_bl]
         good_bls = [bl for bl in bls if bl not in bad_bls]
     return good_bls
+
+
+def get_uvpspec(uvd, psbeam, uvp_file, time_thresh=0.2):
+    """
+    Make or load the UVPSpec object corresponding to the data given.
+
+    Parameters
+    ----------
+    uvd : UVData object
+        UVData object containing the data
+    psbeam : PSpecBeam object
+        PSpecBeam object containing the beam
+    uvp_file : str
+        The path to look for/write the UVPSpec object
+    time_thresh : float, optional
+        Time threshold for broadcasting flags (default is 0.2, not recommended
+        to make this larger than 0.5 as per hera_pspec)
+
+    Returns
+    -------
+    ds : PSpecData object
+        The PSpecData object containing the UVData objects with broadcasted
+        flags
+    uvp : UVPSpec object
+        The UVPSpec object containing the power spectra
+    """
+    ds = hp.pspecdata.PSpecData([uvd, uvd], wgts=[None, None], beam=psbeam)
+    ds.broadcast_dset_flags(time_thresh=time_thresh)
+    if os.path.isfile(uvp_file):
+        # Load UVPSpec from existing file
+        print(uvp_file + ' exists, loading UVPSpec...')
+        uvp = hp.UVPSpec()
+        uvp.read_hdf5(uvp_file)
+    else:
+        # Run OQE with identity weighting and I normalization
+        uvp = ds.pspec(bls1, bls2, dsets=(0, 1), pols=[('XX', 'XX')],
+                       spw_ranges=spw, input_data_weight='identity', norm='I',
+                       taper='blackman-harris')
+        print('\nWriting ' + uvp_file + '...')
+        uvp.write_hdf5(uvp_file)
+    return ds, uvp
 
 
 def sample_blpairs(blpairs, size=None, seed=None):
