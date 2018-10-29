@@ -65,7 +65,7 @@ uvp_avg.data_array[0] = np.ma.masked_array(uvp_avg.data_array[0], zero_wgt_mask)
 
 # The four panel plot with flags before and after broadcasting, spectra of
 # all baseline pairs, and the median power spectrum with errors
-fig, ax = plt.subplots(2, 2, figsize=(12, 12))
+fig, ax = plt.subplots(2, 2, figsize=(12, 8))
 utils.plot.plot_flag_frac(uvd_orig, good_bls, ax[0, 0], vmin=0, vmax=1)
 utils.plot.plot_flag_frac(ds.dsets[0], good_bls, ax[0, 1], vmin=0, vmax=1)
 utils.plot.plot_multiple_blpairs(uvp_avg, ax[1, 0], blpairs=nonzero_blpairs)
