@@ -6,6 +6,7 @@ from pyuvdata import UVData
 from hera_qm.metrics_io import process_ex_ants
 import utils
 
+
 # Paths
 JD_dec = '49088'
 time_thresh_str = '0.05'
@@ -14,6 +15,7 @@ beam_file = '/home/lwhitler/data/dfiles/HERA_NF_dipole_power.beamfits'
 data_file = '/data6/HERA/data/IDR2.1/2458106/' + base_name + '.uvOCRS'
 ant_metrics = '/data6/HERA/data/IDR2.1/2458106/' + base_name.replace('.xx','') + '.uv.ant_metrics.json'
 uvp_prefix = '/home/lwhitler/data/dfiles/pspecs/broadcasting/tt' + time_thresh_str + '/' + base_name + ''
+im_prefix = '/home/lwhitler/data/images/broadcasting' + base_name
 
 # Cosmology and beam models
 cosmo = hp.conversions.Cosmo_Conversions()
@@ -84,4 +86,4 @@ if zero_index is not None:
     ax[1, 1].yaxis.get_major_ticks()[zero_index].label.set_visible(False)
 ax[0, 0].set_title('Original flags')
 ax[0, 1].set_title('Flags after broadcasting')
-plt.savefig('test.png', format='png')
+plt.savefig(im_prefix + '.tt' + time_thresh_str + '.png', format='png')
