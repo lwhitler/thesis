@@ -45,7 +45,7 @@ time_thresh = float(time_thresh_str)
 uvp_default = uvp_prefix.replace(time_thresh_str, '0.2') + '.ps.' + spw_str + '.' + bl_str + '.' + uvd.vis_units + '.h5'
 uvp_file = uvp_prefix + '.ps.' + spw_str + '.' + bl_str + '.' + uvd.vis_units + '.h5'
 ds_default, uvp_default = utils.aux.get_uvpspec(uvd_default, psbeam,
-                                                uvp_default)
+                                                bls1, bls2, uvp_default)
 ds, uvp = utils.aux.get_uvpspec(uvd, psbeam, uvp_file)
 
 # Take the time average of the spectra
