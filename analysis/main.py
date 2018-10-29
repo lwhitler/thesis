@@ -8,7 +8,7 @@ import utils
 
 # Paths
 JD_dec = '49088'
-time_thresh_str = '0.1'
+time_thresh_str = '0.05'
 base_name = 'zen.2458106.' + JD_dec + '.xx.HH'
 beam_file = '/home/lwhitler/data/dfiles/HERA_NF_dipole_power.beamfits'
 data_file = '/data6/HERA/data/IDR2.1/2458106/' + base_name + '.uvOCRS'
@@ -75,7 +75,6 @@ utils.plot.plot_median_spectra(uvp_default_avg, ax[1, 1],
 utils.plot.plot_median_spectra(uvp_avg, ax[1, 1], blpairs=nonzero_blpairs,
                                color='#8600FF', label='Time threshold: {}'.format(time_thresh_str))
 # Plot appearance
-ax[1, 1].legend(loc='best')
 fig.canvas.draw()
 zero_index = utils.plot.find_zero_tick_label(ax[1, 0])
 if zero_index is not None:
