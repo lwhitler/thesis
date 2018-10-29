@@ -12,7 +12,7 @@ time_thresh_str = '0.1'
 base_name = 'zen.2458106.' + JD_dec + '.xx.HH'
 beam_file = '/home/lwhitler/data/dfiles/HERA_NF_dipole_power.beamfits'
 data_file = '/data6/HERA/data/IDR2.1/2458106/' + base_name + '.uvOCRS'
-ant_metrics = '/data6/HERA/data/IDR2.1/2458106/' + base_name + '.uv.ant_metrics.json'
+ant_metrics = '/data6/HERA/data/IDR2.1/2458106/' + base_name.replace('.xx','') + '.uv.ant_metrics.json'
 uvp_prefix = '/home/lwhitler/data/dfiles/pspecs/broadcasting/tt' + time_thresh_str + '/' + base_name + ''
 
 # Cosmology and beam models
