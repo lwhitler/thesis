@@ -157,7 +157,7 @@ def convert_Jy_to_mK(uvd, psbeam):
         PSpecBeam object to use to convert the data
     """
     freq_array = np.unique(uvd.freq_array)
-    uvd.data_array *= beam.Jy_to_mK(freq_array, pol='xx')[None, None, :, None]
+    uvd.data_array *= psbeam.Jy_to_mK(freq_array, pol='xx')[None, None, :, None]
     uvd.vis_units = 'mK'
 
 

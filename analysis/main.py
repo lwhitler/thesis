@@ -69,7 +69,7 @@ utils.plot.plot_flag_frac(uvd_orig, good_bls, ax[0, 0], vmin=0, vmax=1)
 utils.plot.plot_flag_frac(ds.dsets[0], good_bls, ax[0, 1], vmin=0, vmax=1)
 utils.plot.plot_multiple_blpairs(uvp_avg, ax[1, 0], blpairs=nonzero_blpairs)
 utils.plot.plot_median_spectra(uvp_default_avg, ax[1, 1],
-                               blpairs=nonzero_blpairs, color='#0700FF'
+                               blpairs=nonzero_blpairs, color='#0700FF',
                                label='Default (time threshold: 0.2)')
 utils.plot.plot_median_spectra(uvp_avg, ax[1, 1], blpairs=nonzero_blpairs,
                                color='#8600FF', label='Time threshold: {}'.format(time_thresh_str))
