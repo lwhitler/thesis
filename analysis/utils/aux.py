@@ -184,7 +184,7 @@ def find_good_bls(bls, xants):
     return good_bls
 
 
-def get_uvpspec(uvd, psbeam, uvp_file, time_thresh=0.2):
+def get_uvpspec(uvd, psbeam, bls1, bls2, spw, uvp_file, time_thresh=0.2):
     """
     Make or load the UVPSpec object corresponding to the data given.
 
