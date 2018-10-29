@@ -184,18 +184,23 @@ def find_good_bls(bls, xants):
     return good_bls
 
 
-def get_uvpspec(uvd, psbeam, bls1, bls2, spw, uvp_file, time_thresh=0.2):
+def get_uvpspec(uvp_file, uvd, psbeam, bls1, bls2, spw=0,
+                time_thresh=0.2):
     """
     Make or load the UVPSpec object corresponding to the data given.
 
     Parameters
     ----------
+    uvp_file : str
+        The path to look for/write the UVPSpec object
     uvd : UVData object
         UVData object containing the data
     psbeam : PSpecBeam object
         PSpecBeam object containing the beam
-    uvp_file : str
-        The path to look for/write the UVPSpec object
+    bls1, bls2 : array-like
+        The baselines to use in OQE
+    spw : int
+        Which spectral window to use
     time_thresh : float, optional
         Time threshold for broadcasting flags (default is 0.2, not recommended
         to make this larger than 0.5 as per hera_pspec)

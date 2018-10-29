@@ -44,10 +44,10 @@ time_thresh = float(time_thresh_str)
 # Make/load the power spectra
 uvp_default = uvp_prefix.replace(time_thresh_str, '0.2') + '.ps.' + spw_str + '.' + bl_str + '.' + uvd.vis_units + '.h5'
 uvp_file = uvp_prefix + '.ps.' + spw_str + '.' + bl_str + '.' + uvd.vis_units + '.h5'
-ds_default, uvp_default = utils.aux.get_uvpspec(uvd_default, psbeam,
-                                                bls1, bls2, 0,
-                                                uvp_default)
-ds, uvp = utils.aux.get_uvpspec(uvd, psbeam, uvp_file)
+ds_default, uvp_default = utils.aux.get_uvpspec(uvp_default, uvd_default,
+                                                psbeam, bls1, bls2)
+ds, uvp = utils.aux.get_uvpspec(uvp_file, uvd, psbeam, bls1, bls2,
+                                time_thresh=time_thresh)
 
 # Take the time average of the spectra
 uvp_default_avg = uvp_default.average_spectra(time_avg=True, inplace=False)
