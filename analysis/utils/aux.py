@@ -221,6 +221,9 @@ def get_uvpspec(uvd, psbeam, uvp_file, time_thresh=0.2):
                        spw_ranges=spw, input_data_weight='identity', norm='I',
                        taper='blackman-harris')
         print('\nWriting ' + uvp_file + '...')
+        ps_directory = uvp_file.split('tt' + str(time_thresh))[0] + 'tt' + str(time_thresh)
+        if not os.path.exists(ps_directory):
+            os.makedirs(ps_directory)
         uvp.write_hdf5(uvp_file)
     return ds, uvp
 
