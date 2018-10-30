@@ -84,7 +84,7 @@ if zero_index is not None:
 zero_index = utils.plot.find_zero_tick_label(ax[1, 1])
 if zero_index is not None:
     ax[1, 1].yaxis.get_major_ticks()[zero_index].label.set_visible(False)
-ax[0, 0].set_title('Original flags')
-ax[0, 1].set_title('Flags after broadcasting')
+ax[0, 0].set_title('Original flags', fontsize=14)
+ax[0, 1].set_title('Flags after broadcasting', fontsize=14)
 plt.tight_layout()
 plt.savefig(im_prefix + '.tt' + time_thresh_str + '.png', format='png')
