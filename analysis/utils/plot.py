@@ -52,8 +52,8 @@ def plot_multiple_blpairs(uvp, ax, blpairs=None, plot_median=True, delay=False,
 
     # Axis labeling
     xlabel, ylabel = make_axis_labels(uvp, delay=delay)
-    ax.set_xlabel(xlabel, fontsize=12)
-    ax.set_ylabel(ylabel, fontsize=12)
+    ax.set_xlabel(xlabel, fontsize=14)
+    ax.set_ylabel(ylabel, fontsize=14)
 
 
 def plot_flag_frac(uvd, bls, ax, **kwargs):
@@ -116,15 +116,18 @@ def plot_median_spectra(uvp, ax, blpairs=None, niters=1000, delay=False,
 
     # y-axis scaling
     if yscale == 'symlog':
-        linthreshy = np.max(np.real(uvp.data_array[0]))*1e-6
+        real_component = np.real(uvp.data_array[0])
+        peak = np.max(real_component)
+        noise_cut = real_component[real_component<peak/2.]
+        linthreshy = np.max(real_component)*5
         ax.set_yscale(yscale, linthreshy=linthreshy)
     else:
         ax.set_yscale(yscale)
 
     # Axis labeling
     xlabel, ylabel = make_axis_labels(uvp, delay=delay)
-    ax.set_xlabel(xlabel, fontsize=12)
-    ax.set_ylabel(ylabel, fontsize=12)
+    ax.set_xlabel(xlabel, fontsize=14)
+    ax.set_ylabel(ylabel, fontsize=14)
 
 
 def make_axis_labels(uvp, delay=False):
