@@ -15,7 +15,7 @@ beam_file = '/home/lwhitler/data/dfiles/HERA_NF_dipole_power.beamfits'
 data_file = '/data6/HERA/data/IDR2.1/2458106/' + base_name + '.uvOCRS'
 ant_metrics = '/data6/HERA/data/IDR2.1/2458106/' + base_name.replace('.xx','') + '.uv.ant_metrics.json'
 uvp_prefix = '/home/lwhitler/data/dfiles/pspecs/broadcasting/tt' + time_thresh_str + '/' + base_name + ''
-im_prefix = '/home/lwhitler/data/images/broadcasting/' + base_name
+im_prefix = 'plots/' + base_name
 
 # Cosmology and beam models
 cosmo = hp.conversions.Cosmo_Conversions()
