@@ -119,7 +119,7 @@ def plot_median_spectra(uvp, ax, blpairs=None, niters=1000, delay=False,
         linthreshy = np.max(np.real(uvp.data_array[0]))*1e-5
         linthreshy = 10**np.floor(np.log10(linthreshy))
         ax.set_yscale(yscale, linthreshy=linthreshy,
-                      linscaley=3)
+                      linscaley=2)
     else:
         ax.set_yscale(yscale)
 
