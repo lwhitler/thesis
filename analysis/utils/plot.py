@@ -116,7 +116,7 @@ def plot_median_spectra(uvp, ax, blpairs=None, niters=1000, delay=False,
 
     # y-axis scaling
     if yscale == 'symlog':
-        linthreshy = np.max(np.real(uvp.data_array[0]))*1e-5
+        linthreshy = np.max(np.real(uvp.data_array[0]))*1e-6
         ax.set_yscale(yscale, linthreshy=linthreshy)
     else:
         ax.set_yscale(yscale)
