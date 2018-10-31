@@ -81,16 +81,16 @@ fig, ax = plt.subplots(2, 2, figsize=(12, 8))
 utils.plot.plot_flag_frac(uvd_orig, good_bls, ax[0, 0], vmin=0, vmax=1)
 utils.plot.plot_flag_frac(ds.dsets[0], good_bls, ax[0, 1], vmin=0, vmax=1)
 utils.plot.plot_median_spectra(median_default, med_err_default,
-                               uvp_default_avg, ax[0, 1], color='#0700FF')
-utils.plot.plot_median_spectra(median, med_err, uvp_avg, ax[0, 1],
+                               uvp_default_avg, ax[1, 0], color='#0700FF')
+utils.plot.plot_median_spectra(median, med_err, uvp_avg, ax[1, 0],
                                color='#8600FF')
 utils.plot.plot_median_spectra(med_diff, med_diff_err, uvp_avg, ax[1, 1],
                                color='#0700FF')
 # Plot appearance
 fig.canvas.draw()
-# zero_index = utils.plot.find_zero_tick_label(ax[1, 0])
-# if zero_index is not None:
-#     ax[1, 0].yaxis.get_major_ticks()[zero_index].label.set_visible(False)
+zero_index = utils.plot.find_zero_tick_label(ax[1, 0])
+if zero_index is not None:
+    ax[1, 0].yaxis.get_major_ticks()[zero_index].label.set_visible(False)
 # zero_index = utils.plot.find_zero_tick_label(ax[1, 1])
 # if zero_index is not None:
 #     ax[1, 1].yaxis.get_major_ticks()[zero_index].label.set_visible(False)

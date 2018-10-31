@@ -110,7 +110,7 @@ def plot_median_spectra(med, med_err, uvp, ax, delay=False, yscale='symlog',
     if hline:
         ax.axhline(0, c='#444444', ls=':', lw=0.75)
     ax.fill_between(x, med+med_err, med-med_err, alpha=0.3, **kwargs)
-    ax.plot(x, median, lw=1.25, **kwargs)
+    ax.plot(x, med, lw=1.25, **kwargs)
 
     # y-axis scaling
     if yscale == 'symlog':
