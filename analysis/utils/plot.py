@@ -109,13 +109,13 @@ def plot_median_spectra(med, med_err, uvp, ax, delay=False, yscale='symlog',
     # Plot median and errors
     if hline:
         ax.axhline(0, c='#444444', ls=':', lw=0.75)
-    ax.fill_between(x, median+med_err, median-med_err, alpha=0.3, **kwargs)
+    ax.fill_between(x, med+med_err, med-med_err, alpha=0.3, **kwargs)
     ax.plot(x, median, lw=1.25, **kwargs)
 
     # y-axis scaling
     if yscale == 'symlog':
         linthreshy = np.max(np.real(uvp.data_array[0]))*1e-5
-        linthreshy = 10**np.ceil(np.log10(linthreshy))
+        linthreshy = 10**np.floor(np.log10(linthreshy))
         ax.set_yscale(yscale, linthreshy=linthreshy,
                       linscaley=2)
     else:
