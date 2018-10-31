@@ -75,6 +75,9 @@ med_err = utils.aux.bootstrap_median(uvp_avg, blpairs=nonzero_blpairs, niters=10
 med_diff, med_diff_err = utils.aux.subtract_medians(median_default, median,
                                                     med_err_default, med_err)
 
+# Set up for plotting
+x = uvp.get_kparas(0)
+
 # The four panel plot with flags before and after broadcasting, spectra of
 # all baseline pairs, and the median power spectrum with errors
 fig, ax = plt.subplots(2, 2, figsize=(12, 8))
