@@ -29,7 +29,6 @@ def plot_multiple_blpairs(uvp, ax, blpairs=None, plot_median=True, delay=False,
     hline : bool, optional
         Whether to plot a horizontal line at zero (default is True)
     """
-    kparas = uvp.get_kparas(0)
     # Default to baseline pairs in UVPSpec object
     if blpairs is None:
         blpairs = list(np.unique(uvp.blpair_array))
