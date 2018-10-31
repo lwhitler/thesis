@@ -80,13 +80,12 @@ med_diff, med_diff_err = utils.aux.subtract_medians(median_default, median,
 fig, ax = plt.subplots(2, 2, figsize=(12, 8))
 utils.plot.plot_flag_frac(uvd_orig, good_bls, ax[0, 0], vmin=0, vmax=1)
 utils.plot.plot_flag_frac(ds.dsets[0], good_bls, ax[0, 1], vmin=0, vmax=1)
-utils.plot.plot_median_spectra(median_default, med_err_default, ax[0, 1],
-                               blpairs=nonzero_blpairs, color='#0700FF',
-                               label='Default (time threshold: 0.2)')
-utils.plot.plot_median_spectra(median, med_err, ax[0, 1], blpairs=nonzero_blpairs,
-                               color='#8600FF', label='Time threshold: {}'.format(time_thresh_str))
-utils.plot.plot_median_spectra(med_diff, med_diff_err, ax[1, 1], blpairs=nonzero_blpairs,
-                               color='#8600FF', label='Time threshold: {}'.format(time_thresh_str))
+utils.plot.plot_median_spectra(median_default, med_err_default, uvp_default_avg,
+                               ax[0, 1], blpairs=nonzero_blpairs, color='#0700FF')
+utils.plot.plot_median_spectra(median, med_err, uvp_avg, ax[0, 1],
+                               blpairs=nonzero_blpairs, color='#8600FF')
+utils.plot.plot_median_spectra(med_diff, med_diff_err, uvp_avg, ax[1, 1],
+                               blpairs=nonzero_blpairs, color='#8600FF')
 # Plot appearance
 fig.canvas.draw()
 zero_index = utils.plot.find_zero_tick_label(ax[1, 0])

@@ -73,7 +73,7 @@ def plot_flag_frac(uvd, bls, ax, **kwargs):
     ax.imshow(flag_frac, aspect='auto', **kwargs)
 
 
-def plot_median_spectra(med, med_err, ax, delay=False, yscale='symlog',
+def plot_median_spectra(med, med_err, uvp, ax, delay=False, yscale='symlog',
                         hline=True, **kwargs):
     """
     Plot the median power spectra of multiple baseline pairs.
@@ -84,6 +84,7 @@ def plot_median_spectra(med, med_err, ax, delay=False, yscale='symlog',
         The median to plot
     med_err : array-like
         The error on the median
+    uvp : UVPSpec object
     ax : Axes object
         Axes object to plot the median in
     blpairs : list(s) of tuples, optional
