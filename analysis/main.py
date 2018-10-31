@@ -66,9 +66,9 @@ uvp_default_avg.data_array[0] = np.ma.masked_array(uvp_default_avg.data_array[0]
 uvp_avg.data_array[0] = np.ma.masked_array(uvp_avg.data_array[0], zero_wgt_mask)
 
 # The median and bootstrapped errors
-median_default = utils.aux.calc_median(uvp_avg_default, blpairs=nonzero_blpairs)
+median_default = utils.aux.calc_median(uvp_default_avg, blpairs=nonzero_blpairs)
 median = utils.aux.calc_median(uvp_avg, blpairs=nonzero_blpairs)
-med_err_default = utils.aux.bootstrap_median(uvp_avg_default, blpairs=nonzero_blpairs,
+med_err_default = utils.aux.bootstrap_median(uvp_default_avg, blpairs=nonzero_blpairs,
                                             niters=1000)
 med_err = utils.aux.bootstrap_median(uvp_avg, blpairs=nonzero_blpairs, niters=1000)
 # The difference of the medians
