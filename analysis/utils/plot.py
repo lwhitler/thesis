@@ -73,15 +73,17 @@ def plot_flag_frac(uvd, bls, ax, **kwargs):
     ax.imshow(flag_frac, aspect='auto', **kwargs)
 
 
-def plot_median_spectra(uvp, ax, blpairs=None, niters=1000, delay=False,
-                        yscale='symlog', hline=True, **kwargs):
+def plot_median_spectra(med, med_err, ax, delay=False, yscale='symlog',
+                        hline=True, **kwargs):
     """
     Plot the median power spectra of multiple baseline pairs.
 
     Parameters
     ----------
-    uvp : UVPSpec object
-        UVPSpec object containing the power spectra to take the median of
+    med : array-like
+        The median to plot
+    med_err : array-like
+        The error on the median
     ax : Axes object
         Axes object to plot the median in
     blpairs : list(s) of tuples, optional
@@ -104,14 +106,10 @@ def plot_median_spectra(uvp, ax, blpairs=None, niters=1000, delay=False,
     else:
         x = uvp.get_dlys(0) * 1e9  # delay in ns
 
-    # Get the median and bootstrap for errors
-    median = aux.calc_median(uvp, blpairs=blpairs)
-    med_sd = aux.bootstrap_median(uvp, blpairs=blpairs, niters=niters)
-
     # Plot median and errors
     if hline:
         ax.axhline(0, c='#444444', ls=':', lw=0.75)
-    ax.fill_between(x, median+med_sd, median-med_sd, alpha=0.3, **kwargs)
+    ax.fill_between(x, median+med_err, median-med_err, alpha=0.3, **kwargs)
     ax.plot(x, median, lw=1.25, **kwargs)
 
     # y-axis scaling

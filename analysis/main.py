@@ -65,16 +65,27 @@ nonzero_blpairs = uvp_avg.blpair_array[~zero_wgt[:, 0]]
 uvp_default_avg.data_array[0] = np.ma.masked_array(uvp_default_avg.data_array[0], zero_wgt_mask)
 uvp_avg.data_array[0] = np.ma.masked_array(uvp_avg.data_array[0], zero_wgt_mask)
 
+# The median and bootstrapped errors
+median_default = utils.aux.calc_median(uvp_avg_default, blpairs=nonzero_blpairs)
+median = utils.aux.calc_median(uvp_avg, blpairs=nonzero_blpairs)
+med_err_default = utils.aux.bootstrap_median(uvp_avg_default, blpairs=nonzero_blpairs,
+                                            niters=1000)
+med_err = utils.aux.bootstrap_median(uvp_avg, blpairs=nonzero_blpairs, niters=1000)
+# The difference of the medians
+med_diff, med_diff_err = utils.aux.subtract_medians(median_default, median,
+                                                    med_err_default, med_err)
+
 # The four panel plot with flags before and after broadcasting, spectra of
 # all baseline pairs, and the median power spectrum with errors
 fig, ax = plt.subplots(2, 2, figsize=(12, 8))
 utils.plot.plot_flag_frac(uvd_orig, good_bls, ax[0, 0], vmin=0, vmax=1)
 utils.plot.plot_flag_frac(ds.dsets[0], good_bls, ax[0, 1], vmin=0, vmax=1)
-utils.plot.plot_multiple_blpairs(uvp_avg, ax[1, 0], blpairs=nonzero_blpairs)
-utils.plot.plot_median_spectra(uvp_default_avg, ax[1, 1],
+utils.plot.plot_median_spectra(median_default, med_err_default, ax[0, 1],
                                blpairs=nonzero_blpairs, color='#0700FF',
                                label='Default (time threshold: 0.2)')
-utils.plot.plot_median_spectra(uvp_avg, ax[1, 1], blpairs=nonzero_blpairs,
+utils.plot.plot_median_spectra(median, med_err, ax[0, 1], blpairs=nonzero_blpairs,
+                               color='#8600FF', label='Time threshold: {}'.format(time_thresh_str))
+utils.plot.plot_median_spectra(med_diff, med_diff_err, ax[1, 1], blpairs=nonzero_blpairs,
                                color='#8600FF', label='Time threshold: {}'.format(time_thresh_str))
 # Plot appearance
 fig.canvas.draw()

@@ -257,3 +257,26 @@ def sample_blpairs(blpairs, size=None, seed=None):
         np.random.seed(seed)
     sample = [np.random.choice(blpairs) for i in range(size)]
     return sample
+
+
+def subtract_medians(median1, median2, med_err1, med_err2):
+    """
+    Subtract two medians and add their errors in quadrature.
+
+    Parameters
+    ----------
+    median1, median2 : array
+        The medians to subtract (median1 - median2)
+    med_err1, med_err2 : array
+        The errors on the subtracted medians
+
+    Returns
+    -------
+    med_diff : array
+        The difference of the medians
+    med_diff_err : array
+        The error of the differenced median
+    """
+    med_diff = median1 - median2
+    med_diff_err = np.sqrt(med_err1**2 + med_err2**2)
+    return med_diff, med_diff_err
