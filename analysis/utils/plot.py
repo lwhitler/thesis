@@ -4,8 +4,8 @@ import hera_pspec as hp
 import aux
 
 
-def plot_multiple_blpairs(uvp, ax, blpairs=None, plot_median=True, delay=False,
-                          yscale='symlog', hline=True, **kwargs):
+def plot_multiple_blpairs(uvp, ax, blpairs=None, delay=False, yscale='symlog',
+                          hline=True, **kwargs):
     """
     Plot the power spectra from multiple baseline pairs.
 
@@ -18,9 +18,6 @@ def plot_multiple_blpairs(uvp, ax, blpairs=None, plot_median=True, delay=False,
     blpairs : list(s) of tuples, optional
         The baseline pairs to plot the spectra of (default is all of the
         baseline pairs in the UVPSpec object)
-    plot_median : bool, optional
-        Whether to plot the median of the baseline pair power spectra (default
-        is True)
     delay : bool, optional
         Whether to plot in delay (ns) or cosmological units (h Mpc^-1) (default
         is cosmological units)
@@ -72,45 +69,38 @@ def plot_flag_frac(uvd, bls, ax, **kwargs):
     ax.imshow(flag_frac, aspect='auto', **kwargs)
 
 
-def plot_median_spectra(med, med_err, uvp, ax, delay=False, yscale='symlog',
-                        hline=True, **kwargs):
+def plot_median_spectra(x, med, med_err, ax, delay=False, hline=True,
+                        color=None, label=None, yscale='symlog', **kwargs):
     """
     Plot the median power spectra of multiple baseline pairs.
 
     Parameters
     ----------
+    x : array-like
+        The x-values to plot (either delay or cosmological units)
     med : array-like
         The median to plot
     med_err : array-like
         The error on the median
-    uvp : UVPSpec object
     ax : Axes object
         Axes object to plot the median in
-    blpairs : list(s) of tuples, optional
-        The baseline pairs to plot the spectra of (default is all of the
-        baseline pairs in the UVPSpec object)
-    niters : int, optional
-        Number of resamples to take to calculate the error of the median
-        (default is 1000)
     delay : bool, optional
-        Whether to plot in delay (ns) or cosmological units (h Mpc^-1) (default
-        is cosmological units)
-    yscale : str, optional
-        The y-axis scale ('linear', 'log', or 'symlog', default is symlog)
+        Whether the spectrum is plotted in delay (ns) or cosmological units
+        (h Mpc^-1) (default is cosmological units)
     hline : bool, optional
         Whether to plot a horizontal line at zero (default is True)
+    color : str
+        What color to plot the spectrum in
+    label : str
+        Label for the legend
+    yscale : str, optional
+        The y-axis scale ('linear', 'log', or 'symlog', default is symlog)
     """
-    # Get the x-axis units
-    if not delay:
-        x = uvp.get_kparas(0)  # k_parallel in h Mpc^-1
-    else:
-        x = uvp.get_dlys(0) * 1e9  # delay in ns
-
     # Plot median and errors
     if hline:
         ax.axhline(0, c='#444444', ls=':', lw=0.75)
-    ax.fill_between(x, med+med_err, med-med_err, alpha=0.3, **kwargs)
-    ax.plot(x, med, lw=1.25, **kwargs)
+    ax.fill_between(x, med+med_err, med-med_err, alpha=0.3, color=color)
+    ax.plot(x, med, lw=1.25, color=color, label=label, **kwargs)
 
     # y-axis scaling
     if yscale == 'symlog':

@@ -9,7 +9,7 @@ import utils
 
 # Paths
 JD_dec = '49088'
-time_thresh_str = '0.05'
+time_thresh_str = '0.05' # For flagging
 base_name = 'zen.2458106.' + JD_dec + '.xx.HH'
 beam_file = '/home/lwhitler/data/dfiles/HERA_NF_dipole_power.beamfits'
 data_file = '/data6/HERA/data/IDR2.1/2458106/' + base_name + '.uvOCRS'
@@ -17,16 +17,16 @@ ant_metrics = '/data6/HERA/data/IDR2.1/2458106/' + base_name.replace('.xx','') +
 uvp_prefix = '/home/lwhitler/data/dfiles/pspecs/broadcasting/tt' + time_thresh_str + '/' + base_name + ''
 im_prefix = 'plots/' + base_name
 
-# Cosmology and beam models
+# Data and models
 cosmo = hp.conversions.Cosmo_Conversions()
-psbeam = hp.pspecbeam.PSpecBeamUV(beam_file, cosmo=cosmo)
-# Load the data
-uvd_orig = UVData()
-uvd_orig.read_miriad(data_file)
-uvd_default, uvd = copy.deepcopy(uvd_orig), copy.deepcopy(uvd_orig)
+beam = hp.pspecbeam.PSpecBeamUV(beam_file, cosmo=cosmo)
+uvd_load = UVData()
+uvd_load.read_miriad(data_file)
+
 # Convert data from Jy to mK
-utils.aux.convert_Jy_to_mK(uvd_default, psbeam)
-utils.aux.convert_Jy_to_mK(uvd, psbeam)
+uvd_orig, uvd = copy.deepcopy(uvd_load), copy.deepcopy(uvd_load)
+utils.aux.convert_Jy_to_mK(uvd_orig, beam)
+utils.aux.convert_Jy_to_mK(uvd, beam)
 
 # Select the baseline pairs without bad antennas
 reds = hp.utils.get_reds(uvd)[0]
@@ -37,59 +37,73 @@ good_bls = utils.aux.find_good_bls(bls, xants)
 blps = hp.utils.construct_blpairs(good_bls, exclude_auto_bls=True,
                                   exclude_permutations=True)
 bls1, bls2 = blps[0], blps[1]
+
 # Select the spectral window
 spw = [(512, 640)]
 spw_str = str(spw[0][0]) + '-' + str(spw[0][1])  # For saving files
+
 # Time threshold for broadcasting flags
 time_thresh = float(time_thresh_str)
 
 # Make/load the power spectra
-uvp_default = uvp_prefix.replace(time_thresh_str, '0.2') + '.ps.' + spw_str + '.' + bl_str + '.' + uvd.vis_units + '.h5'
+uvp_orig_file = uvp_prefix.replace(time_thresh_str, '0.2') + '.ps.' + spw_str + '.' + bl_str + '.' + uvd_orig.vis_units + '.h5'
 uvp_file = uvp_prefix + '.ps.' + spw_str + '.' + bl_str + '.' + uvd.vis_units + '.h5'
-ds_default, uvp_default = utils.aux.get_uvpspec(uvd_default, psbeam, bls1, bls2,
-                                                spw, uvp_default)
-ds, uvp = utils.aux.get_uvpspec(uvd, psbeam, bls1, bls2, spw, uvp_file,
+ds_orig, uvp_orig = utils.aux.get_uvpspec(uvd_orig, beam, bls1, bls2, spw,
+                                          uvp_orig_file, time_thresh=0.2)
+ds, uvp = utils.aux.get_uvpspec(uvd, beam, bls1, bls2, spw, uvp_file,
                                 time_thresh=time_thresh)
+# Save the baseline pairs
+blpairs = list(np.unique(uvp.blpair_array))
 
 # Take the time average of the spectra
-uvp_default_avg = uvp_default.average_spectra(time_avg=True, inplace=False)
+uvp_avg_orig = uvp_orig.average_spectra(time_avg=True, inplace=False)
 uvp_avg = uvp.average_spectra(time_avg=True, inplace=False)
-# Save the baseline pairs
-blpairs = list(np.unique(uvp_avg.blpair_array))
 
-# Find all nonzero data and corresponding baselines
+# Remove zero data and corresponding baselines
 zero_wgt = np.all(uvp_avg.wgt_array[0][:, :, 0] == 0, axis=1)
 zero_wgt_mask = np.broadcast_to(zero_wgt, uvp_avg.data_array[0][:, :, 0].shape)
 zero_wgt_mask = zero_wgt_mask[:, :, np.newaxis]
 nonzero_blpairs = uvp_avg.blpair_array[~zero_wgt[:, 0]]
-uvp_default_avg.data_array[0] = np.ma.masked_array(uvp_default_avg.data_array[0], zero_wgt_mask)
-uvp_avg.data_array[0] = np.ma.masked_array(uvp_avg.data_array[0], zero_wgt_mask)
+uvp_avg_orig.data_array[0] = np.ma.masked_array(uvp_avg_orig.data_array[0],
+                                                zero_wgt_mask)
+uvp_avg.data_array[0] = np.ma.masked_array(uvp_avg.data_array[0],
+                                           zero_wgt_mask)
 
-# The median and bootstrapped errors
-median_default = utils.aux.calc_median(uvp_default_avg, blpairs=nonzero_blpairs)
-median = utils.aux.calc_median(uvp_avg, blpairs=nonzero_blpairs)
-med_err_default = utils.aux.bootstrap_median(uvp_default_avg, blpairs=nonzero_blpairs,
-                                            niters=1000)
-med_err = utils.aux.bootstrap_median(uvp_avg, blpairs=nonzero_blpairs, niters=1000)
-# The difference of the medians
-med_diff, med_diff_err = utils.aux.subtract_medians(median_default, median,
-                                                    med_err_default, med_err)
+# Calculate the median, bootstrapped errors, and the difference
+niters = 1000
+med_orig = utils.aux.calc_median(uvp_avg_orig, blpairs=nonzero_blpairs)
+med = utils.aux.calc_median(uvp_avg, blpairs=nonzero_blpairs)
+med_err_orig = utils.aux.bootstrap_median(uvp_avg_orig, blpairs=nonzero_blpairs,
+                                          niters=niters)
+med_err = utils.aux.bootstrap_median(uvp_avg, blpairs=nonzero_blpairs,
+                                     niters=niters)
+med_diff, med_diff_err = utils.aux.subtract_medians(median_orig, median,
+                                                    med_err_orig, med_err)
+# x-axis for plotting
+kparas = uvp_avg.get_kparas(0)
 
-# The four panel plot with flags before and after broadcasting, spectra of
-# all baseline pairs, and the median power spectrum with errors
-fig, ax = plt.subplots(2, 2, figsize=(12, 8))
-utils.plot.plot_flag_frac(uvd_orig, good_bls, ax[0, 0], vmin=0, vmax=1)
-utils.plot.plot_flag_frac(ds.dsets[0], good_bls, ax[0, 1], vmin=0, vmax=1)
-utils.plot.plot_median_spectra(median_default, med_err_default,
-                               uvp_default_avg, ax[1, 0], color='#0700FF',
+# The original flags, before broadcasting
+fig1, ax1 = plt.subplots(1, 1, figsize=(5, 4))
+utils.plot.plot_flag_frac(uvd_load, good_bls, ax1, vmin=0, vmax=1)
+ax1.set_title('Original flags')
+plt.savefig(im_prefix + '.original_flags.png', format='png')
+
+# Four panel plot with flags from both flagging strategies, the median power
+# spectrum from both methods, and the difference
+fig2, ax2 = plt.subplots(2, 2, sharey='row', figsize=(12, 8))
+utils.plot.plot_flag_frac(ds_orig.dsets[0], good_bls, ax2[0, 0], vmin=0, vmax=1)
+utils.plot.plot_flag_frac(ds.dsets[0], good_bls, ax2[0, 1], vmin=0, vmax=1)
+utils.plot.plot_median_spectra(kparas, med_orig, med_err_orig, uvp_avg_orig,
+                               ax2[1, 0], color='#0700FF',
                                label='Time threshold: 0.2')
-utils.plot.plot_median_spectra(median, med_err, uvp_avg, ax[1, 0], color='#8600FF',
-                               label='Time threshold: {0}'.format(time_thres_str))
-utils.plot.plot_median_spectra(med_diff, med_diff_err, uvp_avg, ax[1, 1],
-                               color='#0700FF')
-# Plot appearance
-ax[0, 0].set_title('Original flags', fontsize=14)
-ax[0, 1].set_title('Flags after broadcasting', fontsize=14)
-ax[1, 0].set_title('')
+utils.plot.plot_median_spectra(kparas, med, med_err, uvp_avg, ax2[1, 0], color='#8600FF',
+                               label='Time threshold: {0}'.format(time_thresh_str))
+utils.plot.plot_median_spectra(kparas, med_diff, med_diff_err, uvp_avg,
+                               ax2[1, 1], color='#0700FF')
+ax2[1, 1].yaxis.set_tick_params(labelleft=True)
+ax2[0, 0].set_title('Time threshold: 0.2', fontsize=14)
+ax2[0, 1].set_title('Time threshold: {0}'.format(time_thresh_str), fontsize=14)
+ax2[1, 0].set_title('Power spectrum comparison', fontsize=14)
+ax2[1, 1].set_title('Difference of medians', fontsize=14)
 plt.tight_layout()
 plt.savefig(im_prefix + '.tt' + time_thresh_str + '.png', format='png')
