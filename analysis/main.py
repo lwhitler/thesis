@@ -77,7 +77,7 @@ med_err_orig = utils.aux.bootstrap_median(uvp_avg_orig, blpairs=nonzero_blpairs,
                                           niters=niters)
 med_err = utils.aux.bootstrap_median(uvp_avg, blpairs=nonzero_blpairs,
                                      niters=niters)
-med_diff, med_diff_err = utils.aux.subtract_medians(median_orig, median,
+med_diff, med_diff_err = utils.aux.subtract_medians(med_orig, med,
                                                     med_err_orig, med_err)
 # x-axis for plotting
 kparas = uvp_avg.get_kparas(0)
