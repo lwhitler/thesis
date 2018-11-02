@@ -47,9 +47,9 @@ def plot_multiple_blpairs(uvp, ax, blpairs=None, delay=False, yscale='symlog',
         ax.set_yscale(yscale)
 
     # Axis labeling
-    xlabel, ylabel = make_axis_labels(uvp, delay=delay)
-    ax.set_xlabel(xlabel, fontsize=14)
-    ax.set_ylabel(ylabel, fontsize=14)
+    # xlabel, ylabel = make_axis_labels(uvp, delay=delay)
+    # ax.set_xlabel(xlabel, fontsize=14)
+    # ax.set_ylabel(ylabel, fontsize=14)
 
 
 def plot_flag_frac(uvd, bls, ax, **kwargs):
@@ -112,9 +112,9 @@ def plot_median_spectra(x, med, med_err, ax, delay=False, hline=True,
         ax.set_yscale(yscale)
 
     # Axis labeling
-    xlabel, ylabel = make_axis_labels(uvp, delay=delay)
-    ax.set_xlabel(xlabel, fontsize=14)
-    ax.set_ylabel(ylabel, fontsize=14)
+    # xlabel, ylabel = make_axis_labels(uvp, delay=delay)
+    # ax.set_xlabel(xlabel, fontsize=14)
+    # ax.set_ylabel(ylabel, fontsize=14)
 
 
 def make_axis_labels(uvp, delay=False):
