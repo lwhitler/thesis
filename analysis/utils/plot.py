@@ -43,7 +43,7 @@ def plot_multiple_blpairs(uvp, ax, blpairs=None, delay=False,
     ax.set_ylabel(ylabel, fontsize=12)
 
 
-def plot_flag_frac(uvd, spw, bls, ax, **kwargs):
+def plot_flag_frac(uvd, bls, ax, spw=(0, 1024), **kwargs):
     """
     Plot the waterfall for the percentage of flagged baselines.
 
@@ -51,12 +51,12 @@ def plot_flag_frac(uvd, spw, bls, ax, **kwargs):
     ----------
     uvd : UVData object
         The UVData object containing the flags
-    spw : tuple
-        The spectral window to plot
     bls : array-like
         Baselines for which to look for flags
     ax : Axes object
         Axes object to plot the waterfall on
+    spw : tuple, optional
+        The spectral window to plot (default is the entire band)
     """
     flag_frac = aux.calc_flagged_bl_percent(uvd, bls)
     ax.imshow(flag_frac[:, spw[0]:spw[1]], aspect='auto', **kwargs)
