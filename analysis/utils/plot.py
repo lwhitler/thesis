@@ -46,7 +46,7 @@ def plot_multiple_blpairs(uvp, ax, blpairs=None, delay=False, vis_units='mK',
     else:
         ax.set_yscale(yscale)
 
-    Axis labeling
+    # Axis labeling
     xlabel, ylabel = make_axis_labels(delay=delay, vis_units=vis_units)
     ax.set_xlabel(xlabel, fontsize=14)
     ax.set_ylabel(ylabel, fontsize=14)
@@ -113,7 +113,7 @@ def plot_median_spectra(x, med, med_err, ax, delay=False, vis_units='mK', hline=
     else:
         ax.set_yscale(yscale)
 
-    Axis labeling
+    # Axis labeling
     xlabel, ylabel = make_axis_labels(delay=delay, vis_units=vis_units)
     ax.set_xlabel(xlabel, fontsize=14)
     ax.set_ylabel(ylabel, fontsize=14)
