@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib import colors
 import hera_pspec as hp
 import aux
 import params
@@ -43,10 +44,53 @@ def plot_multiple_blpairs(uvp, ax, blpairs=None, delay=False,
     ax.set_xlabel(xlabel, fontsize=12)
     ax.set_ylabel(ylabel, fontsize=12)
 
+def plot_flag_comparison(uvd1, uvd2, spw, bl, ax, xtick_space=2,
+                         colors=['#E4DFDA', '#262322', '#8600FF', '#0700FF'],
+                         **kwargs):
+    """
+    Plot waterfall comparing two flag arrays.
+
+    Parameters
+    ----------
+    uvd1, uvd2 : UVData objects
+        The UVData objects containing the flags
+    spw : tuple, optional
+        The spectral window to plot
+    bl : array-like
+        The baseline for which to look for flags
+    ax : Axes object
+        Axes object to plot the waterfall on
+    xtick_space : int
+        Spacing of x-tick labels in MHz
+    colors : list, optional
+        Colors to use for the colormap
+    """
+    # Set up the colormap
+    cmap = colors.ListedColormap(colors)
+    bounds = [-0.5, 0.5, 1.5, 2.5, 3.5]
+    norm = colors.BoundaryNorm(bounds, cmap.N)
+
+    # Plot the comparison
+    flag_comparison = aux.compare_flag_strategies(uvd1, uvd2, bl)
+    ax.imshow(flag_comparison[:, spw[0]:spw[1]], aspect='auto',
+              cmap=cmap, norm=norm, **kwargs)
+
+    # Axis labeling
+    # Channels corresponding to frequencies separated by xtick_space
+    freqs = np.arange(params.min_freq, params.max_freq+1, xtick_space)
+    chans = aux.freq_to_chans(freqs)
+    # Downselect to the spectral window desired
+    spw_chans = chans[(chans >= spw[0]) & (chans <= spw[1])]
+    spw_freqs = [str(int(aux.chan_to_freqs(chan))) for chan in spw_chans]
+    ax.set_xticks(spw_chans - spw[0])
+    ax.set_xticklabels(spw_freqs)
+    ax.set_xlabel('Frequency [MHz]', fontsize=12)
+    ax.set_ylabel('Time', fontsize=12)
+
 
 def plot_flag_frac(uvd, spw, bls, ax, xtick_space=2, **kwargs):
     """
-    Plot the waterfall for the percentage of flagged baselines.
+    Plot waterfall for the percentage of flagged baselines.
 
     Parameters
     ----------

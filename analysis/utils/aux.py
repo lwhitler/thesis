@@ -66,7 +66,7 @@ def calc_flagged_bl_percent(uvd, bls):
     ----------
     uvd : UVData object
         UVData object containing the flag array
-    bls : array-like
+    bls : list of tuples
         Baselines for which to look for flags
 
     Returns
@@ -145,6 +145,39 @@ def chan_to_freqs(chans):
     freqs = params.min_freq + freq_per_chan*chans
     return freqs
 
+
+def compare_flag_strategies(uvd1, uvd2, bl):
+    """
+    Comparison of flagging strategies.
+
+    Parameters
+    ----------
+    uvd1, uvd2 : UVData objects
+        UVData objects containing the flag arrays
+    bl : tuple
+        The baseline for which to compare flags
+
+    Returns
+    -------
+    flag_comparison : array
+        A single array of dimension (Ntimes, Nfreqs) where 0 corresponds to
+        no flags, 1 corresponds to being flagged by both methods, 2 corresponds
+        to being flagged in uvd1 and not uvd2, and 3 corresponds to being
+        flagged in uvd2 and not uvd1
+    """
+    ant1, ant2 = bl[0], bl[1]
+    # Not using the get_flags function in pyuvdata because it's slow
+    bl_ind = np.where((uvd.ant_1_array == ant1) &
+                      (uvd.ant_2_array == ant2))[0]
+    flags1 = uvd1.flag_array[bl_ind][:, 0, :, 0].astype(int)
+    flags2 = uvd2.flag_array[bl_ind][:, 0, :, 0].astype(int)
+    
+    flag_comparison = np.zeros_like(flags1)
+    flag_comparison[~flags1 & ~flags2] = 0 # Not flagged
+    flag_comparison[flags1 & flags2] = 1 # Flagged in both uvd1 and uvd2
+    flag_comparison[flags1 & ~flags2] = 2 # Flagged in uvd1 and not uvd2
+    flag_comparison[~flags1 & flags2] = 3 # Flagged in uvd2 and not uvd1
+    return flag_comparison
 
 def convert_Jy_to_mK(uvd, psbeam):
     """
