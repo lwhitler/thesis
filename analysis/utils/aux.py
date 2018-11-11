@@ -78,7 +78,7 @@ def calc_flagged_bl_percent(uvd, bls):
     bl_flag_arr = []
     for bl in bls:
         ant1, ant2 = bl[0], bl[1]
-        # Not using the get_flags function in hera_pspec because it's slow
+        # Not using the get_flags function in pyuvdata because it's slow
         bl_ind = np.where((uvd.ant_1_array == ant1) &
                           (uvd.ant_2_array == ant2))[0]
         bl_flags = uvd.flag_array[bl_ind][:, 0, :, 0].astype(float)

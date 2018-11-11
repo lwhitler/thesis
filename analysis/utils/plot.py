@@ -59,6 +59,14 @@ def plot_flag_frac(uvd, bls, ax, **kwargs):
     flag_frac = aux.calc_flagged_bl_percent(uvd, bls)
     ax.imshow(flag_frac, aspect='auto', **kwargs)
 
+    # x-axis labeling
+    chans = np.array([0, 102.4, 204.8, 307.2, 409.6, 512,
+                      614.4, 716.8, 819.2, 921.6, 1024])
+    freqs = aux.chan_to_freqs(chans)
+    xticklabels = [str(freq) for freq in freqs]
+    ax.set_xticks(chans)
+    ax.set_xticklabels(xticklabels)
+
 
 def plot_median_spectra(x, med, med_err, ax, delay=False, vis_units='mK',
                         hline=True, color=None, label=None, **kwargs):
