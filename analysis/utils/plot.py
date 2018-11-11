@@ -67,7 +67,7 @@ def plot_flag_frac(uvd, spw, bls, ax, xtick_space=2, **kwargs):
     # Axis labeling
     # Channels corresponding to frequencies separated by xtick_space
     freqs = np.arange(params.min_freq, params.max_freq+1, xtick_space)
-    chans = freq_to_chans(freqs)
+    chans = aux.freq_to_chans(freqs)
     # Downselect to the spectral window desired
     spw_chans = chans[(chans >= spw[0]) & (chans <= spw[1])]
     spw_freqs = [str(int(aux.chan_to_freqs(chan))) for chan in spw_chans]
