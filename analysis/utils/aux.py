@@ -169,14 +169,15 @@ def compare_flag_strategies(uvd1, uvd2, bl):
     # Not using the get_flags function in pyuvdata because it's slow
     bl_ind = np.where((uvd1.ant_1_array == ant1) &
                       (uvd1.ant_2_array == ant2))[0]
-    flags1 = uvd1.flag_array[bl_ind][:, 0, :, 0].astype(int)
-    flags2 = uvd2.flag_array[bl_ind][:, 0, :, 0].astype(int)
+    flags1 = uvd1.flag_array[bl_ind][:, 0, :, 0]
+    flags2 = uvd2.flag_array[bl_ind][:, 0, :, 0]
     
     flag_comparison = np.zeros_like(flags1)
     flag_comparison[~flags1 & ~flags2] = 0 # Not flagged
     flag_comparison[flags1 & flags2] = 1 # Flagged in both uvd1 and uvd2
     flag_comparison[flags1 & ~flags2] = 2 # Flagged in uvd1 and not uvd2
     flag_comparison[~flags1 & flags2] = 3 # Flagged in uvd2 and not uvd1
+    import pdb; pdb.set_trace()
     return flag_comparison
 
 def convert_Jy_to_mK(uvd, psbeam):

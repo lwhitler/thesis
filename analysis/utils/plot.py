@@ -72,6 +72,7 @@ def plot_flag_comparison(uvd1, uvd2, spw, bl, ax, xtick_space=2,
 
     # Plot the comparison
     flag_comparison = aux.compare_flag_strategies(uvd1, uvd2, bl)
+    import pdb; pdb.set_trace()
     ax.imshow(flag_comparison[:, spw[0]:spw[1]], aspect='auto',
               cmap=cmap, norm=norm, **kwargs)
 
