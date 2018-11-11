@@ -67,7 +67,7 @@ def plot_flag_frac(uvd, bls, ax, **kwargs):
     ax.set_xticks(chans)
     ax.set_xticklabels(xticklabels)
     ax.set_xlabel('Frequency [MHz]', fontsize=14)
-    ax.set_xlabel('Time', fontsize=14)
+    ax.set_ylabel('Time', fontsize=14)
 
 
 def plot_median_spectra(x, med, med_err, ax, delay=False, vis_units='mK',
