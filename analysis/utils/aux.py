@@ -167,8 +167,8 @@ def compare_flag_strategies(uvd1, uvd2, bl):
     """
     ant1, ant2 = bl[0], bl[1]
     # Not using the get_flags function in pyuvdata because it's slow
-    bl_ind = np.where((uvd.ant_1_array == ant1) &
-                      (uvd.ant_2_array == ant2))[0]
+    bl_ind = np.where((uvd1.ant_1_array == ant1) &
+                      (uvd1.ant_2_array == ant2))[0]
     flags1 = uvd1.flag_array[bl_ind][:, 0, :, 0].astype(int)
     flags2 = uvd2.flag_array[bl_ind][:, 0, :, 0].astype(int)
     
