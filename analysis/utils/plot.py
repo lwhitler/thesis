@@ -4,8 +4,8 @@ import hera_pspec as hp
 import aux
 
 
-def plot_multiple_blpairs(uvp, ax, blpairs=None, delay=False, yscale='symlog',
-                          hline=True, **kwargs):
+def plot_multiple_blpairs(uvp, ax, blpairs=None, delay=False, vis_units='mK',
+                          yscale='symlog', hline=True, **kwargs):
     """
     Plot the power spectra from multiple baseline pairs.
 
@@ -46,10 +46,10 @@ def plot_multiple_blpairs(uvp, ax, blpairs=None, delay=False, yscale='symlog',
     else:
         ax.set_yscale(yscale)
 
-    # Axis labeling
-    # xlabel, ylabel = make_axis_labels(uvp, delay=delay)
-    # ax.set_xlabel(xlabel, fontsize=14)
-    # ax.set_ylabel(ylabel, fontsize=14)
+    Axis labeling
+    xlabel, ylabel = make_axis_labels(delay=delay, vis_units=vis_units)
+    ax.set_xlabel(xlabel, fontsize=14)
+    ax.set_ylabel(ylabel, fontsize=14)
 
 
 def plot_flag_frac(uvd, bls, ax, **kwargs):
@@ -69,8 +69,8 @@ def plot_flag_frac(uvd, bls, ax, **kwargs):
     ax.imshow(flag_frac, aspect='auto', **kwargs)
 
 
-def plot_median_spectra(x, med, med_err, ax, delay=False, hline=True,
-                        color=None, label=None, yscale='symlog', **kwargs):
+def plot_median_spectra(x, med, med_err, ax, delay=False, vis_units='mK', hline=True,
+                        color=None, label=None, yscale='symlog',**kwargs):
     """
     Plot the median power spectra of multiple baseline pairs.
 
@@ -87,6 +87,8 @@ def plot_median_spectra(x, med, med_err, ax, delay=False, hline=True,
     delay : bool, optional
         Whether the spectrum is plotted in delay (ns) or cosmological units
         (h Mpc^-1) (default is cosmological units)
+    vis_units : str, optional
+        Units of visibility data for axis labelling (default is 'mK')
     hline : bool, optional
         Whether to plot a horizontal line at zero (default is True)
     color : str
@@ -107,33 +109,32 @@ def plot_median_spectra(x, med, med_err, ax, delay=False, hline=True,
         linthreshy = np.max(med)*1e-5
         linthreshy = 10**np.floor(np.log10(linthreshy))
         ax.set_yscale(yscale, linthreshy=linthreshy,
-                      linscaley=2)
+                      linscaley=2.5)
     else:
         ax.set_yscale(yscale)
 
-    # Axis labeling
-    # xlabel, ylabel = make_axis_labels(uvp, delay=delay)
-    # ax.set_xlabel(xlabel, fontsize=14)
-    # ax.set_ylabel(ylabel, fontsize=14)
+    Axis labeling
+    xlabel, ylabel = make_axis_labels(delay=delay, vis_units=vis_units)
+    ax.set_xlabel(xlabel, fontsize=14)
+    ax.set_ylabel(ylabel, fontsize=14)
 
 
-def make_axis_labels(uvp, delay=False):
+def make_axis_labels(delay=False, vis_units='mK'):
     """
     Make the axis labels for plotting the power spectra.
 
     Parameters
     ----------
-    uvp : UVPSpec object
-        UVPSpec object containing the power spectra
     delay : bool, optional
         Whether the spectra are in delay (ns) or cosmological units (h Mpc^-1)
         (default is cosmological units)
+    vis_units : str, optional
+        Units of visibility data for axis labelling (default is 'mK')
     """
     if delay:
         xlabel = r'$\tau$ $[{\rm ns}]$'
     else:
         xlabel = r'k$_\parallel$ h Mpc$^{-1}$'
-    vis_units = uvp.vis_units
     ylabel = r'P(k$_\parallel$) [(' + vis_units + '$^2$ h$^{-3}$ Mpc$^3$]'
     return xlabel, ylabel
 
