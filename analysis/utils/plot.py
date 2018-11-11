@@ -64,16 +64,14 @@ def plot_flag_frac(uvd, bls, ax, spw=(0, 1024), **kwargs):
     # Axis labeling
     # Channels corresponding to every 5 MHz between 100 and 200 MHz
     full_band_chans = np.array([0, 51.2, 102.4, 153.6, 204.8, 256.,
-                                307.2, 358.4, 409.6, 460.8, 512.
+                                307.2, 358.4, 409.6, 460.8, 512.,
                                 563.2, 614.4, 665.6, 716.8, 768.,
                                 819.2, 870.4, 921.6, 972.8, 1024.])
-    spw_endpoints = (aux.chan_to_freqs(spw[0]), aux.chan_to_freqs(spw[1]))
-    spw_chans = full_band_chans[(spw_freqs > spw[0]) & (spw_freqs < spw[1])]
-    spw_freqs = aux.chan_to_freqs(spw_chans)
-    xticks = spw_chans
-    xticklabels = [str(int(aux.chan_to_freqs(chan))) for chan in spw_chans]
+    spw_chans = full_band_chans[(full_band_chans >= spw[0]) & (full_band_chans <= spw[1])]
+    spw_freqs = [str(int(aux.chan_to_freqs(chan))) for chan in spw_chans]
     ax.set_xticks(spw_chans)
-    ax.set_xticklabels(xticklabels)
+    ax.set_xticklabels(spw_freqs)
+    print(spw_chans; spw_freqs)
     ax.set_xlabel('Frequency [MHz]', fontsize=12)
     ax.set_ylabel('Time', fontsize=12)
 
