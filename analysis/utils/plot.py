@@ -71,7 +71,7 @@ def plot_flag_frac(uvd, bls, ax, spw=(0, 1024), **kwargs):
     spw_freqs = [str(int(aux.chan_to_freqs(chan))) for chan in spw_chans]
     ax.set_xticks(spw_chans)
     ax.set_xticklabels(spw_freqs)
-    print(spw_chans; spw_freqs)
+    print(spw_chans); print(spw_freqs)
     ax.set_xlabel('Frequency [MHz]', fontsize=12)
     ax.set_ylabel('Time', fontsize=12)
 
