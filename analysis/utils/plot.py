@@ -39,8 +39,8 @@ def plot_multiple_blpairs(uvp, ax, blpairs=None, delay=False,
 
     # Axis labeling
     xlabel, ylabel = make_axis_labels(delay=delay, vis_units=vis_units)
-    ax.set_xlabel(xlabel, fontsize=14)
-    ax.set_ylabel(ylabel, fontsize=14)
+    ax.set_xlabel(xlabel, fontsize=12)
+    ax.set_ylabel(ylabel, fontsize=12)
 
 
 def plot_flag_frac(uvd, spw, bls, ax, **kwargs):
@@ -62,8 +62,13 @@ def plot_flag_frac(uvd, spw, bls, ax, **kwargs):
     ax.imshow(flag_frac[:, spw[0]:spw[1]], aspect='auto', **kwargs)
 
     # Axis labeling
-    ax.set_xlabel('Channel (spectral window: {})'.format(spw), fontsize=14)
-    ax.set_ylabel('Time', fontsize=14)
+    xticklabels = np.arange(spw[0], spw[1]+1, 10)
+    xticks = xticklabels - spw[0]
+    xticklabels = [str(int(label)) for label in xticklabels]
+    ax.set_xticks(xticks)
+    ax.set_xticklabels(xticklabels)
+    ax.set_xlabel('Channel', fontsize=12)
+    ax.set_ylabel('Time', fontsize=12)
 
 
 def plot_median_spectra(x, med, med_err, ax, delay=False, vis_units='mK',
@@ -101,8 +106,8 @@ def plot_median_spectra(x, med, med_err, ax, delay=False, vis_units='mK',
 
     # Axis labeling
     xlabel, ylabel = make_axis_labels(delay=delay, vis_units=vis_units)
-    ax.set_xlabel(xlabel, fontsize=14)
-    ax.set_ylabel(ylabel, fontsize=14)
+    ax.set_xlabel(xlabel, fontsize=12)
+    ax.set_ylabel(ylabel, fontsize=12)
 
 
 def make_axis_labels(delay=False, vis_units='mK'):
