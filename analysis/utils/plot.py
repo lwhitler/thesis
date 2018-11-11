@@ -59,10 +59,10 @@ def plot_flag_frac(uvd, spw, bls, ax, **kwargs):
         Axes object to plot the waterfall on
     """
     flag_frac = aux.calc_flagged_bl_percent(uvd, bls)
-    ax.imshow(flag_frac, aspect='auto', **kwargs)
+    ax.imshow(flag_frac[:, spw[0]:spw[1]], aspect='auto', **kwargs)
 
     # Axis labeling
-    ax.set_xlabel('Channel (spectral window: {})'.format(spw[0]), fontsize=14)
+    ax.set_xlabel('Channel (spectral window: {})'.format(spw), fontsize=14)
     ax.set_ylabel('Time', fontsize=14)
 
 
