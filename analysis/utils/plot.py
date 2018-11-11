@@ -45,7 +45,7 @@ def plot_multiple_blpairs(uvp, ax, blpairs=None, delay=False,
     ax.set_ylabel(ylabel, fontsize=12)
 
 def plot_flag_comparison(uvd1, uvd2, spw, bl, ax, xtick_space=2,
-                         colors=['#E4DFDA', '#262322', '#8600FF', '#0700FF'],
+                         cmap_cols=['#E4DFDA', '#262322', '#8600FF', '#0700FF'],
                          **kwargs):
     """
     Plot waterfall comparing two flag arrays.
@@ -66,7 +66,7 @@ def plot_flag_comparison(uvd1, uvd2, spw, bl, ax, xtick_space=2,
         Colors to use for the colormap
     """
     # Set up the colormap
-    cmap = colors.ListedColormap(colors)
+    cmap = colors.ListedColormap(cmap_cols)
     bounds = [-0.5, 0.5, 1.5, 2.5, 3.5]
     norm = colors.BoundaryNorm(bounds, cmap.N)
 
