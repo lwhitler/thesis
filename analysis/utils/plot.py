@@ -4,8 +4,8 @@ import hera_pspec as hp
 import aux
 
 
-def plot_multiple_blpairs(uvp, ax, blpairs=None, delay=False, vis_units='mK',
-                          yscale='symlog', hline=True, **kwargs):
+def plot_multiple_blpairs(uvp, ax, blpairs=None, delay=False,
+                          vis_units='mK', hline=True, **kwargs):
     """
     Plot the power spectra from multiple baseline pairs.
 
@@ -21,8 +21,6 @@ def plot_multiple_blpairs(uvp, ax, blpairs=None, delay=False, vis_units='mK',
     delay : bool, optional
         Whether to plot in delay (ns) or cosmological units (h Mpc^-1) (default
         is cosmological units)
-    yscale : str, optional
-        The y-axis scale ('linear', 'log', or 'symlog', default is symlog)
     hline : bool, optional
         Whether to plot a horizontal line at zero (default is True)
     """
@@ -38,13 +36,6 @@ def plot_multiple_blpairs(uvp, ax, blpairs=None, delay=False, vis_units='mK',
                            lw=0.25, alpha=0.01, ax=ax)
     if plot_median:
         plot_median_spectra(uvp, ax, delay=delay, hline=hline)
-
-    # y-axis scaling
-    if yscale == 'symlog':
-        linthreshy = np.max(np.real(uvp.data_array[0]))*1e-4
-        ax.set_yscale(yscale, linthreshy=linthreshy)
-    else:
-        ax.set_yscale(yscale)
 
     # Axis labeling
     xlabel, ylabel = make_axis_labels(delay=delay, vis_units=vis_units)
@@ -69,8 +60,8 @@ def plot_flag_frac(uvd, bls, ax, **kwargs):
     ax.imshow(flag_frac, aspect='auto', **kwargs)
 
 
-def plot_median_spectra(x, med, med_err, ax, delay=False, vis_units='mK', hline=True,
-                        color=None, label=None, yscale='symlog',**kwargs):
+def plot_median_spectra(x, med, med_err, ax, delay=False, vis_units='mK',
+                        hline=True, color=None, label=None, **kwargs):
     """
     Plot the median power spectra of multiple baseline pairs.
 
@@ -95,23 +86,12 @@ def plot_median_spectra(x, med, med_err, ax, delay=False, vis_units='mK', hline=
         What color to plot the spectrum in
     label : str
         Label for the legend
-    yscale : str, optional
-        The y-axis scale ('linear', 'log', or 'symlog', default is symlog)
     """
     # Plot median and errors
     if hline:
         ax.axhline(0, c='#444444', ls=':', lw=0.75)
     ax.fill_between(x, med+med_err, med-med_err, alpha=0.3, color=color)
     ax.plot(x, med, lw=1.25, color=color, label=label, **kwargs)
-
-    # y-axis scaling
-    if yscale == 'symlog':
-        linthreshy = np.max(med)*1e-5
-        linthreshy = 10**np.floor(np.log10(linthreshy))
-        ax.set_yscale(yscale, linthreshy=linthreshy,
-                      linscaley=2.5)
-    else:
-        ax.set_yscale(yscale)
 
     # Axis labeling
     xlabel, ylabel = make_axis_labels(delay=delay, vis_units=vis_units)
