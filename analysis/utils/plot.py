@@ -62,11 +62,17 @@ def plot_flag_frac(uvd, bls, ax, spw=(0, 1024), **kwargs):
     ax.imshow(flag_frac[:, spw[0]:spw[1]], aspect='auto', **kwargs)
 
     # Axis labeling
-    # Channels corresponding to every 5 MHz between 100 and 200 MHz
-    full_band_chans = np.array([0, 51.2, 102.4, 153.6, 204.8, 256.,
-                                307.2, 358.4, 409.6, 460.8, 512.,
-                                563.2, 614.4, 665.6, 716.8, 768.,
-                                819.2, 870.4, 921.6, 972.8, 1024.])
+    # Channels corresponding to every 2 MHz between 100 and 200 MHz
+    full_band_chans = np.array([0., 20.48, 40.96, 61.44, 81.92, 102.4,
+                                122.88, 143.36, 163.84, 184.32, 204.8,
+                                225.28, 245.76, 266.24, 286.72, 307.2,
+                                327.68, 348.16, 368.64, 389.12, 409.6,
+                                430.08, 450.56, 471.04, 491.52, 512.,
+                                532.48, 552.96, 573.44, 593.92, 614.4,
+                                634.88, 655.36, 675.84, 696.32, 716.8,
+                                737.28, 757.76, 778.24, 798.72, 819.2,
+                                839.68, 860.16, 880.64, 901.12, 921.6,
+                                942.08, 962.56, 983.04, 1003.52, 1024.])
     spw_chans = full_band_chans[(full_band_chans >= spw[0]) & (full_band_chans <= spw[1])]
     spw_freqs = [str(int(aux.chan_to_freqs(chan))) for chan in spw_chans]
     ax.set_xticks(spw_chans - spw[0])
