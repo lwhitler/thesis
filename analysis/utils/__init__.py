@@ -1,2 +1,2 @@
-__all__ = ['aux', 'plot']
+__all__ = ['aux', 'params', 'plot']
 from . import *

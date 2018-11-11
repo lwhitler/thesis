@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import hera_pspec as hp
 import aux
+import params
 
 
 def plot_multiple_blpairs(uvp, ax, blpairs=None, delay=False,
@@ -43,7 +44,7 @@ def plot_multiple_blpairs(uvp, ax, blpairs=None, delay=False,
     ax.set_ylabel(ylabel, fontsize=12)
 
 
-def plot_flag_frac(uvd, bls, ax, spw=(0, 1024), **kwargs):
+def plot_flag_frac(uvd, spw, bls, ax, xtick_space=2, **kwargs):
     """
     Plot the waterfall for the percentage of flagged baselines.
 
@@ -51,29 +52,24 @@ def plot_flag_frac(uvd, bls, ax, spw=(0, 1024), **kwargs):
     ----------
     uvd : UVData object
         The UVData object containing the flags
+    spw : tuple, optional
+        The spectral window to plot
     bls : array-like
         Baselines for which to look for flags
     ax : Axes object
         Axes object to plot the waterfall on
-    spw : tuple, optional
-        The spectral window to plot (default is the entire band)
+    xtick_space : int
+        Spacing of x-tick labels in MHz
     """
     flag_frac = aux.calc_flagged_bl_percent(uvd, bls)
     ax.imshow(flag_frac[:, spw[0]:spw[1]], aspect='auto', **kwargs)
 
     # Axis labeling
-    # Channels corresponding to every 2 MHz between 100 and 200 MHz
-    full_band_chans = np.array([0., 20.48, 40.96, 61.44, 81.92, 102.4,
-                                122.88, 143.36, 163.84, 184.32, 204.8,
-                                225.28, 245.76, 266.24, 286.72, 307.2,
-                                327.68, 348.16, 368.64, 389.12, 409.6,
-                                430.08, 450.56, 471.04, 491.52, 512.,
-                                532.48, 552.96, 573.44, 593.92, 614.4,
-                                634.88, 655.36, 675.84, 696.32, 716.8,
-                                737.28, 757.76, 778.24, 798.72, 819.2,
-                                839.68, 860.16, 880.64, 901.12, 921.6,
-                                942.08, 962.56, 983.04, 1003.52, 1024.])
-    spw_chans = full_band_chans[(full_band_chans >= spw[0]) & (full_band_chans <= spw[1])]
+    # Channels corresponding to frequencies separated by xtick_space
+    freqs = np.arange(params.min_freq, params.max_freq+1, xtick_space)
+    chans = freq_to_chans(freqs)
+    # Downselect to the spectral window desired
+    spw_chans = chans[(chans >= spw[0]) & (chans <= spw[1])]
     spw_freqs = [str(int(aux.chan_to_freqs(chan))) for chan in spw_chans]
     ax.set_xticks(spw_chans - spw[0])
     ax.set_xticklabels(spw_freqs)

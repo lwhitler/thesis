@@ -4,6 +4,7 @@ import os
 import hera_pspec as hp
 from pyuvdata import UVData
 from hera_qm.metrics_io import process_ex_ants
+import params
 
 
 def bootstrap_median(uvp, blpairs=None, niters=1000):
@@ -53,7 +54,7 @@ def calc_21cm_obs_freq(z):
     f_obs : float
          The observed frequency at the given redshift in MHz
     """
-    f_obs = (299792458.0/0.211) / ((1+z)*1e6)
+    f_obs = f_HI * 1e-6 / (1+z)
     return f_obs
 
 
@@ -140,8 +141,8 @@ def chan_to_freqs(chans):
     freqs : array
          Frequencies in MHz corresponding to the input channels
     """
-    freq_per_chan = 100. / 1024.  # 1024 channels over 100 MHz bandwidth
-    freqs = 100. + freq_per_chan*chans
+    freq_per_chan = (params.max_freq-params.min_freq) / params.Nchans  # MHz/channel
+    freqs = params.min_freq + freq_per_chan*chans
     return freqs
 
 
@@ -182,6 +183,25 @@ def find_good_bls(bls, xants):
         bad_bls = [bad_bl for bad_bl in bls if xant in bad_bl]
         good_bls = [bl for bl in bls if bl not in bad_bls]
     return good_bls
+
+
+def freq_to_chans(freqs):
+    """
+    Convert frequencies to channel numbers.
+
+    Parameters
+    ----------
+    chan : array
+        Channels to convert
+
+    Returns
+    -------
+    freqs : array
+         Frequencies in MHz corresponding to the input channels
+    """
+    freq_per_chan = (params.max_freq-params.min_freq) / params.Nchans  # MHz/channel
+    chans = (freqs-params.min_freq) / freq_per_chan
+    return chans
 
 
 def get_uvpspec(uvd, psbeam, bls1, bls2, spw, uvp_file, time_thresh=0.2):
