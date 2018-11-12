@@ -44,8 +44,8 @@ def plot_multiple_blpairs(uvp, ax, blpairs=None, delay=False,
     ax.set_xlabel(xlabel, fontsize=12)
     ax.set_ylabel(ylabel, fontsize=12)
 
-def plot_flag_comparison(uvd1, uvd2, spw, bl, ax, xtick_space=2,
-                         cmap_cols=['#E4DFDA', '#262322', '#8600FF', '#0700FF'],
+def plot_flag_comparison(uvd1, uvd2, spw, bls, ax, xtick_space=2,
+                         cmap_cols=['#E4DFDA', '#262322', '#0700FF', '#8600FF'],
                          **kwargs):
     """
     Plot waterfall comparing two flag arrays.
@@ -56,8 +56,8 @@ def plot_flag_comparison(uvd1, uvd2, spw, bl, ax, xtick_space=2,
         The UVData objects containing the flags
     spw : tuple, optional
         The spectral window to plot
-    bl : array-like
-        The baseline for which to look for flags
+    bls : array-like
+        The baselines for which to look for flags
     ax : Axes object
         Axes object to plot the waterfall on
     xtick_space : int
@@ -71,8 +71,7 @@ def plot_flag_comparison(uvd1, uvd2, spw, bl, ax, xtick_space=2,
     norm = colors.BoundaryNorm(bounds, cmap.N)
 
     # Plot the comparison
-    flag_comparison = aux.compare_flag_strategies(uvd1, uvd2, bl)
-    import pdb; pdb.set_trace()
+    flag_comparison = aux.compare_flag_strategies(uvd1, uvd2, bls)
     ax.imshow(flag_comparison[:, spw[0]:spw[1]], aspect='auto',
               cmap=cmap, norm=norm, **kwargs)
 
