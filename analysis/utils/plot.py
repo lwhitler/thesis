@@ -48,7 +48,7 @@ def plot_multiple_blpairs(uvp, ax, blpairs=None, delay=False,
 
 def plot_flag_comparison(uvd1, uvd2, spw, bls, ax, tt1=0.2, tt2=0.2, xtick_space=2,
                          cmap_cols=['#E4DFDA', '#262322', '#0700FF', '#8600FF'],
-                         **kwargs):
+                         legend_fontsize=10, **kwargs):
     """
     Plot waterfall comparing two flag arrays.
 
@@ -68,6 +68,8 @@ def plot_flag_comparison(uvd1, uvd2, spw, bls, ax, tt1=0.2, tt2=0.2, xtick_space
         Spacing of x-tick labels in MHz
     colors : list, optional
         Colors to use for the colormap
+    legend_fontsize : int, optional
+        Font size for the legend (default is 10)
     """
     # Set up the colormap
     cmap = colors.ListedColormap(cmap_cols)
@@ -92,11 +94,12 @@ def plot_flag_comparison(uvd1, uvd2, spw, bls, ax, tt1=0.2, tt2=0.2, xtick_space
     ax.set_ylabel('Time', fontsize=12)
 
     # Legend
-    patches = [patches.Patch(color=cmap_cols[0], label='None'),
-               patches.Patch(color=cmap_cols[1], label='Both'),
-               patches.Patch(color=cmap_cols[2], label='Time threshold: {0}'.format(tt1)),
-               patches.Patch(color=cmap_cols[3], label='Time threshold: {0}'.format(tt2))]
-    ax.legend(handles=patches, loc=9, bbox_to_anchor=(0.5, -0.1), ncol=4)
+    color_patches = [patches.Patch(color=cmap_cols[0], label='None'),
+                     patches.Patch(color=cmap_cols[1], label='Both'),
+                     patches.Patch(color=cmap_cols[2], label='Time threshold: {0}'.format(tt1)),
+                     patches.Patch(color=cmap_cols[3], label='Time threshold: {0}'.format(tt2))]
+    ax.legend(handles=color_patches, fontsize=legend_fontsize, loc=9,
+              bbox_to_anchor=(0.5, -0.15), ncol=4)
 
 
 def plot_flag_frac(uvd, spw, bls, ax, xtick_space=2, **kwargs):

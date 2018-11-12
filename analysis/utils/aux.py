@@ -165,9 +165,10 @@ def compare_flag_strategies(uvd1, uvd2, bls):
         to being flagged in uvd1 and not uvd2, and 3 corresponds to being
         flagged in uvd2 and not uvd1
     """
-    flags1 = calc_flagged_bl_percent(uvd1, bls).astype(bool)
-    flags2 = calc_flagged_bl_percent(uvd2, bls).astype(bool)
-    
+    flags1 = calc_flagged_bl_percent(uvd1, bls)
+    flags2 = calc_flagged_bl_percent(uvd2, bls)
+    flags1, flags2 = (flags1 == 1), (flags2 == 1)
+
     flag_comparison = np.zeros_like(flags1, dtype=float)
     flag_comparison[~flags1 & ~flags2] = 0 # Not flagged
     flag_comparison[flags1 & flags2] = 1 # Flagged in both uvd1 and uvd2
