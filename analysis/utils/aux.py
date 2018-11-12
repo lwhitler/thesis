@@ -58,7 +58,7 @@ def calc_21cm_obs_freq(z):
     return f_obs
 
 
-def calc_flagged_bl_percent(uvd, bls):
+def calc_flags(uvd, bls):
     """
     Calculate the percentage of flagged baselines.
 
@@ -89,7 +89,8 @@ def calc_flagged_bl_percent(uvd, bls):
     # Calculate the percentage of baselines flagged
     flag_sum = np.sum(bl_flag_arr, axis=0)
     flag_percent = flag_sum / len(bls)
-    return flag_percent
+    flags = (flag_percent == 1)
+    return flags
 
 
 def calc_median(uvp, blpairs=None):
@@ -165,9 +166,8 @@ def compare_flag_strategies(uvd1, uvd2, bls):
         to being flagged in uvd1 and not uvd2, and 3 corresponds to being
         flagged in uvd2 and not uvd1
     """
-    flags1 = calc_flagged_bl_percent(uvd1, bls)
-    flags2 = calc_flagged_bl_percent(uvd2, bls)
-    flags1, flags2 = (flags1 == 1), (flags2 == 1)
+    flags1 = calc_flags(uvd1, bls)
+    flags2 = calc_flags(uvd2, bls)
 
     flag_comparison = np.zeros_like(flags1, dtype=float)
     flag_comparison[~flags1 & ~flags2] = 0 # Not flagged

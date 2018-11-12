@@ -66,7 +66,7 @@ def plot_flag_comparison(uvd1, uvd2, spw, bls, ax, tt1=0.2, tt2=0.2, xtick_space
         Time thresholds used for broadcasting flags
     xtick_space : int
         Spacing of x-tick labels in MHz
-    colors : list, optional
+    cmap_cols : list, optional
         Colors to use for the colormap
     legend_fontsize : int, optional
         Font size for the legend (default is 10)
@@ -102,7 +102,8 @@ def plot_flag_comparison(uvd1, uvd2, spw, bls, ax, tt1=0.2, tt2=0.2, xtick_space
               bbox_to_anchor=(0.5, -0.15), ncol=4)
 
 
-def plot_flag_frac(uvd, spw, bls, ax, xtick_space=2, **kwargs):
+def plot_flags(uvd, spw, bls, ax, xtick_space=2, cmap_cols=['#E4DFDA', '#262322'],
+                   legend_fontsize=10, **kwargs):
     """
     Plot waterfall for the percentage of flagged baselines.
 
@@ -118,9 +119,20 @@ def plot_flag_frac(uvd, spw, bls, ax, xtick_space=2, **kwargs):
         Axes object to plot the waterfall on
     xtick_space : int
         Spacing of x-tick labels in MHz
+    cmap_cols : list, optional
+        Colors to use for the colormap
+    legend_fontsize : int, optional
+        Font size for the legend (default is 10)
     """
-    flag_frac = aux.calc_flagged_bl_percent(uvd, bls)
-    ax.imshow(flag_frac[:, spw[0]:spw[1]], aspect='auto', **kwargs)
+    # Set up the colormap
+    cmap = colors.ListedColormap(cmap_cols)
+    bounds = [-0.5, 0.5, 1.5, 2.5, 3.5]
+    norm = colors.BoundaryNorm(bounds, cmap.N)
+
+    # Plot the flags
+    flags = aux.calc_flags(uvd, bls).astype(float)
+    ax.imshow(flags[:, spw[0]:spw[1]], aspect='auto',
+              cmap=cmap, norm=norm, **kwargs)
 
     # Axis labeling
     # Channels corresponding to frequencies separated by xtick_space
@@ -133,6 +145,12 @@ def plot_flag_frac(uvd, spw, bls, ax, xtick_space=2, **kwargs):
     ax.set_xticklabels(spw_freqs)
     ax.set_xlabel('Frequency [MHz]', fontsize=12)
     ax.set_ylabel('Time', fontsize=12)
+
+    # Legend
+    color_patches = [patches.Patch(color=cmap_cols[0], label='Not flagged'),
+                     patches.Patch(color=cmap_cols[1], label='Flagged')]
+    ax.legend(handles=color_patches, fontsize=legend_fontsize, loc=9,
+              bbox_to_anchor=(0.5, -0.15), ncol=2)
 
 
 def plot_median_spectra(x, med, med_err, ax, delay=False, vis_units='mK',
