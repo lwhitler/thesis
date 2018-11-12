@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.mpatches as mpatches
+import matplotlib.patches as patches
 from matplotlib import colors
 import hera_pspec as hp
 import aux
@@ -92,10 +92,10 @@ def plot_flag_comparison(uvd1, uvd2, spw, bls, ax, tt1=0.2, tt2=0.2, xtick_space
     ax.set_ylabel('Time', fontsize=12)
 
     # Legend
-    patches = [mpatches.Patch(color=cmap_cols[0], label='None'),
-               mpatches.Patch(color=cmap_cols[1], label='Both'),
-               mpatches.Patch(color=cmap_cols[2], label='Time threshold: {0}'.format(tt1)),
-               mpatches.Patch(color=cmap_cols[3], label='Time threshold: {0}'.format(tt2))]
+    patches = [patches.Patch(color=cmap_cols[0], label='None'),
+               patches.Patch(color=cmap_cols[1], label='Both'),
+               patches.Patch(color=cmap_cols[2], label='Time threshold: {0}'.format(tt1)),
+               patches.Patch(color=cmap_cols[3], label='Time threshold: {0}'.format(tt2))]
     ax.legend(handles=patches, loc=9, bbox_to_anchor=(0.5, -0.1), ncol=4)
 
 
