@@ -6,10 +6,8 @@ from scipy import constants
 from pyuvdata import UVData
 from pyuvdata import utils as uvutils
 from hera_sim import foregrounds, noise, rfi, sigchain
+import utils
 
-
-def bl_len_in_ns(uvw_arr):
-    return (np.linalg.norm(uvw_arr) / 299792458.) * 1e9
 
 # Paths
 JD_dec = '40141'
@@ -37,7 +35,7 @@ reds, _, lens, conj_bls = uvutils.get_baseline_redundancies(unique_bls, uvd.uvw_
 auto_ind = np.where(lens == 0)
 del reds[auto_ind[0][0]]
 lens = np.delete(lens, auto_ind)
-lens_ns = [bl_len_in_ns(length) for length in lens]
+lens_ns = [utils.aux.bl_len_in_ns(length) for length in lens]
 
 ### BUILDING THE MODEL ###
 # Sky and receiver temperature

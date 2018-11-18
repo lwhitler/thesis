@@ -7,6 +7,18 @@ from hera_qm.metrics_io import process_ex_ants
 import params
 
 
+def bl_len_in_ns(len_array):
+    """
+    Compute the length of a baseline in nanoseconds.
+
+    Parameters
+    ----------
+    len_array : array of scalars, lists, or tuples
+        Array of baseline lengths or coordinate-wise lengths
+    """
+    len_in_ns = (np.linalg.norm(len_array) / 299792458.) * 1e9
+    return len_in_ns
+
 def bootstrap_median(uvp, blpairs=None, niters=1000):
     """
     Calculate the error on the median power spectrum by bootstrapping.
