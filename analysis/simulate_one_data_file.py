@@ -38,7 +38,7 @@ sim_out = '/home/lwhitler/data/dfiles/sim/' + filename.replace('.uv', '.sim.uv')
 # Load the real data to start from
 uvd = UVData()
 uvd.read(data_in, file_type='miriad')
-uvd_sim = copy.deepcopy(uvd_load)  # To save the simulation
+uvd_sim = copy.deepcopy(uvd)  # To save the simulation
 # Frequencies, LSTs, and antennas in the real data
 freqs = np.unique(uvd.freq_array) / 1e9  # In GHz for hera_sim
 lsts = np.unique(uvd.lst_array)
@@ -75,17 +75,15 @@ rfi_all = rfi_narrow + rfi_broad + rfi_scatter
 # True visibilities for each redundant baseline group
 # NOTE: 200 point sources was kind of an arbitrary choice.
 true_vis = {}
-for bl_len in lens_ns:
-    diffuse = foregrounds.diffuse_foreground(Tsky_model, lsts, freqs, bl_len)
+for i, bl_len in enumerate(lens_ns):
+    diff = foregrounds.diffuse_foreground(Tsky_model, lsts, freqs, bl_len)
     pt_src = foregrounds.pntsrc_foreground(lsts, freqs, bl_len, nsrcs=200)
-    true_vis[bl_len] = diffuse + pt_src
+    true_vis[i] = diff + pt_src
 
 # With noise and antenna gains
 bl_dict = dict.fromkeys(np.unique(uvd.baseline_array))
-for red_group in reds:
-    red_ind = reds.index(red_group)
-    bl_len = lens[red_ind]
-    true_vis_red = true_vis[bl_len]
+for i, red_group in enumerate(reds):
+    true_vis_red = true_vis[i]
     for bl in red_group:
         # Conjugate the visibilities if the baseline is conjugately redundant
         if bl in conj_bls:
@@ -112,12 +110,12 @@ print('Setting the following baselines to NaNs:')
 for bl in bl_dict.keys():
     if bl_dict[bl] is None:
         bl_dict[bl] = np.full((len(lsts), len(freqs)), np.nan + 1j*np.nan)
-        print('\t{0}.'.format(uvd.baseline_to_antnums(bl)))
+        print('\t{0}'.format(uvd.baseline_to_antnums(bl)))
 
 # Fit the model into the UVData structure
 sim_data = np.zeros_like(uvd.data_array)
 for bl in bl_dict.keys():
-    blt_ind = np.where(uvd.baseline_array == bl_num)[0]
+    blt_ind = np.where(uvd.baseline_array == bl)[0]
     sim_data[blt_ind] = bl_dict[bl][:, None, :, None]
 
 # Save to a miriad file
