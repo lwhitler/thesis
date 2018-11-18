@@ -104,4 +104,4 @@ for bl in bl_dict.keys():
 # Unflag everything just in case anything was flagged
 uvd_sim.flag_array = np.full_like(uvd.flag_array, False)
 uvd_sim.data_array = sim_data
-uvd_sim.write_miriad(sim_out, clobber=True)
+uvd_sim.write_miriad(sim_out)
