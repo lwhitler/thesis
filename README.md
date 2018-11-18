@@ -1,3 +1,3 @@
-# Lily Whitler - Honors Thesis and ASU/NASA Space Grant
+# Honors Thesis and ASU/NASA Space Grant
 
-For scripts, notes, and other miscellany.
+Primarily scripts to do things that have been mostly finalized.
