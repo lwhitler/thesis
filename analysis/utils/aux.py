@@ -188,6 +188,7 @@ def compare_flag_strategies(uvd1, uvd2, bls):
     flag_comparison[~flags1 & flags2] = 3 # Flagged in uvd2 and not uvd1
     return flag_comparison
 
+
 def convert_Jy_to_mK(uvd, psbeam):
     """
     Convert data from Jy to mK.
