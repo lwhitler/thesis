@@ -6,14 +6,28 @@ from hera_sim import foregrounds, noise, rfi, sigchain
 import utils
 
 
-# Paths
-JD_dec = '40141'
-filename = 'zen.2458106.' + JD_dec + '.xx.HH.uv'
-data_in = '/data6/HERA/data/IDR2.1/2458106/' + filename
-sim_out = '/home/lwhitler/data/dfiles/sim/' + filename.replace('.uv', '.sim.uv')
-def simulate_one_data_file(data_in, sim_out, Trx=150., broadband_chance=0.01,
-                           random_rfi_chance=0.001, diffuse_scalar=30.,
-                           npt_srcs=200, xtalk_amp=3.):
+def simulate_one_data_file(data_in, sim_out, Trx=150., broadband_rfi=0.01,
+                           random_rfi=0.001, nsrcs=200, xtalk_amp=3.):
+    """
+    Simulate a data file using an existing file as a base.
+
+    Parameters
+    ----------
+    data_in : string
+        The data to use as a starting point
+    sim_out : string
+        The file to write the simulation to
+    Trx : float
+        Receiver temperature
+    broadband_rfi : float
+        Chance of broadband RFI occurring
+    random_rfi : float
+        Chance of random RFI occurring
+    nsrcs : int
+        Number of point sources to simulate
+    xtalk_amp : float
+        Amplitude of crosstalk
+    """
     print('Loading data...')
     # Load the real data to start from
     uvd = UVData()
@@ -46,15 +60,15 @@ def simulate_one_data_file(data_in, sim_out, Trx=150., broadband_chance=0.01,
     Tsky = {pol: noise.resample_Tsky(freqs, lsts, Tsky_mdl=Tsky_model[pol]) for pol in pols}
     Trx = Trx
 
-    print('Simulating antenna gains...')
     # Antenna gains
+    print('Simulating antenna gains...')
     gains = sigchain.gen_gains(freqs, antpols)
 
-    print('Simulating RFI...')
     # RFI
+    print('Simulating RFI...')
     rfi_narrow = rfi.rfi_stations(freqs, lsts)
-    rfi_broad = rfi.rfi_impulse(freqs, lsts, chance=broadband_chance)
-    rfi_scatter = rfi.rfi_scatter(freqs, lsts, chance=random_rfi_chance)
+    rfi_broad = rfi.rfi_impulse(freqs, lsts, chance=broadband_rfi)
+    rfi_scatter = rfi.rfi_scatter(freqs, lsts, chance=random_rfi)
     rfi_all = rfi_narrow + rfi_broad + rfi_scatter
 
     print('Simulating foregrounds...')
@@ -65,7 +79,7 @@ def simulate_one_data_file(data_in, sim_out, Trx=150., broadband_chance=0.01,
     for k, pol in enumerate(pols):
         print('Starting polarization {0}'.format(pol))
         diff = foregrounds.diffuse_foreground(Tsky_model[pol], lsts, freqs,
-                                              bl_len, scalar=diffuse_scalar)
+                                              bl_len)
         true_vis = diff + pt_src
         for bl in red_group:
             # Conjugate the visibilities if baseline is conjugately redundant
