@@ -43,7 +43,7 @@ def simulate_one_data_file(data_in, sim_out, Trx=150., broadband_rfi=0.01,
     antpols2 = [(ant, pol[1]) for ant in set(uvd.ant_1_array) for pol in pols]
     antpols = list(set(antpols1).union(set(antpols2)))
 
-    print('Finding unique baselnes...')
+    print('Finding redundant baselnes...')
     # Redundant baseline groups in the real data
     unique_bls, bl_inds = np.unique(uvd.baseline_array, return_index=True)
     reds, _, lens, conj_bls = uvutils.get_baseline_redundancies(unique_bls, uvd.uvw_array[bl_inds],
@@ -74,8 +74,8 @@ def simulate_one_data_file(data_in, sim_out, Trx=150., broadband_rfi=0.01,
     print('Simulating foregrounds...')
     # Combine foregrounds, noise, RFI, and antenna gains
     bl_dict = {bl: np.zeros((len(lsts), len(freqs), len(pols))) for bl in bls}
-    for red_group, bl_len in enumerate(zip(reds, lens_ns)):
-        pt_src = foregrounds.pntsrc_foreground(lsts, freqs, bl_len, nsrcs=npt_srcs)
+    for red_group, bl_len in zip(reds, lens_ns):
+        pt_src = foregrounds.pntsrc_foreground(lsts, freqs, bl_len, nsrcs=nsrcs)
     for k, pol in enumerate(pols):
         print('Starting polarization {0}'.format(pol))
         diff = foregrounds.diffuse_foreground(Tsky_model[pol], lsts, freqs,
@@ -110,9 +110,10 @@ def simulate_one_data_file(data_in, sim_out, Trx=150., broadband_rfi=0.01,
                 blt_ind = np.where(uvd.baseline_array == bl)[0]
             sim_data[blt_ind] = bl_dict[bl][:, None, :, :]
 
-print('Saving...')
-# Save to a miriad file
-# Unflag everything just in case anything was flagged
-uvd_sim.flag_array = np.full_like(uvd.flag_array, False)
-uvd_sim.data_array = sim_data
-uvd_sim.write_miriad(sim_out)
+    print('Saving...')
+    # Save to a miriad file
+    # Unflag everything just in case anything was flagged
+    uvd_sim.flag_array = np.full_like(uvd.flag_array, False)
+    uvd_sim.data_array = sim_data
+    uvd_sim.write_miriad(sim_out)
+
