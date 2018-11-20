@@ -6,8 +6,9 @@ from hera_sim import foregrounds, noise, rfi, sigchain
 import utils
 
 
-def simulate_one_data_file(data_in, sim_out, Trx=150., broadband_rfi=0.01,
-                           random_rfi=0.001, nsrcs=200, xtalk_amp=3.):
+def simulate_one_data_file(data_in, sim_out, file_type, clobber=False,
+                           Trx=150., broadband_rfi=0.01, random_rfi=0.001,
+                           nsrcs=200, xtalk_amp=3.):
     """
     Simulate a data file using an existing file as a base.
 
@@ -17,8 +18,13 @@ def simulate_one_data_file(data_in, sim_out, Trx=150., broadband_rfi=0.01,
         The data to use as a starting point
     sim_out : string
         The file to write the simulation to
-    Trx : float
-        Receiver temperature
+    file_type : one of ['uvfits', 'miriad', 'uvh5']
+        The input and output file type
+    clobber : bool, optional
+        Option to overwrite the output file if it already exists
+        (default is false)
+    Trx : float, optional
+        Receiver temperature (default 150 K)
     broadband_rfi : float
         Chance of broadband RFI occurring
     random_rfi : float
@@ -31,7 +37,7 @@ def simulate_one_data_file(data_in, sim_out, Trx=150., broadband_rfi=0.01,
     print('Loading data...')
     # Load the real data to start from
     uvd = UVData()
-    uvd.read(data_in)
+    uvd.read(data_in, file_type=file_type)
     uvd_sim = copy.deepcopy(uvd)  # To save the simulation
     # Frequencies, LSTs, antennas, baselines, and polarizations in the real data
     freqs = np.unique(uvd.freq_array) / 1e9  # In GHz for hera_sim
@@ -110,10 +116,13 @@ def simulate_one_data_file(data_in, sim_out, Trx=150., broadband_rfi=0.01,
                 blt_ind = np.where(uvd.baseline_array == bl)[0]
             sim_data[blt_ind] = bl_dict[bl][:, None, :, :]
 
-    print('Saving...')
-    # Save to a miriad file
+    print('Saving to {0}...'.format(file_type))
     # Unflag everything just in case anything was flagged
     uvd_sim.flag_array = np.full_like(uvd.flag_array, False)
     uvd_sim.data_array = sim_data
-    uvd_sim.write_miriad(sim_out)
-
+    if file_type == 'miriad':
+        uvd_sim.write_miriad(sim_out)
+    elif file_type == 'uvfits':
+        uvd_sim.write_uvfits(sim_out)
+    elif file_type == 'uvh5':
+        uvd_sim.write_uvh5(sim_out)
