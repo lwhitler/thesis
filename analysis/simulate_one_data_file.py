@@ -18,8 +18,8 @@ uvd.read(data_in, file_type='miriad')
 uvd_sim = copy.deepcopy(uvd)  # To save the simulation
 # Frequencies, LSTs, antennas, baselines, and polarizations in the real data
 freqs = np.unique(uvd.freq_array) / 1e9  # In GHz for hera_sim
-lsts, lst_inds = np.unique(uvd.lst_array, return_index=True)
-lsts = np.asarray([lsts[i] for i in sorted(lst_inds)])
+lst_inds = np.unique(uvd.lst_array, return_index=True)[1]
+lsts = np.asarray([uvd.lst_array[i] for i in sorted(lst_inds)])
 bls = np.unique(uvd.baseline_array)
 pols = uvutils.polnum2str(uvd.polarization_array)
 ants = list(set(uvd.ant_1_array).union(set(uvd.ant_2_array)))
