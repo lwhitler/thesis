@@ -92,7 +92,7 @@ def simulate_one_data_file(data_in, file_type, sim_out=None, clobber=False,
 
     print('Simulating foregrounds...')
     # Combine foregrounds, noise, RFI, and antenna gains
-    bl_dict = {bl: np.zeros((len(lsts), len(freqs), len(pols))) for bl in bls}
+    bl_dict = {bl: np.zeros((len(lsts), len(freqs), len(pols)), dtype=complex) for bl in bls}
     for red_group, bl_len in zip(reds, lens):
         bl_len = bl_len_in_ns(bl_len)
         pt_src = foregrounds.pntsrc_foreground(lsts, freqs, bl_len, nsrcs=nsrcs)
