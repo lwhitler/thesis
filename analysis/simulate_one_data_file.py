@@ -71,9 +71,9 @@ def simulate_one_data_file(data_in, file_type, sim_out=None, clobber=False,
     auto_ind = np.where(lens == 0)
     del reds[auto_ind[0][0]]
     lens = np.delete(lens, auto_ind)
-    lens_ns = [bl_len_in_ns(length) for length in lens]
 
     ### BUILDING THE MODEL ###
+
     # Sky and receiver temperature
     Tsky_model = {pol: noise.HERA_Tsky_mdl[pol] for pol in pols}
     Tsky = {pol: noise.resample_Tsky(freqs, lsts, Tsky_mdl=Tsky_model[pol]) for pol in pols}
@@ -93,35 +93,26 @@ def simulate_one_data_file(data_in, file_type, sim_out=None, clobber=False,
     print('Simulating foregrounds...')
     # Combine foregrounds, noise, RFI, and antenna gains
     bl_dict = {bl: np.zeros((len(lsts), len(freqs), len(pols))) for bl in bls}
-    for red_group, bl_len in zip(reds, lens_ns):
+    for red_group, bl_len in zip(reds, lens):
+        bl_len = bl_len_in_ns(bl_len)
         pt_src = foregrounds.pntsrc_foreground(lsts, freqs, bl_len, nsrcs=nsrcs)
-    for k, pol in enumerate(pols):
-        print('Starting polarization {0}'.format(pol))
-        diff = foregrounds.diffuse_foreground(Tsky_model[pol], lsts, freqs,
-                                              bl_len)
-        true_vis = diff + pt_src
-        for bl in red_group:
-            # Conjugate the visibilities if baseline is conjugately redundant
-            if bl in conj_bls:
-                true_vis_red = true_vis.conj()
-            else:
-                true_vis_red = true_vis
-            # Add noise and crosstalk for each baseline
-            noise_sim = noise.sky_noise_jy(Tsky[pol] + Trx, freqs, lsts)
-            noisy_vis = true_vis_red + noise_sim + rfi_all
-            xtalk = sigchain.gen_xtalk(freqs, amplitude=xtalk_amp)
-            xtalk_noisy_vis = noisy_vis + xtalk
-            # Apply antenna gains and save
-            bl_tuple = uvd.baseline_to_antnums(bl)
-            g_ij = gains[(bl_tuple[0], pol[0])] * gains[(bl_tuple[1], pol[1])].conj()
-            bl_dict[bl][:, :, k] = xtalk_noisy_vis * g_ij
-
-            # Set any missed baselines to NaNs (should just be the autos)
-            print('Setting the following baselines to NaNs:')
-            for bl in bl_dict.keys():
-                if np.count_nonzero(bl_dict[bl]) == 0:
-                    print('\t{0}'.format(uvd.baseline_to_antnums(bl)))
-                    bl_dict[bl] = np.full_like(bl_dict[bl], np.nan)
+        for i, pol in enumerate(pols):
+            diffuse = foregrounds.diffuse_foreground(Tsky_model[pol], lsts, freqs, bl_len)
+            true_vis = diffuse + pt_src
+            for bl in red_group:
+                # Conjugate the visibilities if baseline is conjugately redundant
+                if bl in conj_bls:
+                    true_vis_bl = true_vis.conj()
+                else:
+                    true_vis_bl = true_vis
+                # Add noise and crosstalk for each baseline
+                noise_sim = noise.sky_noise_jy(Tsky[pol] + Trx, freqs, lsts)
+                xtalk = sigchain.gen_xtalk(freqs, amplitude=xtalk_amp)
+                vis = true_vis_bl + noise_sim + xtalk
+                # Apply antenna gains and save to dictionary
+                bl_tuple = uvd.baseline_to_antnums(bl)
+                g_ij = gains[(bl_tuple[0], pol[0])] * gains[(bl_tuple[1], pol[1])].conj()
+                bl_dict[bl][:, :, i] = vis * g_ij
 
     # Fit the model into the UVData structure
     sim_data = np.zeros_like(uvd.data_array)
