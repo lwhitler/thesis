@@ -123,11 +123,11 @@ def simulate_one_data_file(data_in, file_type, sim_out=None, clobber=False,
                     print('\t{0}'.format(uvd.baseline_to_antnums(bl)))
                     bl_dict[bl] = np.full_like(bl_dict[bl], np.nan)
 
-            # Fit the model into the UVData structure
-            sim_data = np.zeros_like(uvd.data_array)
-            for bl in bl_dict.keys():
-                blt_ind = np.where(uvd.baseline_array == bl)[0]
-            sim_data[blt_ind] = bl_dict[bl][:, None, :, :]
+    # Fit the model into the UVData structure
+    sim_data = np.zeros_like(uvd.data_array)
+    for bl in bl_dict.keys():
+        blt_ind = np.where(uvd.baseline_array == bl)[0]
+        sim_data[blt_ind] = bl_dict[bl][:, None, :, :]
 
     # Write the simulation out
     if sim_out is None:
