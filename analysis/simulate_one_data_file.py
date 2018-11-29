@@ -3,10 +3,22 @@ import copy
 from pyuvdata import UVData
 from pyuvdata import utils as uvutils
 from hera_sim import foregrounds, noise, rfi, sigchain
-import utils
 
 
-def simulate_one_data_file(data_in, sim_out, file_type, clobber=False,
+def bl_len_in_ns(len_array):
+    """
+    Compute the length of a baseline in nanoseconds.
+
+    Parameters
+    ----------
+    len_array : array of scalars, lists, or tuples
+        Array of baseline lengths or coordinate-wise lengths
+    """
+    len_in_ns = (np.linalg.norm(len_array) / 299792458.) * 1e9
+    return len_in_ns
+
+
+def simulate_one_data_file(data_in, file_type, sim_out=None, clobber=False,
                            Trx=150., broadband_rfi=0.01, random_rfi=0.001,
                            nsrcs=200, xtalk_amp=3.):
     """
@@ -16,10 +28,11 @@ def simulate_one_data_file(data_in, sim_out, file_type, clobber=False,
     ----------
     data_in : string
         The data to use as a starting point
-    sim_out : string
-        The file to write the simulation to
     file_type : one of ['uvfits', 'miriad', 'uvh5']
         The input and output file type
+    sim_out : string, optional
+        The file to write the simulation to (default is '.sim' appended
+        to the end of the input data path)
     clobber : bool, optional
         Option to overwrite the output file if it already exists
         (default is false)
@@ -58,7 +71,7 @@ def simulate_one_data_file(data_in, sim_out, file_type, clobber=False,
     auto_ind = np.where(lens == 0)
     del reds[auto_ind[0][0]]
     lens = np.delete(lens, auto_ind)
-    lens_ns = [utils.aux.bl_len_in_ns(length) for length in lens]
+    lens_ns = [bl_len_in_ns(length) for length in lens]
 
     ### BUILDING THE MODEL ###
     # Sky and receiver temperature
@@ -116,7 +129,10 @@ def simulate_one_data_file(data_in, sim_out, file_type, clobber=False,
                 blt_ind = np.where(uvd.baseline_array == bl)[0]
             sim_data[blt_ind] = bl_dict[bl][:, None, :, :]
 
-    print('Saving to {0}...'.format(file_type))
+    # Write the simulation out
+    if sim_out is None:
+        sim_out = data_in + '.sim'
+    print('Saving to {0}...'.format(sim_out))
     # Unflag everything just in case anything was flagged
     uvd_sim.flag_array = np.full_like(uvd.flag_array, False)
     uvd_sim.data_array = sim_data
