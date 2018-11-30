@@ -108,7 +108,7 @@ def simulate_one_data_file(data_in, file_type, sim_out=None, clobber=False,
                 # Add noise and crosstalk for each baseline
                 noise_sim = noise.sky_noise_jy(Tsky[pol] + Trx, freqs, lsts)
                 xtalk = sigchain.gen_xtalk(freqs, amplitude=xtalk_amp)
-                vis = true_vis_bl + noise_sim + xtalk
+                vis = true_vis_bl + rfi_all + noise_sim + xtalk
                 # Apply antenna gains and save to dictionary
                 bl_tuple = uvd.baseline_to_antnums(bl)
                 g_ij = gains[(bl_tuple[0], pol[0])] * gains[(bl_tuple[1], pol[1])].conj()
