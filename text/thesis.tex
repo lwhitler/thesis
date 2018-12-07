@@ -1,0 +1,56 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[left=1.25in,right=1.25in,top=1in,bottom=1in]{geometry}
+\usepackage{titlesec, setspace}
+\usepackage{hyperref}
+\usepackage{natbib}
+\input{journals.tex}
+\bibliographystyle{mnras}
+
+\hypersetup{
+	colorlinks=true,
+	citecolor=blue,
+	filecolor=blue,
+	linkcolor=blue,
+	urlcolor=blue
+}
+
+\doublespacing
+\titleformat{\section}{\large\scshape}{\thesection.}{0.75em}{}
+\titleformat{\subsection}{\normalsize\itshape}{\thesubsection.}{0.75em}{}
+\renewcommand{\abstractname}{{\large\textsc{Abstract}}}
+\newcommand{\code}[1]{{\fontfamily{qcr}\selectfont#1}}
+
+\title{Environmental Systematics and the Impact on 21-cm Epoch of Reionization Measurements}
+
+\begin{document}
+\vspace*{0.25\textheight}
+\begin{center}
+{\Large Environmental Systematics and the Impact on \par\vspace{0.15\baselineskip} Epoch of Reionization Measurements}
+\end{center}
+\begin{center}
+Lily R. Whitler \par
+Arizona State University \par
+March 2019 \par
+\end{center}
+
+\newpage
+\begin{abstract}
+\end{abstract}
+
+\section{Introduction}
+\subsection{The Epoch of Reionization}
+\citep{furlanetto2006}
+\subsection{The 21-cm Power Spectrum}
+\subsection{The Hydrogen Epoch of Reionization Array}
+\subsection{Instrumental and Environmental Systematics}
+
+\section{Methods}
+\subsection{Flagging RFI}
+\subsection{Making the Power Spectrum}
+\subsection{Simulating Data with \code{hera{\_}sim}}
+
+\section{Results}
+\section{Conclusion}
+\bibliography{refs}
+\end{document}
