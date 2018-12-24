@@ -1,3 +1,13 @@
-*.pyc
 plots/
 .ipynb_checkpoints
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.pdf
+*.pyc
+*.synctex.gz
+*.toc
+*.lof
+*.lot

@@ -1,56 +1,103 @@
 \documentclass[12pt]{article}
 \usepackage[utf8]{inputenc}
-\usepackage[left=1.25in,right=1.25in,top=1in,bottom=1in]{geometry}
+\usepackage[
+	left=1.25in,
+	right=1.25in,
+	top=1in,
+	bottom=1in]{geometry}
 \usepackage{titlesec, setspace}
+\usepackage[nottoc,numbib]{tocbibind}
+\usepackage[dvipsnames,svgnames]{xcolor}
 \usepackage{hyperref}
+\usepackage{mathptmx}
 \usepackage{natbib}
-\input{journals.tex}
-\bibliographystyle{mnras}
-
-\hypersetup{
-	colorlinks=true,
-	citecolor=blue,
-	filecolor=blue,
-	linkcolor=blue,
-	urlcolor=blue
-}
-
-\doublespacing
-\titleformat{\section}{\large\scshape}{\thesection.}{0.75em}{}
-\titleformat{\subsection}{\normalsize\itshape}{\thesubsection.}{0.75em}{}
-\renewcommand{\abstractname}{{\large\textsc{Abstract}}}
-\newcommand{\code}[1]{{\fontfamily{qcr}\selectfont#1}}
-
-\title{Environmental Systematics and the Impact on 21-cm Epoch of Reionization Measurements}
+\input{input.tex}
 
 \begin{document}
-\vspace*{0.25\textheight}
+\doublespacing
 \begin{center}
-{\Large Environmental Systematics and the Impact on \par\vspace{0.15\baselineskip} Epoch of Reionization Measurements}
-\end{center}
-\begin{center}
-Lily R. Whitler \par
-Arizona State University \par
-March 2019 \par
-\end{center}
+Environmental Systematics and the Impact on \\ 21-cm Epoch of Reionization Measurements \\
+by \\
+Lily R. Whitler \\
+has been approved \\
+Spring 2019 \vspace{0.1\textheight}
 
+\begingroup
+\renewcommand{\arraystretch}{0.7}
+\begin{tabular}{p{1cm}p{3.5in}p{1cm}}
+	& \centering APPROVED: & \\
+	& & \\ & & \\
+	& \hrulefill & \\
+	& \hfill Daniel Jacobs, Director & \\
+	& & \\ & & \\
+	& \hrulefill & \\
+	& \hfill Judd Bowman & \\
+	& & \\ & & \\
+	& \hrulefill & \\
+	& \hfill Adam Beardsley &
+\end{tabular} \vspace{0.075\textheight} \\
+\begin{tabular}{p{1cm}p{3.5in}p{1cm}}
+	& \centering ACCEPTED: & \\
+	& & \\ & & \\
+	& \hrulefill & \\
+	& \hfill Dean, Barrett, The Honors College &
+\end{tabular}
+\endgroup
+\end{center}
+\thispagestyle{empty}
 \newpage
+\pagenumbering{arabic}
+
+\begin{center}
+	Environmental Systematics and the Impact on \\ 21-cm Epoch of Reionization Measurements \\
+	by \\
+	Lily R. Whitler
+	
+	\begin{spacing}{1}
+		\vspace{0.15\textheight}
+		A Thesis Presented in Partial Fulfillment \\
+		of the Requirements for the Degree \\
+		Bachelor of Science with Honors \\
+		\vspace{0.22\textheight}
+		Committee: \\
+		Daniel Jacobs, Director \\
+		Judd Bowman \\
+		Adam Beardsley
+	\end{spacing}
+
+	\vspace{0.22\textheight}
+	ARIZONA STATE UNIVERSITY \\
+	April 2019
+\end{center}
+\thispagestyle{empty}
+\newpage
+
+\tableofcontents
+\listoffigures
+\listoftables
+\newpage
+
 \begin{abstract}
 \end{abstract}
 
 \section{Introduction}
 \subsection{The Epoch of Reionization}
-\citep{furlanetto2006}
+\cite{morales2010} \\
+\cite{pritchard2012}
 \subsection{The 21-cm Power Spectrum}
 \subsection{The Hydrogen Epoch of Reionization Array}
-\subsection{Instrumental and Environmental Systematics}
+\cite{deboer2017}
+\subsection{Radio Frequency Interference}
 
 \section{Methods}
-\subsection{Flagging RFI}
-\subsection{Making the Power Spectrum}
-\subsection{Simulating Data with \code{hera{\_}sim}}
+\subsection{RFI Excision Strategies}
+\subsection{Calculating the Power Spectrum}
+\subsection{Modelling HERA Data}
 
 \section{Results}
+
 \section{Conclusion}
+
+\bibliographystyle{apj}
 \bibliography{refs}
 \end{document}
