@@ -5,12 +5,13 @@
 	right=1.25in,
 	top=1in,
 	bottom=1in]{geometry}
-\usepackage{titlesec, setspace}
-\usepackage[nottoc,numbib]{tocbibind}
-\usepackage[dvipsnames,svgnames]{xcolor}
-\usepackage{hyperref}
 \usepackage{mathptmx}
-\usepackage{natbib}
+\usepackage[dotinlabels]{titletoc}
+\usepackage[nottoc,numbib]{tocbibind}
+\usepackage[svgnames]{xcolor}
+\usepackage{titlesec, setspace}
+\usepackage{graphicx, caption}
+\usepackage{hyperref, natbib}
 \input{input.tex}
 
 \begin{document}
@@ -28,13 +29,13 @@ Spring 2019 \vspace{0.1\textheight}
 	& \centering APPROVED: & \\
 	& & \\ & & \\
 	& \hrulefill & \\
-	& \hfill Daniel Jacobs, Director & \\
+	& \hfill Prof. Daniel Jacobs, Director & \\
 	& & \\ & & \\
 	& \hrulefill & \\
-	& \hfill Judd Bowman & \\
+	& \hfill Prof. Judd Bowman & \\
 	& & \\ & & \\
 	& \hrulefill & \\
-	& \hfill Adam Beardsley &
+	& \hfill Dr. Adam Beardsley &
 \end{tabular} \vspace{0.075\textheight} \\
 \begin{tabular}{p{1cm}p{3.5in}p{1cm}}
 	& \centering ACCEPTED: & \\
@@ -80,19 +81,25 @@ Spring 2019 \vspace{0.1\textheight}
 \begin{abstract}
 \end{abstract}
 
-\section{Introduction}
-\subsection{The Epoch of Reionization}
+\section{Introduction} \label{sec:intro}
+\subsection{The Epoch of Reionization} \label{subsec:eor}
 \cite{morales2010} \\
 \cite{pritchard2012}
-\subsection{The 21-cm Power Spectrum}
-\subsection{The Hydrogen Epoch of Reionization Array}
+\subsection{The 21-cm Power Spectrum} \label{subsec:ps}
+\subsection{The Hydrogen Epoch of Reionization Array} \label{subsec:hera}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.75\textwidth]{hera.png}
+	\caption[HERA as of late 2017 -- early 2018]{HERA as of late 2017 -- early 2018. HERA will observe large-scale structure prior to and during the EoR via the redshifted 21-cm line from the intergalactic medium. Image courtesy of the South African Radio Astronomy Observatory.}
+	\label{fig:hera}
+\end{figure}
 \cite{deboer2017}
-\subsection{Radio Frequency Interference}
+\subsection{Radio Frequency Interference} \label{subsec:rfi}
 
-\section{Methods}
-\subsection{RFI Excision Strategies}
-\subsection{Calculating the Power Spectrum}
-\subsection{Modelling HERA Data}
+\section{Methods} \label{sec:methods}
+\subsection{RFI Excision Strategies} \label{subsec:rfi_excision}
+\subsection{Calculating the Power Spectrum} \label{subsec:calc_ps}
+\subsection{Modelling HERA Data} \label{subsec:modelling}
 
 \section{Results}
 

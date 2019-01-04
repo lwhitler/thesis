@@ -5,7 +5,6 @@ plots/
 *.blg
 *.log
 *.out
-*.pdf
 *.pyc
 *.synctex.gz
 *.toc

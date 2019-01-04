@@ -1,12 +1,14 @@
 % Journals
 \newcommand{\aap}{A\&A}
+\newcommand{\aj}{AJ}
 \newcommand{\apj}{ApJ}
 \newcommand{\araa}{ARA\&A}
 \newcommand{\mnras}{MNRAS}
 \newcommand{\pasp}{PASP}
 \newcommand{\physrep}{PhR}
+\newcommand{\rpph}{RPPh}
 
-% Formatting
+% Formatting and paths
 \hypersetup{
 	colorlinks=true,
 	citecolor=blue,
@@ -14,12 +16,14 @@
 	linkcolor=black,
 	urlcolor=DarkBlue
 }
-\titleformat{\section}{\normalsize\bfseries\centering}{\thesection}{0.75em}{}
-\titleformat{\subsection}{\normalsize\itshape\centering}{\thesubsection}{0.75em}{}
+\graphicspath{{figs/}}
+\captionsetup[figure]{labelfont={bf}, font=small, name={Figure}, labelsep=period}
+\captionsetup[table]{labelfont={bf}, font=small, name={Table}, labelsep=period}
+\titleformat{\section}{\normalsize\bfseries\centering}{\thesection.}{0.75em}{}
+\titleformat{\subsection}{\normalsize\itshape\centering}{\thesubsection.}{0.75em}{}
 \renewcommand{\contentsname}{Table of Contents}
 \renewcommand{\abstractname}{{\normalsize\textbf{Abstract}}}
-
-% For formattingg code
+% For formatting code
 \newcommand{\code}[1]{{\fontfamily{qcr}\selectfont#1}}
 
 % Typesetting
