@@ -12,9 +12,9 @@
 \hypersetup{
 	colorlinks=true,
 	citecolor=blue,
-	filecolor=black,
-	linkcolor=black,
-	urlcolor=DarkBlue
+	filecolor=blue,
+	linkcolor=blue,
+	urlcolor=blue
 }
 \graphicspath{{figs/}}
 \captionsetup[figure]{labelfont={bf}, font=small, name={Figure}, labelsep=period}
@@ -23,8 +23,10 @@
 \titleformat{\subsection}{\normalsize\itshape\centering}{\thesubsection.}{0.75em}{}
 \renewcommand{\contentsname}{Table of Contents}
 \renewcommand{\abstractname}{{\normalsize\textbf{Abstract}}}
-% For formatting code
-\newcommand{\code}[1]{{\fontfamily{qcr}\selectfont#1}}
 
-% Typesetting
+% For formatting text
+\newcommand{\code}[1]{{\fontfamily{qcr}\selectfont#1}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+
+% Typesetting special symbols
 \newcommand{\HI}{H\,\textsc{i}}
