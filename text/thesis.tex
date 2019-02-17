@@ -2,7 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage[dotinlabels]{titletoc}
-\usepackage[nottoc,numbib]{tocbibind}
+\usepackage[nottoc]{tocbibind}
 \usepackage{mathptmx}
 \usepackage{amsmath, amssymb}
 \usepackage{geometry, titlesec, setspace}
@@ -97,9 +97,9 @@ In the early universe, matter was hot and ionized. Photons scattered off of free
 
 Immediately following the release of the CMB and lasting until several hundred million years after the Big Bang was the cosmic Dark Ages. During this era, though photons were free to propagate, no stars, galaxies, or other sources of radiation had yet formed. The only sources of information we have from the Dark Ages are CMB photons and emission from neutral hydrogen.
 
-The transition between the Dark Ages and the subsequent Epoch of Reionization (EoR) was marked by the \red{emergence} of the first luminous sources. During the EoR, ultraviolet \red{(UV)} radiation from these objects ionized the intergalactic medium (IGM) around them. The EoR ended when the IGM was fully ionized, thus completing the final major phase change of hydrogen in the universe.
+The transition between the Dark Ages and the subsequent Epoch of Reionization (EoR) was marked by the \red{emergence} of the first luminous sources. During the EoR, ultraviolet (UV) radiation from these objects ionized the intergalactic medium (IGM) around them. The EoR ended when the IGM was fully ionized, thus completing the final major phase change of hydrogen in the universe.
 
-Figure \ref{fig:timeline} shows an illustration of this evolution. The \textit{Planck} satellite and its predecessors, the \textit{Cosmic Background Explorer} and \textit{Wilkinson Microwave Anisotropy Probe}, have measured the temperature and polarization anisotropies in the CMB, providing us with a wealth of information about the early universe. On the other end of cosmic history, the Hubble Deep Fields have probed some of the oldest known galaxies. However, the time in between is still lacking observational constraints. \red{I should probably have references in this section...}
+Figure \ref{fig:timeline} shows an illustration of this evolution. The \textit{Planck} satellite and its predecessors, the \textit{Cosmic Background Explorer} and \textit{Wilkinson Microwave Anisotropy Probe}, have measured the temperature and polarization anisotropies in the CMB, providing us with a wealth of information about the early universe. On the other end of cosmic history, the Hubble Deep Fields have probed some of the oldest known galaxies. However, much of the Dark Ages and EoR still lack observational constraints. \red{I should probably have references in this little subsection...}
 
 \begin{figure}[tb]
 	\centering
@@ -110,38 +110,46 @@ Figure \ref{fig:timeline} shows an illustration of this evolution. The \textit{P
 
 \subsection{The Epoch of Reionization} \label{subsec:eor}
 
-The EoR is important to understanding the processes of structure formation in the universe. The CMB exhibits density fluctuations on the order of $10^{-5}$, which gravitational instabilities eventually collapsed into
+The physics during the Dark Ages was much simpler than during the EoR, since only hydrogen and CMB photons were present, but this same simplicity makes the Dark Ages more difficult to observe due to the lack of luminous sources. In contrast, observational probes of the EoR have the advantage of being able to target either the ionizing UV sources or the neutral hydrogen gas.
 
-while today, we clearly have large, gravitationally bound clumps of matter (galaxies and even galaxy clusters) and voids where there are no large concentrations of mass. The process by which the small density fluctuations in the CMB evolved into the structure we see now has been explored theoretically \red{(citations?)}, but the theory encompassing the Dark Ages and the EoR has not yet been observationally \red{tested}.
-
-\cite{furlanetto2006}
-
-\cite{morales2010}
-
-\cite{pritchard2012}
+\red{[Talk about the theory of the EoR---ionizing bubbles, etc.]}
 
 \subsection{The 21-cm Power Spectrum} \label{subsec:ps}
+
+\red{[What is it?]}
+
+\red{[Challenges---foregrounds, calibration, etc.]}
+
+\subsection{Radio Frequency Interference} \label{subsec:rfi}
+
+Radio frequency interference (RFI) is one such environmental contaminant.
 
 \subsection{The Hydrogen Epoch of Reionization Array} \label{subsec:hera}
 
 \begin{figure}[tb]
 	\centering
 	\includegraphics[width=0.75\textwidth]{hera.png}
-	\caption[HERA as of late 2017 -- early 2018]{HERA as of late 2017 -- early 2018. HERA will observe large-scale structure prior to and during the EoR via the redshifted 21-cm line from the IGM. Image courtesy of the South African Radio Astronomy Observatory.}
+	\caption[HERA as of late 2017 -- early 2018]{HERA as of late 2017 -- early 2018. HERA will observe the periods prior to and during the EoR via the redshifted 21-cm line from the IGM. Image courtesy of the South African Radio Astronomy Observatory.}
 	\label{fig:hera}
 \end{figure}
 
-The Hydrogen Epoch of Reionization Array (HERA; Figure \ref{fig:hera}) is an experiment to study the periods prior to and during the EoR \red{(from redshifts $z \sim 6 - 30$)} via measurements of the redshifted 21-cm line \citep{deboer2017}. HERA is one of several instruments designed to perform this measurement; others include the Low-Frequency Array (\red{van Haarlem et al., 2013}), the Murchison Widefield Array (\red{Tingay et al., 2013}), and in the future, the Square Kilometer Array (SKA). HERA is located in the Karoo Radio Astronomy Reserve in South Africa, a site protected by law to preserve its radio-quiet environment for radio frequency \red{experiments} like HERA.
+The Hydrogen Epoch of Reionization Array (HERA; Figure \ref{fig:hera}) is one of several radio interferometers designed to study the large-scale structure during the EoR via measurements of the redshifted 21-cm line \citep{deboer2017}---others include the Low Frequency Array \citep[LOFAR;][]{vanHaarlem2013} and the Murchison Widefield Array \citep[MWA;][]{tingay2013}. HERA both builds upon preceding instruments, including the MWA and the Donald C. Backer Precision Array for Probing the Epoch of Reionization \citep[PAPER;][]{parsons2010}, and will pave the way for future experiments such as the Square Kilometer Array \citep[SKA; e.g.,][]{mellema2013}.
 
-\subsection{Radio Frequency Interference} \label{subsec:rfi}
+When complete, HERA will be composed of 350 14-meter dishes, with a dense 320-element hexagonal core and 30 outriggers. This design means that although HERA measures approximately 61,000 visibilities, it has only 6140 unique baselines \red{[diagram of what this means?]}. This redundancy can be leveraged to calibrate the array up to degeneracies in overall gain and phase, following \cite{liu2010} and \cite{zheng2014}, and to increase sensitivity for the delay spectrum approach developed by PAPER. \red{[This needs expanding, will do it later]}
 
 \section{Methods} \label{sec:methods}
 
 \subsection{RFI Excision Strategies} \label{subsec:rfi_excision}
 
+\red{Initial flagging with XRFI}
+
+\red{Flag broadcasting with \code{hera\textunderscore pspec}}
+
 \subsection{Calculating the Power Spectrum} \label{subsec:calc_ps}
 
 \subsection{Modelling HERA Data} \label{subsec:modelling}
+
+\red{Making \code{hera\textunderscore sim} talk to \code{pyuvdata}}
 
 \section{Results}
 
