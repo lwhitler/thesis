@@ -9,6 +9,11 @@
 \newcommand{\rpph}{RPPh}
 
 % Formatting and paths
+\geometry{
+	left=1.25in,
+	right=1.25in,
+	top=1in,
+	bottom=1in}
 \hypersetup{
 	colorlinks=true,
 	citecolor=blue,
@@ -17,8 +22,8 @@
 	urlcolor=blue
 }
 \graphicspath{{figs/}}
-\captionsetup[figure]{labelfont={bf}, font=small, name={Figure}, labelsep=period}
-\captionsetup[table]{labelfont={bf}, font=small, name={Table}, labelsep=period}
+\captionsetup[figure]{labelfont={bf}, font={small, stretch=1.3}, name={Figure}, labelsep=period}
+\captionsetup[table]{labelfont={bf}, font={small, stretch=1.3}, name={Table}, labelsep=period}
 \titleformat{\section}{\normalsize\bfseries\centering}{\thesection.}{0.75em}{}
 \titleformat{\subsection}{\normalsize\itshape\centering}{\thesubsection.}{0.75em}{}
 \renewcommand{\contentsname}{Table of Contents}

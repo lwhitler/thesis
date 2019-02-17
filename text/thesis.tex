@@ -1,15 +1,11 @@
 \documentclass[12pt]{article}
 \usepackage[utf8]{inputenc}
-\usepackage[
-	left=1.25in,
-	right=1.25in,
-	top=1in,
-	bottom=1in]{geometry}
-\usepackage{mathptmx}
+\usepackage[english]{babel}
 \usepackage[dotinlabels]{titletoc}
 \usepackage[nottoc,numbib]{tocbibind}
-\usepackage[svgnames]{xcolor}
-\usepackage{titlesec, setspace}
+\usepackage{mathptmx}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry, titlesec, setspace}
 \usepackage{graphicx, caption}
 \usepackage{hyperref, natbib}
 \input{input.tex}
@@ -19,9 +15,9 @@
 \begin{center}
 Environmental Systematics and the Impact on \\ 21-cm Epoch of Reionization Measurements \\
 by \\
-Lily R. Whitler \\
+Lily Whitler \\
 has been approved \\
-Spring 2019 \vspace{0.1\textheight}
+Spring 2019 \\[0.1\textheight]
 
 \begingroup
 \renewcommand{\arraystretch}{0.7}
@@ -29,14 +25,14 @@ Spring 2019 \vspace{0.1\textheight}
 	& \centering APPROVED: & \\
 	& & \\ & & \\
 	& \hrulefill & \\
-	& \hfill Prof. Daniel Jacobs, Director & \\
+	& \hfill Daniel Jacobs, Director & \\
 	& & \\ & & \\
 	& \hrulefill & \\
-	& \hfill Prof. Judd Bowman & \\
+	& \hfill Judd Bowman & \\
 	& & \\ & & \\
 	& \hrulefill & \\
-	& \hfill Dr. Adam Beardsley &
-\end{tabular} \vspace{0.075\textheight} \\
+	& \hfill Adam Beardsley &
+\end{tabular} \\[0.075\textheight]
 \begin{tabular}{p{1cm}p{3.5in}p{1cm}}
 	& \centering ACCEPTED: & \\
 	& & \\ & & \\
@@ -50,28 +46,26 @@ Spring 2019 \vspace{0.1\textheight}
 \pagenumbering{arabic}
 
 \begin{center}
-	Environmental Systematics and the Impact on \\ 21-cm Epoch of Reionization Measurements \\
+	{\Large Environmental Systematics and the Impact on \\ 21-cm Epoch of Reionization Measurements} \\
 	by \\
-	Lily R. Whitler
+	Lily Whitler \\[0.15\textheight]
 	
-	\begin{spacing}{1}
-		\vspace{0.15\textheight}
-		A Thesis Presented in Partial Fulfillment \\
-		of the Requirements for the Degree \\
-		Bachelor of Science with Honors \\
-		\vspace{0.22\textheight}
-		Committee: \\
-		Daniel Jacobs, Director \\
-		Judd Bowman \\
-		Adam Beardsley
-	\end{spacing}
-
-	\vspace{0.22\textheight}
+	A Thesis Presented in Partial Fulfillment \\
+	of the Requirements for Graduation from \\
+	Barrett, the Honors College \\[0.15\textheight]
+	
+	Committee: \\
+	Daniel Jacobs, Director \\
+	Judd Bowman \\
+	Adam Beardsley \\[0.2\textheight]
+	
 	ARIZONA STATE UNIVERSITY \\
 	April 2019
 \end{center}
 \thispagestyle{empty}
-\newpage
+
+\clearpage
+\pagenumbering{roman}
 
 \begingroup
 \hypersetup{
@@ -89,20 +83,36 @@ Spring 2019 \vspace{0.1\textheight}
 
 \begin{abstract}
 \end{abstract}
-\newpage
+
+\clearpage
+\pagenumbering{arabic}
 
 \section{Introduction} \label{sec:intro}
 
-\subsection{The Epoch of Reionization} \label{subsec:eor}
+\subsection{A Brief History of the Universe} \label{subsec:universe}
 
-Immediately after the Big Bang, the expanding universe was a hot, but cooling, plasma of fundamental particles. Approximately 380,000 years later, the universe had cooled and expanded enough for electrons to become bound to atomic nuclei, making the universe transparent to light and emitting the cosmic microwave background. Immediately following this period and lasting until $\sim$ 400 million years after the Big Bang was the cosmic Dark Ages, when the universe was quite literally dark---no stars or other sources of light had yet formed. Then, with the \red{formation} of the first luminous sources, the intergalactic medium (IGM), which had been predominantly neutral until then, was ionized by the energetic radiation from these sources during the Epoch or Reionization (EoR). The EoR ended around a billion years after the Big Bang, and the universe's structure has continued evolving into what we now see today. This history is summarized in Figure \ref{fig:timeline}. \red{I should probably have a reference here.}
+Immediately after the Big Bang, the universe was a hot plasma of fundamental particles. Now, nearly 14 billion years later, it is populated with a rich variety of \red{objects}, from massive galaxy clusters all the way down to our own solar system and its planets. The \red{evolutionary} path of the universe from the Big Bang to now, however, is not entirely clear.
+
+In the early universe, matter was hot and ionized. Photons scattered off of free particles, rendering the universe opaque to electromagnetic radiation. This lasted until approximately 380,000 years after the Big Bang, when the universe had expanded and cooled sufficiently for electrons to become bound to atomic nuclei during recombination. When recombination was complete, photons were able to propagate freely through space, subject only to cosmological redshift. Today, we see photons from this era as the cosmic microwave background (CMB).
+
+Immediately following the release of the CMB and lasting until several hundred million years after the Big Bang was the cosmic Dark Ages. During this era, though photons were free to propagate, no stars, galaxies, or other sources of radiation had yet formed. The only sources of information we have from the Dark Ages are CMB photons and emission from neutral hydrogen.
+
+The transition between the Dark Ages and the subsequent Epoch of Reionization (EoR) was marked by the \red{emergence} of the first luminous sources. During the EoR, ultraviolet \red{(UV)} radiation from these objects ionized the intergalactic medium (IGM) around them. The EoR ended when the IGM was fully ionized, thus completing the final major phase change of hydrogen in the universe.
+
+Figure \ref{fig:timeline} shows an illustration of this evolution. The \textit{Planck} satellite and its predecessors, the \textit{Cosmic Background Explorer} and \textit{Wilkinson Microwave Anisotropy Probe}, have measured the temperature and polarization anisotropies in the CMB, providing us with a wealth of information about the early universe. On the other end of cosmic history, the Hubble Deep Fields have probed some of the oldest known galaxies. However, the time in between is still lacking observational constraints. \red{I should probably have references in this section...}
 
 \begin{figure}[tb]
 	\centering
 	\includegraphics[width=\textwidth]{timeline.jpg}
-	\caption[Timeline of the universe]{Timeline of the evolution of the universe. Image courtesy of NASA.}
+	\caption[Timeline of the universe]{Timeline of the evolution of the universe. Image courtesy of NASA, ESA, and the Planck Collaboration.}
 	\label{fig:timeline}
 \end{figure}
+
+\subsection{The Epoch of Reionization} \label{subsec:eor}
+
+The EoR is important to understanding the processes of structure formation in the universe. The CMB exhibits density fluctuations on the order of $10^{-5}$, which gravitational instabilities eventually collapsed into
+
+while today, we clearly have large, gravitationally bound clumps of matter (galaxies and even galaxy clusters) and voids where there are no large concentrations of mass. The process by which the small density fluctuations in the CMB evolved into the structure we see now has been explored theoretically \red{(citations?)}, but the theory encompassing the Dark Ages and the EoR has not yet been observationally \red{tested}.
 
 \cite{furlanetto2006}
 
@@ -111,7 +121,9 @@ Immediately after the Big Bang, the expanding universe was a hot, but cooling, p
 \cite{pritchard2012}
 
 \subsection{The 21-cm Power Spectrum} \label{subsec:ps}
+
 \subsection{The Hydrogen Epoch of Reionization Array} \label{subsec:hera}
+
 \begin{figure}[tb]
 	\centering
 	\includegraphics[width=0.75\textwidth]{hera.png}
@@ -119,17 +131,21 @@ Immediately after the Big Bang, the expanding universe was a hot, but cooling, p
 	\label{fig:hera}
 \end{figure}
 
-The Hydrogen Epoch of Reionization Array (HERA; Figure \ref{fig:hera}) is an experiment to study the periods prior to and during the EoR \red{(from redshifts $z \sim 6 - 30$)} via measurements of the redshifted 21-cm line \citep{deboer2017}.
+The Hydrogen Epoch of Reionization Array (HERA; Figure \ref{fig:hera}) is an experiment to study the periods prior to and during the EoR \red{(from redshifts $z \sim 6 - 30$)} via measurements of the redshifted 21-cm line \citep{deboer2017}. HERA is one of several instruments designed to perform this measurement; others include the Low-Frequency Array (\red{van Haarlem et al., 2013}), the Murchison Widefield Array (\red{Tingay et al., 2013}), and in the future, the Square Kilometer Array (SKA). HERA is located in the Karoo Radio Astronomy Reserve in South Africa, a site protected by law to preserve its radio-quiet environment for radio frequency \red{experiments} like HERA.
+
 \subsection{Radio Frequency Interference} \label{subsec:rfi}
 
 \section{Methods} \label{sec:methods}
+
 \subsection{RFI Excision Strategies} \label{subsec:rfi_excision}
+
 \subsection{Calculating the Power Spectrum} \label{subsec:calc_ps}
+
 \subsection{Modelling HERA Data} \label{subsec:modelling}
 
 \section{Results}
 
-\section{Conclusion}
+\section{Conclusions}
 
 \bibliographystyle{apj}
 \bibliography{refs}
