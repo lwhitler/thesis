@@ -6,7 +6,7 @@
 \usepackage{mathptmx}
 \usepackage{amsmath, amssymb}
 \usepackage{geometry, titlesec, setspace}
-\usepackage{graphicx, caption}
+\usepackage{graphicx, caption, subcaption}
 \usepackage{hyperref, natbib}
 \input{input.tex}
 
@@ -91,7 +91,7 @@ Spring 2019 \\[0.1\textheight]
 
 \subsection{A Brief History of the Universe} \label{subsec:universe}
 
-Immediately after the Big Bang, the universe was a hot plasma of fundamental particles. Now, nearly 14 billion years later, it is populated with a rich variety of \red{objects}, from massive galaxy clusters all the way down to our own solar system and its planets. The \red{evolutionary} path of the universe from the Big Bang to now, however, is not entirely clear.
+Immediately after the Big Bang, the universe was a hot plasma of fundamental particles. Now, nearly 14 billion years later, it is populated with a rich variety of \red{objects}, from massive galaxy clusters all the way down to our own solar system and its planets. However, the \red{evolutionary} path the universe took from the Big Bang to now is not entirely clear.
 
 In the early universe, matter was hot and ionized. Photons scattered off of free particles, rendering the universe opaque to electromagnetic radiation. This lasted until approximately 380,000 years after the Big Bang, when the universe had expanded and cooled sufficiently for electrons to become bound to atomic nuclei during recombination. When recombination was complete, photons were able to propagate freely through space, subject only to cosmological redshift. Today, we see photons from this era as the cosmic microwave background (CMB).
 
@@ -99,22 +99,34 @@ Immediately following the release of the CMB and lasting until several hundred m
 
 The transition between the Dark Ages and the subsequent Epoch of Reionization (EoR) was marked by the \red{emergence} of the first luminous sources. During the EoR, ultraviolet (UV) radiation from these objects ionized the intergalactic medium (IGM) around them. The EoR ended when the IGM was fully ionized, thus completing the final major phase change of hydrogen in the universe.
 
-Figure \ref{fig:timeline} shows an illustration of this evolution. The \textit{Planck} satellite and its predecessors, the \textit{Cosmic Background Explorer} and \textit{Wilkinson Microwave Anisotropy Probe}, have measured the temperature and polarization anisotropies in the CMB, providing us with a wealth of information about the early universe. On the other end of cosmic history, the Hubble Deep Fields have probed some of the oldest known galaxies. However, much of the Dark Ages and EoR still lack observational constraints. \red{I should probably have references in this little subsection...}
+Figure \ref{fig:timeline} shows an illustration of this evolution. The \textit{Planck} satellite and its predecessors, the \red{Cosmic Background Explorer [italics?]} and \textit{Wilkinson Microwave Anisotropy Probe}, have measured the temperature anisotropies in the CMB, providing a wealth of information about the universe just a few hundred thousand years after its \red{birth}. On the other end of cosmic history, the Hubble Deep Fields have probed some of the oldest known galaxies. \red{However, most of the Dark Ages and EoR still lack observational constraints.}
 
 \begin{figure}[tb]
 	\centering
-	\includegraphics[width=\textwidth]{timeline.jpg}
-	\caption[Timeline of the universe]{Timeline of the evolution of the universe. Image courtesy of NASA, ESA, and the Planck Collaboration.}
+	\includegraphics[width=\textwidth]{timeline.png}
+	\caption[History of the universe]{A visualization of cosmic evolution. Image originally from \cite{loeb2006}.}
 	\label{fig:timeline}
 \end{figure}
 
 \subsection{The Epoch of Reionization} \label{subsec:eor}
 
-The physics during the Dark Ages was much simpler than during the EoR, since only hydrogen and CMB photons were present, but this same simplicity makes the Dark Ages more difficult to observe due to the lack of luminous sources. In contrast, observational probes of the EoR have the advantage of being able to target either the ionizing UV sources or the neutral hydrogen gas.
+The EoR is the period in cosmic history during which the intergalactic medium, which had been neutral since recombination, was ionized by the very first luminous sources. This era, along with the Dark Ages, is the bridge between \red{our knowledge of} the CMB and the universe today.
 
-\red{[Talk about the theory of the EoR---ionizing bubbles, etc.]}
+Though the EoR is largely observationally \red{unconstrained}, theoretical studies have constructed a broad \red{account} of the ionization process. UV photons from the earliest stars, galaxies, or quasars ionized the gas in their immediate neighborhood, and as individual objects continue ionizing their surroundings, these bubbles of ionized gas grew in size and eventually began to overlap. As the EoR progressed, the bubbles continued to grow and overlap until the IGM was fully ionized.
 
-\subsection{The 21-cm Power Spectrum} \label{subsec:ps}
+This \red{qualitative} picture is generally accepted, but answering more detailed questions such as ``What is the timeline of reionization?'', ``What was the topology? Were there a lot of small bubbles or did a few large ones dominate?'', or even ``What exactly were the ionizing sources?'' \red{[this can most definitely be worded better]} will require observations of this era.
+
+\subsection{Observational Constraints on the Epoch of Reionization} \label{subsec:probes}
+
+\cite{fan2006} constrained the end of reionization to be around $z \sim 6$, primarily via observations of high-redshift quasars. This approach will continue to place tighter \red{limits} on the \red{tail end} of reionization, especially since deep surveys with the upcoming \textit{James Webb Space Telescope} and other ground- and space-based instruments will enable detections of statistically significant samples of these high-redshift objects. However, the \red{[something] luminosity function limits the detection of quasars above $z \gtrsim 7$, thus limiting our ability to probe the earlier part of the EoR with these objects \textit{(citation)}}.
+
+Other probes of the EoR include gamma ray bursts and metal absorption line systems. High-redshift gamma ray bursts exhibit troughs \red{blueward} of Lyman alpha (Ly$\alpha$) in their spectra due to absorption by intervening neutral hydrogen, thus serving as a probe of the ionization state of the IGM \citep[e.g.,][]{gallerani2008}. Early star formation enriches the interstellar medium and the IGM with heavy elements, which can be used either to probe the properties of the stellar populations that ionized the universe or to directly trace the ionization history. For example, \cite{oh2002} \red{proposed} the use of the \OI~line at 1302 \AA, since \OI~and H have almost identical ionization potentials and \OI~is expected to be in tight charge exchange equilibrium with H.
+
+Both the large-scale polarization of the CMB and the small-scale kinetic Sunyaev-Zel'dovich (kSZ) effect place some constraints on the onset and topography of reionization \citep{fan2006}. CMB photons undergo Thomson scattering off of free electrons produced by the ionization of hydrogen which causes the emission to polarize. This interaction can be quantified by the optical depth of reionization, and thus the redshift. Primary CMB anisotropies are suppressed by this polarization, so measuring the polarization caused by CMB photons Thomson scattering during reionization constrains the onset of the EoR \citep[e.g.,][]{zaldarriaga1997, roy2018}. The kSZ effect, on the other hand, is due to inverse Compton scattering of ionized electrons in the IGM and introduces secondary temperature anisotropies on small angular scales, which is a tracer of the \red{patchiness} of reionization \citep{fan2006, park2013, roy2018}.
+
+As useful as the CMB is as a probe of the EoR, it is essentially a two-dimensional snapshot of the universe taken at one time in cosmic history. Although the CMB has imprints of other eras, specifically the EoR, on it, a truly three-dimensional map would contain much information. \red{I need more stuff here, but moving on to the 21-cm stuff for now...}
+
+\subsection{21-cm Cosmology} \label{subsec:ps}
 
 \red{[What is it?]}
 
@@ -122,24 +134,38 @@ The physics during the Dark Ages was much simpler than during the EoR, since onl
 
 \subsection{Radio Frequency Interference} \label{subsec:rfi}
 
-Radio frequency interference (RFI) is one such environmental contaminant.
+RFI can 
 
 \subsection{The Hydrogen Epoch of Reionization Array} \label{subsec:hera}
 
 \begin{figure}[tb]
 	\centering
-	\includegraphics[width=0.75\textwidth]{hera.png}
-	\caption[HERA as of late 2017 -- early 2018]{HERA as of late 2017 -- early 2018. HERA will observe the periods prior to and during the EoR via the redshifted 21-cm line from the IGM. Image courtesy of the South African Radio Astronomy Observatory.}
+	\begin{subfigure}{0.48\textwidth}
+		\centering
+		{\includegraphics[width=\textwidth]{hera.png}}
+	\end{subfigure} \hfill
+	\begin{subfigure}{0.48\textwidth}
+		\centering
+		{\includegraphics[width=\textwidth]{hera_map.png}}
+	\end{subfigure}
+	\caption[The Hydrogen Epoch of Reionization Array]{Left: A photo of HERA as of late 2017 -- early 2018. HERA will observe the periods prior to and during the EoR via the redshifted 21-cm line from the IGM. Image courtesy of the South African Radio Astronomy Observatory. Right: A map of the completed array, composed of 320 central elements and 30 outriggers \citep{deboer2017}.}
 	\label{fig:hera}
 \end{figure}
 
-The Hydrogen Epoch of Reionization Array (HERA; Figure \ref{fig:hera}) is one of several radio interferometers designed to study the large-scale structure during the EoR via measurements of the redshifted 21-cm line \citep{deboer2017}---others include the Low Frequency Array \citep[LOFAR;][]{vanHaarlem2013} and the Murchison Widefield Array \citep[MWA;][]{tingay2013}. HERA both builds upon preceding instruments, including the MWA and the Donald C. Backer Precision Array for Probing the Epoch of Reionization \citep[PAPER;][]{parsons2010}, and will pave the way for future experiments such as the Square Kilometer Array \citep[SKA; e.g.,][]{mellema2013}.
+The Hydrogen Epoch of Reionization Array (HERA; left panel of Figure \ref{fig:hera}) is one of several radio interferometers designed to study the large-scale structure during the EoR via measurements of the redshifted 21-cm line \citep{deboer2017}---others include the Low Frequency Array \citep[LOFAR;][]{vanHaarlem2013} and the Murchison Widefield Array \citep[MWA;][]{tingay2013}. HERA builds upon preceding instruments, such as the MWA and the Donald C. Backer Precision Array for Probing the Epoch of Reionization \citep[PAPER;][]{parsons2010}, and will pave the way for future experiments such as the Square Kilometer Array \cite[SKA; e.g.,][]{mellema2013}.
 
-When complete, HERA will be composed of 350 14-meter dishes, with a dense 320-element hexagonal core and 30 outriggers. This design means that although HERA measures approximately 61,000 visibilities, it has only 6140 unique baselines \red{[diagram of what this means?]}. This redundancy can be leveraged to calibrate the array up to degeneracies in overall gain and phase, following \cite{liu2010} and \cite{zheng2014}, and to increase sensitivity for the delay spectrum approach developed by PAPER. \red{[This needs expanding, will do it later]}
+When complete, HERA will be \red{composed} of 350 14-meter dishes with a dense 320-element hexagonal core and 30 outriggers (right panel of Figure \ref{fig:hera}). The dense \red{configuration} was chosen to maximize sensitivity to the diffuseness of the 21-cm signal, which will be sampled primarily by short baselines. \red{The redundancy of the hexagonal shape increases sensitivity and the efficacy of the delay spectrum approach for separating and rejecting foreground-contaminated modes \textit{(this is apparently a PAPER thing??---citation?)} and allows for the redundant calibration technique developed and pioneered in \cite{liu2010} and \cite{zheng2014}. [explain this entire thing more (or cut it)]}
 
 \section{Methods} \label{sec:methods}
 
 \subsection{RFI Excision Strategies} \label{subsec:rfi_excision}
+
+\begin{figure}[tb]
+	\centering
+	\includegraphics[width=\textwidth]{flagging_steps.png}
+	\caption[Steps for flagging RFI]{\red{Something about how we go about flagging RFI before calculating the power spectrum}}
+	\label{fig:rfi_flagging}
+\end{figure}
 
 \red{Initial flagging with XRFI}
 
@@ -155,6 +181,6 @@ When complete, HERA will be composed of 350 14-meter dishes, with a dense 320-el
 
 \section{Conclusions}
 
-\bibliographystyle{apj}
+\bibliographystyle{aasjournal}
 \bibliography{refs}
 \end{document}
