@@ -124,17 +124,23 @@ Other probes of the EoR include gamma ray bursts and metal absorption line syste
 
 Both the large-scale polarization of the CMB and the small-scale kinetic Sunyaev-Zel'dovich (kSZ) effect place some constraints on the onset and topography of reionization \citep{fan2006}. CMB photons undergo Thomson scattering off of free electrons produced by the ionization of hydrogen which causes the emission to polarize. This interaction can be quantified by the optical depth of reionization, and thus the redshift. Primary CMB anisotropies are suppressed by this polarization, so measuring the polarization caused by CMB photons Thomson scattering during reionization constrains the onset of the EoR \citep[e.g.,][]{zaldarriaga1997, roy2018}. The kSZ effect, on the other hand, is due to inverse Compton scattering of ionized electrons in the IGM and introduces secondary temperature anisotropies on small angular scales, which is a tracer of the \red{patchiness} of reionization \citep{fan2006, park2013, roy2018}.
 
-As useful as the CMB is as a probe of the EoR, it is essentially a two-dimensional snapshot of the universe taken at one time in cosmic history. Although the CMB has imprints of other eras, specifically the EoR, on it, a truly three-dimensional map would contain much information. \red{I need more stuff here, but moving on to the 21-cm stuff for now...}
+As useful as the CMB is as a probe of the EoR, it is essentially a two-dimensional snapshot of the universe taken at one time in cosmic history. Although the CMB has imprints of other eras, specifically the EoR, on it, a three-dimensional map would contain much information. \red{I need more stuff here, but moving on to the 21-cm stuff for now...}
 
-\subsection{21-cm Cosmology} \label{subsec:ps}
+\subsection{21-cm Cosmology} \label{subsec:21cm}
 
-\red{[What is it?]}
+Neutral hydrogen emits a photon with a wavelength of 21 centimeters during its so-called ``spin-flip transition.'' In the ground state of neutral hydrogen, an electron is bound to a proton, each of which has an intrinsic quantum spin due to their magnetic dipole moments. The spin of the electron can be either parallel or antiparallel to the proton's spin, and the parallel state is slightly higher in energy. The transition from the parallel to the antiparallel state is called the spin-flip transition and results in the emission of a 21-cm photon. \red{The energy difference between these two states is $\sim 5.87$ $\mu$eV, a tiny fraction of the 13.6 eV necessary to ionize hydrogen once, making the 21-cm line one of the only ways to probe the very low-energy environment of the Dark Ages and early stages of the EoR.}
 
-\red{[Challenges---foregrounds, calibration, etc.]}
+Due to the expansion of the universe, the observed wavelength of the 21-cm line is redshifted to longer wavelengths, which can be traced back to a specific time in cosmic history. This redshift evolution provides a full three-dimensional probe of the EoR. Theoretical studies of the EoR place the EoR approximately between $z \sim 20 - 6$ \red{(This may not be quite right. Also, citations??)}, which corresponds to observed wavelengths of approximately 1.5 -- 4.5 meters. The spin flip transition has a very small transition rate of $2.9 \times 10^{-15}$ s$^{-1}$, or about one transition every 10 million years, but fortunately, hydrogen is incredibly ubiquitous in the universe so we can still use this line as an EoR probe.
+
+Actually measuring 21-cm emission from the EoR, however, is an exercise in extreme precision. Synchrotron emission from our own galaxy and other extragalactic sources dominates the frequency band of interest, creating foregrounds that are several orders of magnitude brighter than the 21-cm signal is expected to be. These foregrounds are the primary challenge that all 21-cm experiments must overcome to detect the EoR. However, the environment and the instrument can introduce other \red{systematics}, such as radio frequency interference (RFI), ionospheric effects, and cable reflections, that further complicate the measurement.
 
 \subsection{Radio Frequency Interference} \label{subsec:rfi}
 
-RFI can 
+Interference from sources including FM radio, satellite and aircraft communications, television transmissions, and even nearby weather events (e.g., lightning) is exceptionally bright and can easily contaminate the results of any cosmological measurement. \red{Unfortunately}, since it is typically man-made, it is also everywhere that humans are.
+
+There are a few ways to mitigate RFI. First, instruments can be built in remote areas to minimize contact with human-made interference. Then, RFI can be removed after taking observations with software that detects and masks out (``flags'') data it identifies as being contaminated. Steps further along in the data reduction and analysis process ignore this flagged data.
+
+There are currently several radio interferometers making observations towards a 21-cm power spectral EoR detection, some of which are located in remote places of the world and all \red{(I think)} of which use some sort of RFI excision software. The Hydrogen Epoch of Reionization Array (HERA), located in the Karoo Desert in South Africa, does both.
 
 \subsection{The Hydrogen Epoch of Reionization Array} \label{subsec:hera}
 
@@ -152,7 +158,7 @@ RFI can
 	\label{fig:hera}
 \end{figure}
 
-The Hydrogen Epoch of Reionization Array (HERA; left panel of Figure \ref{fig:hera}) is one of several radio interferometers designed to study the large-scale structure during the EoR via measurements of the redshifted 21-cm line \citep{deboer2017}---others include the Low Frequency Array \citep[LOFAR;][]{vanHaarlem2013} and the Murchison Widefield Array \citep[MWA;][]{tingay2013}. HERA builds upon preceding instruments, such as the MWA and the Donald C. Backer Precision Array for Probing the Epoch of Reionization \citep[PAPER;][]{parsons2010}, and will pave the way for future experiments such as the Square Kilometer Array \cite[SKA; e.g.,][]{mellema2013}.
+HERA (left panel of Figure \ref{fig:hera}) is one of several radio interferometers designed to study the large-scale structure during the EoR via measurements of the redshifted 21-cm line \citep{deboer2017}---others include the Low Frequency Array \citep[LOFAR;][]{vanHaarlem2013} and the Murchison Widefield Array \citep[MWA;][]{tingay2013}. HERA builds upon preceding instruments, such as the MWA and the Donald C. Backer Precision Array for Probing the Epoch of Reionization \citep[PAPER;][]{parsons2010}, and will pave the way for future experiments such as the Square Kilometer Array \cite[SKA; e.g.,][]{mellema2013}.
 
 When complete, HERA will be \red{composed} of 350 14-meter dishes with a dense 320-element hexagonal core and 30 outriggers (right panel of Figure \ref{fig:hera}). The dense \red{configuration} was chosen to maximize sensitivity to the diffuseness of the 21-cm signal, which will be sampled primarily by short baselines. \red{The redundancy of the hexagonal shape increases sensitivity and the efficacy of the delay spectrum approach for separating and rejecting foreground-contaminated modes \textit{(this is apparently a PAPER thing??---citation?)} and allows for the redundant calibration technique developed and pioneered in \cite{liu2010} and \cite{zheng2014}. [explain this entire thing more (or cut it)]}
 
