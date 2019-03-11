@@ -5,10 +5,12 @@
 \usepackage[nottoc]{tocbibind}
 \usepackage{mathptmx}
 \usepackage{amsmath, amssymb}
-\usepackage{geometry, titlesec, setspace}
-\usepackage{graphicx, caption, subcaption}
+\usepackage{geometry, titlesec, setspace, enumitem}
+\usepackage{xcolor, graphicx, caption, subcaption}
 \usepackage{hyperref, natbib}
 \input{input.tex}
+
+\usepackage{lipsum}
 
 \begin{document}
 \doublespacing
@@ -99,12 +101,12 @@ Immediately following the release of the CMB and lasting until several hundred m
 
 The transition between the Dark Ages and the subsequent Epoch of Reionization (EoR) was marked by the \red{emergence} of the first luminous sources. During the EoR, ultraviolet (UV) radiation from these objects ionized the intergalactic medium (IGM) around them. The EoR ended when the IGM was fully ionized, thus completing the final major phase change of hydrogen in the universe.
 
-Figure \ref{fig:timeline} shows an illustration of this evolution. The \textit{Planck} satellite and its predecessors, the \red{Cosmic Background Explorer [italics?]} and \textit{Wilkinson Microwave Anisotropy Probe}, have measured the temperature anisotropies in the CMB, providing a wealth of information about the universe just a few hundred thousand years after its \red{birth}. On the other end of cosmic history, the Hubble Deep Fields have probed some of the oldest known galaxies. \red{However, most of the Dark Ages and EoR still lack observational constraints.}
+Figure \ref{fig:timeline} shows an illustration of this evolution. The \textit{Planck} satellite and its predecessors, the Cosmic Background Explorer \note{[LW: italicize?]} and \textit{Wilkinson Microwave Anisotropy Probe}, have measured the temperature anisotropies in the CMB, providing a wealth of information about the universe just a few hundred thousand years after its \red{birth}. On the other end of cosmic history, the Hubble Deep Fields have probed some of the oldest known galaxies. However, most of the Dark Ages and EoR still lack observational constraints.
 
 \begin{figure}[tb]
 	\centering
 	\includegraphics[width=\textwidth]{timeline.png}
-	\caption[History of the universe]{A visualization of cosmic evolution. Image originally from \cite{loeb2006}.}
+	\caption[History of the universe]{A visualization of cosmic evolution. Image modified from \cite{loeb2006}.}
 	\label{fig:timeline}
 \end{figure}
 
@@ -114,25 +116,32 @@ The EoR is the period in cosmic history during which the intergalactic medium, w
 
 Though the EoR is largely observationally \red{unconstrained}, theoretical studies have constructed a broad \red{account} of the ionization process. UV photons from the earliest stars, galaxies, or quasars ionized the gas in their immediate neighborhood, and as individual objects continue ionizing their surroundings, these bubbles of ionized gas grew in size and eventually began to overlap. As the EoR progressed, the bubbles continued to grow and overlap until the IGM was fully ionized.
 
-This \red{qualitative} picture is generally accepted, but answering more detailed questions such as ``What is the timeline of reionization?'', ``What was the topology? Were there a lot of small bubbles or did a few large ones dominate?'', or even ``What exactly were the ionizing sources?'' \red{[this can most definitely be worded better]} will require observations of this era.
+This \red{qualitative} picture is generally accepted, but answering more detailed questions such as ``What is the timeline of reionization?'', ``What was the topology? Were there a lot of small bubbles or did a few large ones dominate?'', or even ``What exactly were the ionizing sources?'' will require observations of this era \note{[LW: this sentence can definitely be worded better]}.
 
 \subsection{Observational Constraints on the Epoch of Reionization} \label{subsec:probes}
 
-\cite{fan2006} constrained the end of reionization to be around $z \sim 6$, primarily via observations of high-redshift quasars. This approach will continue to place tighter \red{limits} on the \red{tail end} of reionization, especially since deep surveys with the upcoming \textit{James Webb Space Telescope} and other ground- and space-based instruments will enable detections of statistically significant samples of these high-redshift objects. However, the \red{[something] luminosity function limits the detection of quasars above $z \gtrsim 7$, thus limiting our ability to probe the earlier part of the EoR with these objects \textit{(citation)}}.
+\cite{fan2006} constrained the end of reionization to be around $z \sim 6$, primarily via observations of high-redshift quasars. In the future, this approach will continue to place tighter \red{limits} on the \red{tail end} of reionization, especially since deep surveys with the upcoming \textit{James Webb Space Telescope} and other ground- and space-based instruments will enable detections of statistically significant samples of these high-redshift objects. However, the quasar luminosity function limits the detection of quasars above $z \gtrsim 7$, thus limiting our ability to probe the earlier part of the EoR with these objects \citep{richards2006, hopkins2007}.
 
 Other probes of the EoR include gamma ray bursts and metal absorption line systems. High-redshift gamma ray bursts exhibit troughs \red{blueward} of Lyman alpha (Ly$\alpha$) in their spectra due to absorption by intervening neutral hydrogen, thus serving as a probe of the ionization state of the IGM \citep[e.g.,][]{gallerani2008}. Early star formation enriches the interstellar medium and the IGM with heavy elements, which can be used either to probe the properties of the stellar populations that ionized the universe or to directly trace the ionization history. For example, \cite{oh2002} \red{proposed} the use of the \OI~line at 1302 \AA, since \OI~and H have almost identical ionization potentials and \OI~is expected to be in tight charge exchange equilibrium with H.
 
 Both the large-scale polarization of the CMB and the small-scale kinetic Sunyaev-Zel'dovich (kSZ) effect place some constraints on the onset and topography of reionization \citep{fan2006}. CMB photons undergo Thomson scattering off of free electrons produced by the ionization of hydrogen which causes the emission to polarize. This interaction can be quantified by the optical depth of reionization, and thus the redshift. Primary CMB anisotropies are suppressed by this polarization, so measuring the polarization caused by CMB photons Thomson scattering during reionization constrains the onset of the EoR \citep[e.g.,][]{zaldarriaga1997, roy2018}. The kSZ effect, on the other hand, is due to inverse Compton scattering of ionized electrons in the IGM and introduces secondary temperature anisotropies on small angular scales, which is a tracer of the \red{patchiness} of reionization \citep{fan2006, park2013, roy2018}.
 
-As useful as the CMB is as a probe of the EoR, it is essentially a two-dimensional snapshot of the universe taken at one time in cosmic history. Although the CMB has imprints of other eras, specifically the EoR, on it, a three-dimensional map would contain much information. \red{I need more stuff here, but moving on to the 21-cm stuff for now...}
+As useful as the CMB is as a probe of the EoR, it is essentially a two-dimensional snapshot of the universe taken at one time in cosmic history. Although the CMB has imprints of other eras, specifically the EoR, on it, a three-dimensional map would contain much information. \note{[LW: Transitions are good. I should have some. But moving onto 21-cm stuff for now...]}
 
 \subsection{21-cm Cosmology} \label{subsec:21cm}
 
-Neutral hydrogen emits a photon with a wavelength of 21 centimeters during its so-called ``spin-flip transition.'' In the ground state of neutral hydrogen, an electron is bound to a proton, each of which has an intrinsic quantum spin due to their magnetic dipole moments. The spin of the electron can be either parallel or antiparallel to the proton's spin, and the parallel state is slightly higher in energy. The transition from the parallel to the antiparallel state is called the spin-flip transition and results in the emission of a 21-cm photon. \red{The energy difference between these two states is $\sim 5.87$ $\mu$eV, a tiny fraction of the 13.6 eV necessary to ionize hydrogen once, making the 21-cm line one of the only ways to probe the very low-energy environment of the Dark Ages and early stages of the EoR.}
+Neutral hydrogen emits a photon with a wavelength of 21 centimeters during its ``spin-flip transition.'' In the ground state of neutral hydrogen, an electron is bound to a proton, each of which has an intrinsic quantum spin due to their magnetic dipole moments. The spin of the electron can be either parallel or antiparallel to the proton's spin, and the parallel state is slightly higher in energy. The transition from the parallel to the antiparallel state is called the spin-flip transition and results in the emission of a 21-cm photon. A \red{cartoon} of this process is in Figure \ref{fig:spin_flip}.
 
-Due to the expansion of the universe, the observed wavelength of the 21-cm line is redshifted to longer wavelengths, which can be traced back to a specific time in cosmic history. This redshift evolution provides a full three-dimensional probe of the EoR. Theoretical studies of the EoR place the EoR approximately between $z \sim 20 - 6$ \red{(This may not be quite right. Also, citations??)}, which corresponds to observed wavelengths of approximately 1.5 -- 4.5 meters. The spin flip transition has a very small transition rate of $2.9 \times 10^{-15}$ s$^{-1}$, or about one transition every 10 million years, but fortunately, hydrogen is incredibly ubiquitous in the universe so we can still use this line as an EoR probe.
+The energy difference between these two states is $\sim 5.87$ $\mu$eV, a tiny fraction of the 13.6 eV necessary to ionize hydrogen once, making the 21-cm line one of the only ways to probe the very low-energy environment of the Dark Ages and early stages of the EoR. Due to the expansion of the universe, the observed wavelength of the 21-cm line is redshifted to longer wavelengths, which can be traced back to a specific time in cosmic history. This redshift evolution provides a full three-dimensional probe of the EoR. Theoretical studies of the EoR place the EoR approximately between $z \sim 6 - 20$ \note{[LW: 15? 20? Unsure of the exact theoretical view on the timeline. Also, citations.]}, which corresponds to observed wavelengths of approximately 1.5 -- 4.5 meters. The spin flip transition has a very small transition rate of $2.9 \times 10^{-15}$ s$^{-1}$, or about one transition every 10 million years, but fortunately, hydrogen is incredibly ubiquitous in the universe so we can still use this line as an EoR probe.
 
-Actually measuring 21-cm emission from the EoR, however, is an exercise in extreme precision. Synchrotron emission from our own galaxy and other extragalactic sources dominates the frequency band of interest, creating foregrounds that are several orders of magnitude brighter than the 21-cm signal is expected to be. These foregrounds are the primary challenge that all 21-cm experiments must overcome to detect the EoR. However, the environment and the instrument can introduce other \red{systematics}, such as radio frequency interference (RFI), ionospheric effects, and cable reflections, that further complicate the measurement.
+Actually measuring 21-cm emission from the EoR, however, is an exercise in extreme precision. Synchrotron emission from our own galaxy and other extragalactic sources dominates the frequency band of interest, creating foregrounds that are several orders of magnitude brighter than the 21-cm signal is expected to be. These foregrounds are the primary challenge that all 21-cm experiments must overcome to detect the EoR. However, the environment and the instrument can introduce other \red{systematics}, such as radio frequency interference (RFI), ionospheric effects, and signal reflections, that further complicate the measurement.
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=0.55\textwidth]{spin_flip.png}
+	\caption[The spin-flip transition of neutral hydrogen]{A \red{cartoon} of the spin-flip transition of neutral hydrogen. Initially, the spin of the electron is parallel with that of the proton---both are in a ``spin up'' state. This initial state is at a higher energy than when the spin of the electron and proton are antiparallel. The transition occurs when the spin of the electron flips from up to down, emitting a photon with a wavelength of 21 cm.}
+	\label{fig:spin_flip}
+\end{figure}
 
 \subsection{Radio Frequency Interference} \label{subsec:rfi}
 
@@ -140,7 +149,7 @@ Interference from sources including FM radio, satellite and aircraft communicati
 
 There are a few ways to mitigate RFI. First, instruments can be built in remote areas to minimize contact with human-made interference. Then, RFI can be removed after taking observations with software that detects and masks out (``flags'') data it identifies as being contaminated. Steps further along in the data reduction and analysis process ignore this flagged data.
 
-There are currently several radio interferometers making observations towards a 21-cm power spectral EoR detection, some of which are located in remote places of the world and all \red{(I think)} of which use some sort of RFI excision software. The Hydrogen Epoch of Reionization Array (HERA), located in the Karoo Desert in South Africa, does both.
+There are currently several radio interferometers making observations towards a 21-cm power spectral EoR detection, some of which are located in remote places of the world and all \red{(I think)} of which use some sort of RFI excision software. \note{[LW: Remember what I said earlier about transitions?]}
 
 \subsection{The Hydrogen Epoch of Reionization Array} \label{subsec:hera}
 
@@ -160,28 +169,57 @@ There are currently several radio interferometers making observations towards a 
 
 HERA (left panel of Figure \ref{fig:hera}) is one of several radio interferometers designed to study the large-scale structure during the EoR via measurements of the redshifted 21-cm line \citep{deboer2017}---others include the Low Frequency Array \citep[LOFAR;][]{vanHaarlem2013} and the Murchison Widefield Array \citep[MWA;][]{tingay2013}. HERA builds upon preceding instruments, such as the MWA and the Donald C. Backer Precision Array for Probing the Epoch of Reionization \citep[PAPER;][]{parsons2010}, and will pave the way for future experiments such as the Square Kilometer Array \cite[SKA; e.g.,][]{mellema2013}.
 
-When complete, HERA will be \red{composed} of 350 14-meter dishes with a dense 320-element hexagonal core and 30 outriggers (right panel of Figure \ref{fig:hera}). The dense \red{configuration} was chosen to maximize sensitivity to the diffuseness of the 21-cm signal, which will be sampled primarily by short baselines. \red{The redundancy of the hexagonal shape increases sensitivity and the efficacy of the delay spectrum approach for separating and rejecting foreground-contaminated modes \textit{(this is apparently a PAPER thing??---citation?)} and allows for the redundant calibration technique developed and pioneered in \cite{liu2010} and \cite{zheng2014}. [explain this entire thing more (or cut it)]}
+When complete, HERA will be \red{composed} of 350 14-meter dishes with a dense 320-element hexagonal core and 30 outriggers (right panel of Figure \ref{fig:hera}). The dense \red{configuration} was chosen to maximize sensitivity to the diffuseness of the 21-cm signal, which will be sampled primarily by short baselines. The redundancy of the hexagonal shape increases sensitivity and the efficacy of the delay spectrum approach for separating and \textit{avoiding} foreground-contaminated modes \note{[LW: A PAPER thing---citation?]} and allows for the redundant calibration technique developed and pioneered in \cite{liu2010} and \cite{zheng2014}. \note{[LW: I need to expand on a lot of this (like the delay spectrum...)]}
+
+HERA's first scientific observing campaign took place from September 2017 to the beginning of April 2018, with the first calibrated, LST-binned internal data release, H1C (HERA with $\sim 100$ antennas) IDR 2.1, occurring in June 2018 (public HERA memo \href{http://reionization.org/wp-content/uploads/2018/07/IDR2.1_Memo_v2.html}{\#45}). A broad overview of the data processing can be found in section 5 in the same memo; key \red{points} include several calibration steps (e.g., redundant calibration and absolute gain calibration) and flagging RFI.
 
 \section{Methods} \label{sec:methods}
 
 \subsection{RFI Excision Strategies} \label{subsec:rfi_excision}
 
-\begin{figure}[tb]
+\begin{figure}[p]
 	\centering
 	\includegraphics[width=\textwidth]{flagging_steps.png}
-	\caption[Steps for flagging RFI]{\red{Something about how we go about flagging RFI before calculating the power spectrum}}
+	\caption[Steps for flagging RFI]{An example of the process of flagging RFI from (a) unflagged visibilities to (b) XRFI flags, and finally (c) broadcasted flags. The red arrows in (b) indicate frequency pixels with enough flags to flag the entire channel as determined by the procedure described in Section \ref{subsec:rfi_excision}, with the flagged channels shown by the red lines in (c). Similarly, grey arrows and lines indicate the initial flags and subsequent broadcasting for time integrations that were completely flagged.}
 	\label{fig:rfi_flagging}
 \end{figure}
 
-\red{Initial flagging with XRFI}
+The H1C IDR 2.1 data reduction pipeline utilizes code developed for HERA quality \red{assurance} (\heraqm\footnote{\url{https://github.com/HERA-team/hera_qm}}) to identify and flag RFI. The entire flagging pipeline, XRFI, functions as follows:
 
-\red{Flag broadcasting with \code{hera\textunderscore pspec}}
+\begin{enumerate}
+	\item Data for individual antennas or baseline are detrended with a median filter by calculating the difference between the data and median and dividing by the noise.
+	\item The same data are flagged based on user-defined thresholds.
+	\item Flags from individual antennas/baselines are averaged over time, thresholded, and flagged again over a full file.
+	\item The data are delay filtered to remove foregrounds. \note{[LW: This is awful and needs explanation.]}
+	\item Visibilities are flagged following the procedure in steps 1 -- 3 and combined into final observation flags.
+\end{enumerate}
 
-\subsection{Calculating the Power Spectrum} \label{subsec:calc_ps}
+After flagging with XRFI, the flags are broadcast such that the patterns are time-independent for a given baseline and spectral window. For a given frequency pixel, also called a channel, in the selected spectral window, if the total fraction of flagged times in that channel exceeds a predefined threshold, then the entire channel is flagged. Otherwise, if the flagged times in the channel do not exceed the threshold, any time integrations that contain flags are flagged for all frequencies in the spectral window. This process is carried out for each frequency pixel until all flags are time-independent. \note{[LW: Might want to go into why this is necessary.]} Figure \ref{fig:rfi_flagging} shows an example of this flagging algorithm in \red{practice}, progressing from visibilities to XRFI flags to broadcasted flags.
+
+\note{[LW: Talk about what I actually did with flagging...]}
+
+\subsection{The Power Spectrum} \label{subsec:calc_ps}
+
+Using the HERA collaboration's power spectrum calculation code, \herapspec\footnote{\url{https://github.com/HERA-team/hera_pspec}}, I \red{used} data flagged as described in Section \ref{subsec:rfi_excision} to estimate a \red{delay} power spectrum. The power spectrum is estimated with the optimal quadratic estimator used in PAPER analysis \citep{ali2015}, with further \red{information} in, e.g., \cite{tegmark1997}, \cite{tegmark1998}, \cite{liu2011}.
+
+\begin{equation}
+\left\langle \widetilde{T}_b\left(\vec{k}\right) \widetilde{T}_b^*\left(\vec{k'}\right) \right\rangle = \left(2\pi\right)^3 \delta\left(\vec{k} - \vec{k'}\right) P_{21}\left(\vec{k}\right)
+\label{eqn:P21}
+\end{equation}
+
+$\widetilde{T}_b\left(\vec{k}\right)$: 3D spatial Fourier transform of brightness temperature distribution on the sky; $\delta$: Dirac delta function; $P_{21}\left(\vec{k}\right)$: 21-cm power spectrum
+
+\note{[LW: Do I actually want to keep this equation?]}
+
+\note{[LW: I don't know how much I want to write in this section because I only have the most handwavy understanding of what's going on.]}
 
 \subsection{Modelling HERA Data} \label{subsec:modelling}
 
-\red{Making \code{hera\textunderscore sim} talk to \code{pyuvdata}}
+In order to perform tests in a more controlled setting, 
+
+\herasim\footnote{\url{https://github.com/HERA-team/hera_sim}}
+
+\note{[LW: Making \code{hera\textunderscore sim} talk to \code{pyuvdata}]}
 
 \section{Results}
 
