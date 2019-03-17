@@ -234,8 +234,119 @@ Since RFI is the focus of this work, I took special care to \red{at least approx
 
 \section{Results}
 
+\subsection{RFI Excision Tests} \label{subsec:rfi_tests}
+
+\begin{enumerate}
+	\item Different time thresholds for broadcasting
+	\item Flagging additional adjacent channels
+	\item Flagging additional non-adjacent channels
+\end{enumerate}
+
+\subsection{Model Results} \label{subsec:model_results}
+
+\begin{enumerate}
+	\item Going all the way back to XRFI flagging strategies through broadcasting
+\end{enumerate}
+
 \section{Conclusions}
+
+The Epoch of Reionization and the preceding Dark Ages are among the last unexplored periods of our universe's history. Filling in the story of cosmic evolution with the timeline and topography of the EoR will provide the beginnings of a much-needed bridge between the CMB and the rich structure we see today. Measuring and analyzing the power spectrum of the 21-cm with HERA, among other current and next-generation instruments, will be a key component of building that bridge.
+
+Several challenges, not the least of which are bright radio foregrounds, stand between us and studying the EoR with this method. However, though radio foregrounds are the largest obstacle, even a single \red{misunderstood} or uncorrected systematic error makes a detection more difficult. Such systematics can range from instrumental effects that aren't quite calibrated correctly to man-made interference.
+
+Towards the goal of making this detection, I have focused on characterizing the effects of RFI on the power spectrum. In particular, I have used methods and techniques already developed by the HERA collaboration in an attempt to recreate the circumstances under which future analyses will be undertaken. This includes everything from initial RFI identification and flagging to the final estimation of the power spectrum.
+
+Future work:
+\begin{enumerate}
+	\item Flagging over subband
+	\item Analytical representation of flag broadcasting (can we even optimize that?)
+\end{enumerate}
 
 \bibliographystyle{aasjournal}
 \bibliography{refs}
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=\textwidth]{flagged_chan315_240_340_42378.png}
+	\caption[Power spectrum after flagging one extra edge channel]{Caption}
+	\label{fig:flaggedchan315}
+\end{figure}
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=\textwidth]{flagged_chan280_240_340_42378.png}
+	\caption[Power spectrum after flagging one central channel]{Caption}
+	\label{fig:flagged_chan280}
+\end{figure}
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=\textwidth]{flagged_block_490_590_42378.png}
+	\caption[Power spectrum after flagging extra contiguous edge channels]{Caption}
+	\label{fig:flagged_chan_315}
+\end{figure}
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=\textwidth]{flagged_block_450_550_42378.png}
+	\caption[Power spectrum after flagging contiguous extra center channels]{Caption}
+	\label{fig:flagged_block_450_550}
+\end{figure}
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=\textwidth]{flagged_sep_450_550_42378.png}
+	\caption[Power spectrum after flagging non-contiguous center channels]{Caption}
+	\label{fig:flagged_sep_450_550}
+\end{figure}
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=\textwidth]{flagged_sep_490_590_42378.png}
+	\caption[Power spectrum after flagging non-contiguous edge channels]{Caption}
+	\label{fig:flagged_sep_490_590}
+\end{figure}
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=\textwidth]{sim_noflags.png}
+	\caption[Simulated power spectrum without flagging]{Caption}
+	\label{fig:sim_noflags}
+\end{figure}
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=\textwidth]{sim_0_10.png}
+	\caption[Simulated power spectrum with no flagged channels and flagged time integrations]{Caption}
+	\label{fig:sim_0_10}
+\end{figure}
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=\textwidth]{sim_flag580.png}
+	\caption[Simulated power spectrum after flagging one central channel]{Caption}
+	\label{fig:flagged_chan_580}
+\end{figure}
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=\textwidth]{sim_flag615.png}
+	\caption[Simulated power spectrum after flagging one edge channel]{Caption}
+	\label{fig:flagged_chan_615}
+\end{figure}
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=\textwidth]{sim_flag580_581.png}
+	\caption[Simulated power spectrum after flagging two contiguous center channels]{Caption}
+	\label{fig:flagged_chan_580_581}
+\end{figure}
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=\textwidth]{sim_flag612_615.png}
+	\caption[Simulated power spectrum after flagging four contiguous edge channels]{Caption}
+	\label{fig:flagged_chan_612_615}
+\end{figure}
+
 \end{document}
