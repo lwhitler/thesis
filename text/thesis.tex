@@ -267,86 +267,127 @@ Future work:
 
 \begin{figure}[p]
 	\centering
-	\includegraphics[width=\textwidth]{flagged_chan315_240_340_42378.png}
-	\caption[Power spectrum after flagging one extra edge channel]{Caption}
-	\label{fig:flaggedchan315}
+	\includegraphics[width=\textwidth]{42378_noflags.png}
+	\caption[Original power spectrum]{Caption}
+	\label{fig:noflags}
 \end{figure}
 
 \begin{figure}[p]
 	\centering
-	\includegraphics[width=\textwidth]{flagged_chan280_240_340_42378.png}
-	\caption[Power spectrum after flagging one central channel]{Caption}
-	\label{fig:flagged_chan280}
+	\includegraphics[width=\textwidth]{42378_timeflags.png}
+	\caption[Power spectrum calculated with data flagged only in time]{Caption}
+	\label{fig:time_flags}
 \end{figure}
 
 \begin{figure}[p]
 	\centering
-	\includegraphics[width=\textwidth]{flagged_block_490_590_42378.png}
-	\caption[Power spectrum after flagging extra contiguous edge channels]{Caption}
-	\label{fig:flagged_chan_315}
+	\includegraphics[width=\textwidth]{42378_flag315.png}
+	\caption[Power spectrum calculated with flagged time integrations and one flagged channel]{Caption}
+	\label{fig:flag_chan315}
 \end{figure}
 
 \begin{figure}[p]
 	\centering
-	\includegraphics[width=\textwidth]{flagged_block_450_550_42378.png}
-	\caption[Power spectrum after flagging contiguous extra center channels]{Caption}
-	\label{fig:flagged_block_450_550}
+	\includegraphics[width=\textwidth]{42378_flag315_316.png}
+	\caption[Power spectrum calculated with flagged time integrations and two contiguous flagged channels]{Caption}
+	\label{fig:flag_chan315_316}
 \end{figure}
 
 \begin{figure}[p]
 	\centering
-	\includegraphics[width=\textwidth]{flagged_sep_450_550_42378.png}
-	\caption[Power spectrum after flagging non-contiguous center channels]{Caption}
-	\label{fig:flagged_sep_450_550}
+	\includegraphics[width=\textwidth]{42378_flag315_317.png}
+	\caption[Power spectrum calculated with flagged time integrations and three contiguous flagged channels]{Caption}
+	\label{fig:flag_chan315_317}
 \end{figure}
 
 \begin{figure}[p]
 	\centering
-	\includegraphics[width=\textwidth]{flagged_sep_490_590_42378.png}
-	\caption[Power spectrum after flagging non-contiguous edge channels]{Caption}
-	\label{fig:flagged_sep_490_590}
+	\includegraphics[width=\textwidth]{42378_flag315_318.png}
+	\caption[Power spectrum calculated with flagged time integrations and four contiguous flagged channels]{Caption}
+	\label{fig:flag_chan315_318}
 \end{figure}
 
 \begin{figure}[p]
 	\centering
-	\includegraphics[width=\textwidth]{sim_noflags.png}
-	\caption[Simulated power spectrum without flagging]{Caption}
+	\includegraphics[width=\textwidth]{42378_flag290_315.png}
+	\caption[Power spectrum calculated with flagged time integrations and two non-contiguous flagged channels]{Caption}
+	\label{fig:flag_chan290_315}
+\end{figure}
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=\textwidth]{42378_flag290_291_315.png}
+	\caption[Power spectrum calculated with flagged time integrations and three flagged channels (two contiguous, one not)]{Caption}
+	\label{fig:flag_chan290_291_315}
+\end{figure}
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=\textwidth]{42378_flag290_291_315_316.png}
+	\caption[Power spectrum calculated with flagged time integrations and four flagged channels (two blocks of two channels)]{Caption}
+	\label{fig:flag_chan290_291_315_316}
+\end{figure}
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=\textwidth]{49088_sim_noflags.png}
+	\caption[Original model power spectrum (only foregrounds)]{Caption}
 	\label{fig:sim_noflags}
 \end{figure}
 
 \begin{figure}[p]
 	\centering
-	\includegraphics[width=\textwidth]{sim_0_10.png}
-	\caption[Simulated power spectrum with no flagged channels and flagged time integrations]{Caption}
-	\label{fig:sim_0_10}
+	\includegraphics[width=\textwidth]{49088_sim_timeflags.png}
+	\caption[Model power spectrum calculated with data flagged only in time]{Caption}
+	\label{fig:sim_time_flags}
 \end{figure}
 
 \begin{figure}[p]
 	\centering
-	\includegraphics[width=\textwidth]{sim_flag580.png}
-	\caption[Simulated power spectrum after flagging one central channel]{Caption}
-	\label{fig:flagged_chan_580}
+	\includegraphics[width=\textwidth]{49088_sim_flag315.png}
+	\caption[Model power spectrum calculated with flagged time integrations and one flagged channel]{Caption}
+	\label{fig:sim_flag_chan315}
 \end{figure}
 
 \begin{figure}[p]
 	\centering
-	\includegraphics[width=\textwidth]{sim_flag615.png}
-	\caption[Simulated power spectrum after flagging one edge channel]{Caption}
-	\label{fig:flagged_chan_615}
+	\includegraphics[width=\textwidth]{49088_sim_flag315_316.png}
+	\caption[Model power spectrum calculated with flagged time integrations and two contiguous flagged channels]{Caption}
+	\label{fig:sim_flag_chan315_316}
 \end{figure}
 
 \begin{figure}[p]
 	\centering
-	\includegraphics[width=\textwidth]{sim_flag580_581.png}
-	\caption[Simulated power spectrum after flagging two contiguous center channels]{Caption}
-	\label{fig:flagged_chan_580_581}
+	\includegraphics[width=\textwidth]{49088_sim_flag315_317.png}
+	\caption[Model power spectrum calculated with flagged time integrations and three contiguous flagged channels]{Caption}
+	\label{fig:sim_flag_chan315_317}
 \end{figure}
 
 \begin{figure}[p]
 	\centering
-	\includegraphics[width=\textwidth]{sim_flag612_615.png}
-	\caption[Simulated power spectrum after flagging four contiguous edge channels]{Caption}
-	\label{fig:flagged_chan_612_615}
+	\includegraphics[width=\textwidth]{49088_sim_flag315_318.png}
+	\caption[Model power spectrum calculated with flagged time integrations and four contiguous flagged channels]{Caption}
+	\label{fig:sim_flag_chan315_318}
 \end{figure}
 
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=\textwidth]{49088_sim_flag290_315.png}
+	\caption[Model power spectrum calculated with flagged time integrations and two non-contiguous flagged channels]{Caption}
+	\label{fig:sim_flag_chan290_315}
+\end{figure}
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=\textwidth]{49088_sim_flag290_291_315.png}
+	\caption[Model power spectrum calculated with flagged time integrations and three flagged channels (two contiguous, one not)]{Caption}
+	\label{fig:sim_flag_chan290_291_315}
+\end{figure}
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=\textwidth]{49088_sim_flag290_291_315_316.png}
+	\caption[Model power spectrum calculated with flagged time integrations and four flagged channels (two blocks of two channels)]{Caption}
+	\label{fig:sim_flag_chan290_291_315_316}
+\end{figure}
 \end{document}
