@@ -1,3 +1,3 @@
-# Honors Thesis and ASU/NASA Space Grant
+# Honors Thesis
 
-Primarily scripts to do things that I'm mostly done playing with.
+Environmental Systematics and the Impact on 21-cm Measurements of the Epoch of Reionization
