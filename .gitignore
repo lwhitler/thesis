@@ -1,5 +1,6 @@
 plots/
 lrwhitler_defense_announcement.pdf
+text/abstract.*
 .ipynb_checkpoints
 *.aux
 *.bbl
